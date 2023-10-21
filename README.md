@@ -62,8 +62,9 @@
             for smoother driving following a quadratic curve rather than a linear one.
 
             It also includes buttons for functions. The frame change late variable system used to cloud up our
-            teleop loop, but by placing these gamepad functions inside one method under the driver station,
-            
+            teleop loop, but by placing these gamepad functions inside one method under the driver station, 
+            we are able to keep our teleop short and concise.
+
 
       4. ### test  
       5. Outside
