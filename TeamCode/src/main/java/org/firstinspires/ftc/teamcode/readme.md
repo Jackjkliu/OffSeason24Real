@@ -56,6 +56,13 @@
 
             robot.[subsystem].[variable] = driverStation.[function/button];
 
+            The driverStation portion of it creates a class that serves as an access point for all values
+            from the driver station. It includes joystick constants like a deadzone and min/max.
+            Additionally, the driver station includes methods that can filter the joystick (and trigger) values
+            for smoother driving following a quadratic curve rather than a linear one.
+
+            It also includes buttons for functions. The frame change late variable system used to cloud up our
+            teleop loop, but by placing these gamepad functions inside one method under the driver station,
             
 
       4. ### test  
