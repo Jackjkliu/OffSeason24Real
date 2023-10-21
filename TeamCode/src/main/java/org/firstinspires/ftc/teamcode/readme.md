@@ -1,20 +1,62 @@
-# Fancy Code Base
+# Fancy Code Base Documentation
 
 ## Folders
-1. EK10582
-   1. auton
-   auton has two folders, action and modes
-    
-   modes contains every auton, ExAuton is a file which shows how auton should be formatted
-   action contains every action, action is an abstract class that needs to have children
-      make a new folder for every subsystem like a 'claw' folder for all the claw actions
+1. ### EK10582
+      1. #### auton
+            Auton has two folders, action and modes.
+            
+            modes contains every auton file that the robot can run; ExAuton is a file which shows how 
+            auton should be formatted.
+            
+            action contains every action: action is an abstract class that needs to have children.
 
 
+            **Organization tip:** Make a new folder for every subsystem like a 'claw' folder for all the claw actions.  
 
 
+      2. #### Subsystem
+            subsystem is a folder that contains all of the robot's subsystem, plus the robot class.  
 
+            _!!The robot is not a subsystem!!_  
 
-   2. subsystem
-   3. teleop
-   4. test
-2. Outside
+            Each robot subsystem extends an abstract Subsystem class, a parent class that helps organize
+            our codebase. A subsystem is any mini-system on the robot that performs a function.
+            Examples of subsystems may include (but are not limited to):  
+
+            * Intake
+            * Drive
+            * Lift
+            * Transfer  
+
+            
+            Each of these subsystems is built on 4 fundamental methods:  
+            * init: 
+                  This runs once when the robot is initialized, and never again.  
+
+            * update: 
+                  This is repeatedly run every code loop until the program is stopped.  
+
+            * stop: 
+                  This code is run once, when the code is stopped.  
+
+            * printToTelemetry: 
+                  This code is similarly run every update loop, but serves to print to telemetry.  
+
+      
+            In each subsystem, you can initialize variables that can be accessed from Teleop and Auton.
+            You can check Drive.java for an example. You will be setting the motor powers and servo 
+            positions from each respective subsystem. The purpose of using subsystems and actions is 
+            to make our teleop code readable and concise!  
+            
+      3. ### teleop  
+            Teleop contains 2 main parts: The actual teleop files and the driver station.
+            The actual teleop files are intended to be concise. Therefore, most if not all of the
+            statements will have a pretty self-explanatory function.
+            For instance, many of the statements follow this format:
+
+            robot.[subsystem].[variable] = driverStation.[function/button];
+
+            
+
+      4. ### test  
+      5. Outside

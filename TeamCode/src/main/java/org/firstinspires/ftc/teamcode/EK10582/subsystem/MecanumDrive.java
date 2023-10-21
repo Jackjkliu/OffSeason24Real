@@ -7,21 +7,25 @@ import org.firstinspires.ftc.teamcode.PIDController;
 
 @Config
 public class MecanumDrive extends Subsystem{
+    //MecanumDrive is a subsystem that controls the drive. It sets the motor powers
+    //according to the lx, ly and rx values.
     public double SPEED = 0.8;
     public boolean gyroOn = false;
     //PIDController gyroPID = new PIDController(4, 0, 0.03);
 
+    //these values are set in Drive
     public double rx, lx, ly;
     private double targetAngle = 0;
 
 
     @Override
     public void init(boolean auton) {
-
+//run once and never run again
     }
 
     @Override
     public void update() {
+        //keep updating, runtime loop
         double bias = 0;
 //        if(gyroOn) {
 //            bias = calculateBias();
@@ -63,6 +67,7 @@ public class MecanumDrive extends Subsystem{
 
     @Override
     public void stop() {
+        //what happens when you press stop or when the program ends
 
     }
 

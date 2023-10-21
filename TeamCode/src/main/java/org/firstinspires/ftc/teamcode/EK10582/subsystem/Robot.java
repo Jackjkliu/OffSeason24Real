@@ -21,17 +21,34 @@ import java.util.List;
 
 public class Robot {
 
+    //TODO: Set these
+    public final double ServoArmRaised = 0.6;
+    public final double ServoArmLowered = 0.2;
+    //creates a Robot variable to be called later
     static Robot robot = null;
+
     HardwareMap hardwareMap;
+
+    //declares a custom EK LinearOpMode named linearOpMode
     EKLinear linearOpMode;
 
     //declare hardware here
-    public DcMotor leftFront, leftBack, rightFront, rightBack;
+    public DcMotor leftFront, leftBack, rightFront, rightBack, intakeSpin;
     public BNO055IMU imu;
+    public Servo intakeArm;
 
+
+    //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive);
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive);
+    public Intake intake = new Intake();
+
+    //Add all subsystems to a list to be initiated and updated through
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake);
+
+    //add all subsystems that need to go through telemetry
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake);
+
+    //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
 
     private ElapsedTime cycleTimer = new ElapsedTime();
@@ -48,12 +65,18 @@ public class Robot {
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
+        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
+
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         imu.initialize(parameters);
 
+
+
         for(Subsystem subsystem : subsystems) {
+            //initialize the subsystems
             subsystem.init(false); //change this
         }
 
@@ -65,17 +88,23 @@ public class Robot {
         return robot;
     }
 
+    //Add an action to the list of things the robot is currently doing.
     public void addAction(Action action) {
         action.start();
         actions.add(action);
     }
 
     public void update() {
+        //Update every single subsystem in the subsystems array initialized earlier
         for(Subsystem subsystem : subsystems) {
             subsystem.update();
         }
+
+        //Updates every single action in the list of actions that are currently being done
         for(Action action : actions) {
             action.update();
+
+            //if an action is finished, end said action and remove it from the list of things to do
             if(action.isComplete) {
                 action.end();
                 actions.remove(action);

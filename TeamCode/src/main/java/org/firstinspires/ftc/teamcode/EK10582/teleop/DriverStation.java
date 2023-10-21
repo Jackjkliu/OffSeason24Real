@@ -30,8 +30,12 @@ public class DriverStation {
     public double getRotVel() {
         return filterJoystick(gamepad1.right_stick_x);
     }
+    public double getLT(){
+        return filterJoystick(gamepad1.left_trigger);
+    }
 
     public double filterJoystick(double input) {
+        //implements both deadzone and scaled drive
         if(Math.abs(input) < JoystickConstants.DEADZONE) return 0;
         if(input > 0) {
             return JoystickConstants.minJoystick * Math.pow((JoystickConstants.maxJoystick / JoystickConstants.minJoystick), input);
@@ -41,13 +45,24 @@ public class DriverStation {
         }
     }
 
-    // example of button for subsystem
-//    boolean lateA = false;
-//    public boolean getCollection() {
-//        boolean out;
-//        out = gamepad1.a && !lateA;
-//        lateA = gamepad1.a;
-//        return out;
-//    }
 
+
+    // example of button for subsystem
+    boolean lateUp = false;
+    public boolean raiseIntakeArm() {
+        boolean out;
+        out = gamepad1.dpad_up && !lateUp;
+        lateUp = gamepad1.dpad_up;
+        return out;
+    }
+
+    boolean lateDown = false;
+    public boolean lowerIntakeArm() {
+        boolean out;
+        out = gamepad1.dpad_down && !lateDown;
+        lateDown = gamepad1.dpad_down;
+        return out;
+    }
+    //in teleop: DriverStation.getCollection() would return whether or not button a was just pressed & also update a
+    //associates button press combinations with the functions that they want to accomplish rather than clouding up teleop
 }

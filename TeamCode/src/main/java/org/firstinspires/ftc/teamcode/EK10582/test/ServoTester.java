@@ -11,7 +11,7 @@ public class ServoTester extends EKLinear {
 
     @Override
     public void run() {
-        Robot.getInstance().init(hardwareMap, this);
+        Robot.getInstance().init(hardwareMap, this );
         waitForStart();
         double currPos = 0;
         while(opModeIsActive()) {
@@ -22,7 +22,7 @@ public class ServoTester extends EKLinear {
                 currPos -= 0.0005;
             }
 
-            Robot.getInstance().armServo.setPosition(currPos);
+//            Robot.getInstance().armServo.setPosition(currPos);
             telemetry.addData("pos", currPos);
             telemetry.update();
         }
