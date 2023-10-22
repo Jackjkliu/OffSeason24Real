@@ -56,9 +56,9 @@
 
             robot.[subsystem].[variable] = driverStation.[function/button];
   
-               OR
+            OR
   
-            if(deriverStation.[function/button]){
+            if(driverStation.[function/button]){
                robot.[subsystem].[method];
             }
 
