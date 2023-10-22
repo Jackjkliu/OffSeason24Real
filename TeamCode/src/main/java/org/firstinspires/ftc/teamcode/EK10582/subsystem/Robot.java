@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
@@ -34,16 +36,19 @@ public class Robot {
     public BNO055IMU imu;
     public Servo intakeArm;
 
+    public WebcamName camera;
+
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
     public Intake intake = new Intake();
+    public AprilTags aprilTags = new AprilTags();
 
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake);
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags);
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
@@ -61,9 +66,11 @@ public class Robot {
 
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-
+//
         intakeArm = hardwareMap.get(Servo.class, "intakeArm");
         intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
+
+        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();

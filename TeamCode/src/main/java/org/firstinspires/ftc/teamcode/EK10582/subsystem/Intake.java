@@ -10,6 +10,7 @@ public class Intake extends Subsystem{
     public double servoTarget;
     public double intakeSpeed;
 
+    //this is supposed to have 7 values in it but rn it only has 2 because we haven't tested heights yet
     public final double[] servoPos = {0.21, 0.7};
     @Override
     public void init(boolean auton){
@@ -41,7 +42,8 @@ public class Intake extends Subsystem{
 
 
         //set intake power to intake speed
-        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.8);
+        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
+        //0.6 is the hard limit for intake speed. change as needed.
     }
 
     @Override
