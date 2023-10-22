@@ -55,6 +55,12 @@
             For instance, many of the statements follow this format:
 
             robot.[subsystem].[variable] = driverStation.[function/button];
+  
+               OR
+  
+            if(deriverStation.[function/button]){
+               robot.[subsystem].[method];
+            }
 
             The driverStation portion of it creates a class that serves as an access point for all values
             from the driver station. It includes joystick constants like a deadzone and min/max.
@@ -66,5 +72,5 @@
             we are able to keep our teleop short and concise.
 
 
-      4. ### test  
-      5. Outside
+      5. ### test  
+      6. Outside
