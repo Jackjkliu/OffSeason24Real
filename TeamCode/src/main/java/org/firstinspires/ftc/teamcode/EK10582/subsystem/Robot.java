@@ -21,9 +21,6 @@ import java.util.List;
 
 public class Robot {
 
-    //TODO: Set these
-    public final double ServoArmRaised = 0.6;
-    public final double ServoArmLowered = 0.2;
     //creates a Robot variable to be called later
     static Robot robot = null;
 

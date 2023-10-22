@@ -45,23 +45,14 @@ public class DriverStation {
         }
     }
 
-
-
     // example of button for subsystem
-    boolean lateUp = false;
+
     public boolean raiseIntakeArm() {
-        boolean out;
-        out = gamepad1.dpad_up && !lateUp;
-        lateUp = gamepad1.dpad_up;
-        return out;
+        return gamepad1.dpad_up;
     }
 
-    boolean lateDown = false;
     public boolean lowerIntakeArm() {
-        boolean out;
-        out = gamepad1.dpad_down && !lateDown;
-        lateDown = gamepad1.dpad_down;
-        return out;
+        return gamepad1.dpad_down;
     }
     //in teleop: DriverStation.getCollection() would return whether or not button a was just pressed & also update a
     //associates button press combinations with the functions that they want to accomplish rather than clouding up teleop

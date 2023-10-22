@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.PIDController;
@@ -77,5 +78,70 @@ public class MecanumDrive extends Subsystem{
         telemetry.addData("lx", lx);
         telemetry.addData("rx", rx);
         telemetry.addData("targetAngle", targetAngle);
+    }
+
+    public void resetEncoders(){
+        Robot.getInstance().leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Robot.getInstance().rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Robot.getInstance().leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Robot.getInstance().rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public int averageTicks(){
+        return (Math.abs(Robot.getInstance().leftFront.getCurrentPosition()) +
+                Math.abs(Robot.getInstance().rightFront.getCurrentPosition()) +
+                Math.abs(Robot.getInstance().rightBack.getCurrentPosition()) +
+                Math.abs(Robot.getInstance().leftBack.getCurrentPosition()))/4;
+    }
+
+    public void straight(double distance, double speed, double direction){
+        resetEncoders();
+
+        double velocity = speed * direction;
+
+        Robot.getInstance().leftBack.setPower(velocity);
+        Robot.getInstance().rightBack.setPower(velocity);
+        Robot.getInstance().leftFront.setPower(velocity);
+        Robot.getInstance().rightFront.setPower(velocity);
+
+        while (true) {
+            if (averageTicks() >= distance) {
+                Robot.getInstance().leftBack.setPower(0);
+                Robot.getInstance().rightBack.setPower(0);
+                Robot.getInstance().leftFront.setPower(0);
+                Robot.getInstance().rightFront.setPower(0);
+                break;
+            }
+        }
+    }
+
+    public void strafe(double distance, double speed, double direction){
+        resetEncoders();
+
+        while (averageTicks() < distance){
+            Robot.getInstance().leftBack.setPower(speed*-1*direction);
+            Robot.getInstance().rightBack.setPower(speed*direction);
+            Robot.getInstance().leftFront.setPower(speed*direction);
+            Robot.getInstance().rightFront.setPower(speed*-1*direction);
+        }
+        Robot.getInstance().leftFront.setPower(0);
+        Robot.getInstance().leftBack.setPower(0);
+        Robot.getInstance().rightFront.setPower(0);
+        Robot.getInstance().rightBack.setPower(0);
+
+    }
+
+    public void turnTo(double targetAngle, double speed, double direction){
+
+        while (Math.abs(Robot.getInstance().imu.getAngularOrientation().firstAngle - targetAngle) > 0.01){
+            Robot.getInstance().leftBack.setPower(speed*direction);
+            Robot.getInstance().rightBack.setPower(speed*-1*direction);
+            Robot.getInstance().leftFront.setPower(speed*direction);
+            Robot.getInstance().rightFront.setPower(speed*-1*direction);
+        }
+        Robot.getInstance().leftFront.setPower(0);
+        Robot.getInstance().leftBack.setPower(0);
+        Robot.getInstance().rightFront.setPower(0);
+        Robot.getInstance().rightBack.setPower(0);
     }
 }
