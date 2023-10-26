@@ -4,9 +4,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
-public class moveIntake extends Action{
+public class alignWithAprilTag extends Action{
 
     ElapsedTime timer = new ElapsedTime();
+    int dir;
 
 
 
@@ -16,8 +17,7 @@ public class moveIntake extends Action{
     }
 
     @Override
-    public void update(){
-
+    public void update() {
     }
 
     @Override

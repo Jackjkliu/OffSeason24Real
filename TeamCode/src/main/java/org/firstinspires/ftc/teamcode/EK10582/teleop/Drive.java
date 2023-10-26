@@ -10,7 +10,6 @@ public class Drive extends EKLinear {
     @Override
     public void run(){
         while(opModeIsActive()) {
-
             /*
             Controls:
             dpad_up is raise arm
@@ -30,6 +29,7 @@ public class Drive extends EKLinear {
             robot.intake.intakeSpeed = driverStation.getLT(); //left trigger
 
             robot.update();
+
         }
     }
 }
