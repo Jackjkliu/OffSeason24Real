@@ -30,8 +30,18 @@ public class DriverStation {
     public double getRotVel() {
         return filterJoystick(gamepad1.right_stick_x);
     }
-    public double getLT(){
+    public double getLT1(){
         return filterJoystick(gamepad1.left_trigger);
+    }
+    public double getLT2(){
+        return filterJoystick(gamepad2.left_trigger);
+    }
+
+    public double getRT1(){
+        return filterJoystick(gamepad1.right_trigger);
+    }
+    public double getRT2(){
+        return filterJoystick(gamepad2.right_trigger);
     }
 
     public double filterJoystick(double input) {

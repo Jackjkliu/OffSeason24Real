@@ -44,7 +44,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagGameDatabase;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.List;
-
+//subsystem child class
 public class AprilTags extends Subsystem {
 
     private AprilTagProcessor aprilTag;
@@ -66,6 +66,9 @@ public class AprilTags extends Subsystem {
     //makes a list called currentDetections
     private List<AprilTagDetection> currentDetections;
 
+
+    //boolean auton will be set to true or false depending if in auton
+    //if in auton, then certain things will happen due to certain if statements specific to auton
     @Override
     public void init(boolean auton) {
 
@@ -119,6 +122,8 @@ public class AprilTags extends Subsystem {
             else{
                 seeTag = false;
             }
+
+            //amount of detections in detections array
             if(currentDetections.size() == 0){
                 seeTag = false;
             }

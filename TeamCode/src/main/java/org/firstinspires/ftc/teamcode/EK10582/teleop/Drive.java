@@ -26,8 +26,10 @@ public class Drive extends EKLinear {
             //intake
             robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
             robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
-            robot.intake.intakeSpeed = driverStation.getLT(); //left trigger
+            robot.intake.intakeSpeed = driverStation.getLT1(); //left trigger
 
+            robot.slides.slideUp = driverStation.getLT2();
+            robot.slides.slideDown = driverStation.getLT2();
             robot.update();
 
         }

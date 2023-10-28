@@ -21,6 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 
+//robot class to create a robot object that will be used
+//to do auton and teleop stuff
 public class Robot {
 
     //creates a Robot variable to be called later
@@ -33,36 +35,53 @@ public class Robot {
 
     //declare hardware here
     public DcMotor leftFront, leftBack, rightFront, rightBack, intakeSpin;
+
+    public DcMotor slide1;
+
     public BNO055IMU imu;
     public Servo intakeArm;
 
     public WebcamName camera;
 
+    //why are subsystems and other elements declared here instead of init?
+    //__
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
     public Intake intake = new Intake();
     public AprilTags aprilTags = new AprilTags();
+    public Slides slides = new Slides();
 
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags);
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides);
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
 
     private ElapsedTime cycleTimer = new ElapsedTime();
 
+    //sets values to declared but not instantiated values
     public void init(HardwareMap hardwareMap, LinearOpMode linearOpMode) {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = (EKLinear)linearOpMode;
 
+        //deviceName refers to what will be shown on the phone
+
+        //hardwareMap is a java map(not hashmap)
+        //map - a way to keep track of information in the form of key-value pairs.
+        //hardwareMap.get - method used to retrieve a specific hardware device from the hardwareMap
+        //___.class - referencing the class instead of using an object of the class
+        //deviceName refers to what will be shown on the phone
         leftFront = hardwareMap.get(DcMotor.class, "leftFront");
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+
+        slide1 = hardwareMap.get(DcMotor.class, "slide1");
+        slide1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -73,7 +92,12 @@ public class Robot {
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
+
+        //.Parameters refers to a nested class within BNO055IMU
+        //.Parameters class has more methods and uses specific to our use of imu
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+
+        //sets parameter obj to another nested class called AngleUnit to increase capabilities
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         imu.initialize(parameters);
 
@@ -87,12 +111,19 @@ public class Robot {
         cycleTimer.reset();
     }
 
+    //checks if a robot object is created
+    //it is unnecessarily and can get complicated if there multiple robot objects
     public static Robot getInstance() {
         if(robot == null) robot = new Robot();
         return robot;
     }
+    //if you see Robot.getInstance() the code will check if there
+    //is a robot instantiated anywhere. if there is, it will use that object
+    // if not, it will create a new robot obj
 
     //Add an action to the list of things the robot is currently doing.
+    //what is action and why do we need this?
+    //__
     public void addAction(Action action) {
         action.start();
         actions.add(action);

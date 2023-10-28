@@ -6,11 +6,18 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.PIDController;
 
+
+//What is mecanumDrive:
+//drive system is the use of special wheels called mecanum wheels
+//child class of subsystem
 @Config
 public class MecanumDrive extends Subsystem{
     //MecanumDrive is a subsystem that controls the drive. It sets the motor powers
     //according to the lx, ly and rx values.
     public double SPEED = 0.8;
+
+    //what is gyro0n for?
+    //__
     public boolean gyroOn = false;
     //PIDController gyroPID = new PIDController(4, 0, 0.03);
 
@@ -19,6 +26,9 @@ public class MecanumDrive extends Subsystem{
     private double targetAngle = 0;
 
 
+    //why are var not instantiated in init?
+    //is it becuase they keep needing to be updated?
+    //__
     @Override
     public void init(boolean auton) {
 //run once and never run again
@@ -31,6 +41,9 @@ public class MecanumDrive extends Subsystem{
 //        if(gyroOn) {
 //            bias = calculateBias();
 //        }
+
+        //what is bias?
+        //__
         double lf = ly + rx + lx + bias;
         double lb = ly + rx - lx + bias;
         double rf = ly - rx - lx - bias;

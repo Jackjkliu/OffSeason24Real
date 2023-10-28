@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+//child class of subsystem
 public class Intake extends Subsystem{
 
     public double increment;
@@ -12,6 +13,8 @@ public class Intake extends Subsystem{
 
     //this is supposed to have 7 values in it but rn it only has 2 because we haven't tested heights yet
     public final double[] servoPos = {0.21, 0.7};
+
+    //why is boolean auton a parameter
     @Override
     public void init(boolean auton){
         increment = 0.0001; //how fast the servo will move
@@ -22,8 +25,11 @@ public class Intake extends Subsystem{
 
     }
 
+    //
     @Override
     public void update(){
+
+        //if servoup/down is true, it will change pos of servo
         if (servoUp) {
             servoTarget += increment;
         }
@@ -38,9 +44,12 @@ public class Intake extends Subsystem{
             servoTarget=0;
         }
 
+
+        //sets the intakeArm to a certain pos and keeps it there
         Robot.getInstance().intakeArm.setPosition(servoTarget);
 
-
+        //intakeSpin is the motor that controls spinning of surgical tube
+        //sets power to motor based of left trigger
         //set intake power to intake speed
         Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
         //0.6 is the hard limit for intake speed. change as needed.
