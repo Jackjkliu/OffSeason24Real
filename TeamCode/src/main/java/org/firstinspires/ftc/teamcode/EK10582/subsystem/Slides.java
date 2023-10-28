@@ -77,4 +77,3 @@ public class Slides extends Subsystem{
         Robot.getInstance().slide1.setTargetPosition(slideTarget);
     }
 }
-
