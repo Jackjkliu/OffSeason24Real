@@ -5,7 +5,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 //child class of subsystem
 public class Intake extends Subsystem{
 
-    public double increment;
+    private double increment;
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
     public boolean servoUp, servoDown;
     public double servoTarget;
@@ -29,7 +29,6 @@ public class Intake extends Subsystem{
     @Override
     public void update(){
 
-        //if servoup/down is true, it will change pos of servo
         if (servoUp) {
             servoTarget += increment;
         }
@@ -44,14 +43,9 @@ public class Intake extends Subsystem{
             servoTarget=0;
         }
 
-
-        //sets the intakeArm to a certain pos and keeps it there
         Robot.getInstance().intakeArm.setPosition(servoTarget);
 
-        //intakeSpin is the motor that controls spinning of surgical tube
-        //sets power to motor based of left trigger
-        //set intake power to intake speed
-        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
+//        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
         //0.6 is the hard limit for intake speed. change as needed.
     }
 
@@ -63,7 +57,7 @@ public class Intake extends Subsystem{
     @Override
     public void printToTelemetry(Telemetry telemetry){
         telemetry.addData("Arm Servo Position: ", Robot.getInstance().intakeArm.getPosition());
-        telemetry.addData("Spintake speed: ", intakeSpeed);
+//        telemetry.addData("Spintake speed: ", intakeSpeed);
 
     }
 

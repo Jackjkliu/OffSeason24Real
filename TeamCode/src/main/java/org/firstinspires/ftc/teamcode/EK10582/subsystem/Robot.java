@@ -15,6 +15,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +45,8 @@ public class Robot {
 
     public WebcamName camera;
 
+    public OpenCvWebcam webcam;
+
     //why are subsystems and other elements declared here instead of init?
     //__
 
@@ -52,11 +56,13 @@ public class Robot {
     public AprilTags aprilTags = new AprilTags();
     public Slides slides = new Slides();
 
+    public openCV opencv = new openCV();
+
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides);
+    private List<Subsystem> subsystems = Arrays.asList(intake, slides, opencv);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(intake, slides, opencv);
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
@@ -68,28 +74,28 @@ public class Robot {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = (EKLinear)linearOpMode;
 
-        //deviceName refers to what will be shown on the phone
 
-        //hardwareMap is a java map(not hashmap)
-        //map - a way to keep track of information in the form of key-value pairs.
-        //hardwareMap.get - method used to retrieve a specific hardware device from the hardwareMap
-        //___.class - referencing the class instead of using an object of the class
-        //deviceName refers to what will be shown on the phone
-        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
-        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
-        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
-        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
-
+//        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+//        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+//        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+//        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+//
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
-        slide1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slide1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide1.setTargetPosition(0);
 
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+//        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 //
         intakeArm = hardwareMap.get(Servo.class, "intakeArm");
-        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
+//        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
 
-        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+//        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
 
@@ -112,7 +118,7 @@ public class Robot {
     }
 
     //checks if a robot object is created
-    //it is unnecessarily and can get complicated if there multiple robot objects
+    //it is unnecessary and can get complicated if there multiple robot objects
     public static Robot getInstance() {
         if(robot == null) robot = new Robot();
         return robot;
@@ -122,8 +128,7 @@ public class Robot {
     // if not, it will create a new robot obj
 
     //Add an action to the list of things the robot is currently doing.
-    //what is action and why do we need this?
-    //__
+
     public void addAction(Action action) {
         action.start();
         actions.add(action);

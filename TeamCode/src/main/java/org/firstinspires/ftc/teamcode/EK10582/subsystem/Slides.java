@@ -6,15 +6,14 @@ public class Slides extends Subsystem{
 
 
     //not init
-    public double slideUp,slideDown;
+    public double slideUp, slideDown;
 
     public double speed;
 
-    public int increment;
+    private int increment;
 
-    public int slideTarget;
+    private int slideTarget;
 
-    public double curPos;
 
 
     //TODO: change vals to actual pos
@@ -23,39 +22,50 @@ public class Slides extends Subsystem{
     //why is boolean auton a parameter
     @Override
     public void init(boolean auton){
-       speed = .4;
+       speed = .2;
        increment = 0;
 
        slideTarget = 0;
+
     }
 
     //
     @Override
     public void update(){
 
-        if(slideUp > 0.01){
-            increment = (int)(slideUp*5);
-        }
+//        if(slideUp > 0.01){
+////            increment = (int)(slideUp*5);
+////            slideTarget+=increment;
+//            Robot.getInstance().slide1.setPower(0.2);
+//        }
+//
+//        else if(slideDown > 0.01){
+////            increment = (int)(slideDown*5);
+////            slideTarget-=increment;
+//            Robot.getInstance().slide1.setPower(-0.2);
+//        }
 
-        if(slideDown > 0.01){
-            increment = -(int)(slideDown*5);
-        }
 
-        slideTarget+=increment;
+//        else{
+//            Robot.getInstance().slide1.setPower(0);
+//        }
+
+
 
         //if increment is greater than the last element in the array
-        if(slideTarget > slidepos[slidepos.length-1]) {
-            slideTarget = slidepos[slidepos.length-1];
-        }
+//        if(slideTarget > 100) {
+//            slideTarget = 100;
+//        }
+//
+//        if(slideTarget < 0) {
+//            slideTarget = 0;
+//        }
+//
+//
+//        //sets the intakeArm to a certain pos and keeps it there
+//        Robot.getInstance().slide1.setTargetPosition(slideTarget);
 
-        if(slideTarget < slidepos[0]) {
-            slideTarget = slidepos[0];
-        }
-
-        Robot.getInstance().slide1.setPower(speed);
-
-        //sets the intakeArm to a certain pos and keeps it there
-        Robot.getInstance().intakeArm.setPosition(slideTarget);
+        Robot.getInstance().slide1.setPower((slideUp - slideDown) * 0.2);
 
     }
 
@@ -66,13 +76,13 @@ public class Slides extends Subsystem{
 
     @Override
     public void printToTelemetry(Telemetry telemetry){
-        telemetry.addData("Slide Position: ", Robot.getInstance().slide1.getCurrentPosition());
-
+        telemetry.addData("target Position: ", slideTarget);
+        telemetry.addData("slideUp", slideUp);
+        telemetry.addData("slideDown", slideDown);
     }
 
-    //position goes from 0 to 6. 1 is ground, 6 is all the way up.
-    //1 is one pixel from ground, etc.
-    public void setSlideUp(int position){
+    //position goes from 0 to 6. 1 is ground, 6 is all the way up
+    public void setSlidePreset(int position){
         slideTarget = slidepos[position];
         Robot.getInstance().slide1.setTargetPosition(slideTarget);
     }
