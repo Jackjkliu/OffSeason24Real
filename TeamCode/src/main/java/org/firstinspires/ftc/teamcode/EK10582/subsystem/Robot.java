@@ -51,18 +51,18 @@ public class Robot {
     //__
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
-    public MecanumDrive mecanumDrive = new MecanumDrive();
-    public Intake intake = new Intake();
-    public AprilTags aprilTags = new AprilTags();
+//    public MecanumDrive mecanumDrive = new MecanumDrive();
+//    public Intake intake = new Intake();
+//    public AprilTags aprilTags = new AprilTags();
     public Slides slides = new Slides();
 
-    public openCV opencv = new openCV();
+//    public openCV opencv = new openCV();
 
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(intake, slides, opencv);
+    private List<Subsystem> subsystems = Arrays.asList(slides);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(intake, slides, opencv);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(slides);
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
@@ -79,7 +79,7 @@ public class Robot {
 //        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
 //        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
 //        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
-//
+////
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
         slide1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide1.setTargetPosition(0);
@@ -89,7 +89,7 @@ public class Robot {
 //        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 //        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 //
-        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
+//        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
 //        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
 
 //        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
@@ -97,15 +97,15 @@ public class Robot {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+//        imu = hardwareMap.get(BNO055IMU.class, "imu");
 
         //.Parameters refers to a nested class within BNO055IMU
         //.Parameters class has more methods and uses specific to our use of imu
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
         //sets parameter obj to another nested class called AngleUnit to increase capabilities
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        imu.initialize(parameters);
+//        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+//        imu.initialize(parameters);
 
 
 

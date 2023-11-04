@@ -14,9 +14,9 @@ public class BasicDrive extends EKLinear {
         while(opModeIsActive()) {
 
             //drive
-            robot.mecanumDrive.lx = driverStation.getXVel();
-            robot.mecanumDrive.ly = driverStation.getYVel();
-            robot.mecanumDrive.rx = driverStation.getRotVel();
+//            robot.mecanumDrive.lx = driverStation.getXVel();
+//            robot.mecanumDrive.ly = driverStation.getYVel();
+//            robot.mecanumDrive.rx = driverStation.getRotVel();
 
             robot.update();
         }

@@ -65,7 +65,7 @@ public class Slides extends Subsystem{
 //        //sets the intakeArm to a certain pos and keeps it there
 //        Robot.getInstance().slide1.setTargetPosition(slideTarget);
 
-        Robot.getInstance().slide1.setPower((slideUp - slideDown) * 0.2);
+        Robot.getInstance().slide1.setPower((slideUp - slideDown) * 0.8);
 
     }
 
