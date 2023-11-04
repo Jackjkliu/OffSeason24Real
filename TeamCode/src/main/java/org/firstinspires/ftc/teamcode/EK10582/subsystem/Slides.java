@@ -23,13 +23,10 @@ public class Slides extends Subsystem{
     @Override
     public void init(boolean auton){
        speed = .8;
-       slideTarget = 0;
     }
 
-    //
     @Override
     public void update(){
-
 //        failsafes: only run in one direction if it hits a max
         if(Robot.getInstance().slide1.getCurrentPosition() <= 0 || (slideUp - slideDown) < 0){
             Robot.getInstance().slide1.setPower(0);

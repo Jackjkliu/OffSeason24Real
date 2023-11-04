@@ -48,8 +48,6 @@ public class Robot {
 
     public OpenCvWebcam webcam;
 
-    //why are subsystems and other elements declared here instead of init?
-    //__
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
 //    public MecanumDrive mecanumDrive = new MecanumDrive();
