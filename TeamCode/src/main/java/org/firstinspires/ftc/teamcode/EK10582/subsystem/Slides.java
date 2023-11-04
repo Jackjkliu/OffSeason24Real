@@ -10,7 +10,7 @@ public class Slides extends Subsystem{
 
     public double speed;
 
-    private int increment;
+    private final int SLIDEMAX = 800;
 
     private int slideTarget;
 
@@ -22,51 +22,27 @@ public class Slides extends Subsystem{
     //why is boolean auton a parameter
     @Override
     public void init(boolean auton){
-       speed = .2;
-       increment = 0;
-
+       speed = .8;
        slideTarget = 0;
-
     }
 
     //
     @Override
     public void update(){
 
-//        if(slideUp > 0.01){
-////            increment = (int)(slideUp*5);
-////            slideTarget+=increment;
-//            Robot.getInstance().slide1.setPower(0.2);
-//        }
-//
-//        else if(slideDown > 0.01){
-////            increment = (int)(slideDown*5);
-////            slideTarget-=increment;
-//            Robot.getInstance().slide1.setPower(-0.2);
-//        }
-
-
-//        else{
-//            Robot.getInstance().slide1.setPower(0);
-//        }
-
-
-
-        //if increment is greater than the last element in the array
-//        if(slideTarget > 100) {
-//            slideTarget = 100;
-//        }
-//
-//        if(slideTarget < 0) {
-//            slideTarget = 0;
-//        }
-//
-//
-//        //sets the intakeArm to a certain pos and keeps it there
-//        Robot.getInstance().slide1.setTargetPosition(slideTarget);
-
-        Robot.getInstance().slide1.setPower((slideUp - slideDown) * 0.8);
-
+//        failsafes: only run in one direction if it hits a max
+        if(Robot.getInstance().slide1.getCurrentPosition() <= 0 || (slideUp - slideDown) < 0){
+            Robot.getInstance().slide1.setPower(0);
+            Robot.getInstance().slide2.setPower(0);
+        }
+        else if (Robot.getInstance().slide1.getCurrentPosition() >= SLIDEMAX || (slideUp - slideDown) >0){
+            Robot.getInstance().slide1.setPower(0);
+            Robot.getInstance().slide2.setPower(0);
+        }
+        else{
+            Robot.getInstance().slide1.setPower((slideUp - slideDown) * speed);
+            Robot.getInstance().slide2.setPower((slideUp - slideDown) * speed);
+        }
     }
 
     @Override

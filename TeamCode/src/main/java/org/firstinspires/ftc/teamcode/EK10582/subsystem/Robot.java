@@ -39,6 +39,7 @@ public class Robot {
     public DcMotor leftFront, leftBack, rightFront, rightBack, intakeSpin;
 
     public DcMotor slide1;
+    public DcMotor slide2;
 
     public BNO055IMU imu;
     public Servo intakeArm;
@@ -81,15 +82,20 @@ public class Robot {
 //        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 ////
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
+        slide2 = hardwareMap.get(DcMotor.class, "slide2");
         slide1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide1.setTargetPosition(0);
+        slide2.setTargetPosition(0);
+        slide2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 //        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 //        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 //
-//        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
+        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
 //        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
 
 //        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
