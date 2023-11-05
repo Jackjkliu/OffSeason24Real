@@ -9,7 +9,7 @@ public class Intake extends Subsystem{
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
     public boolean servoUp, servoDown;
     public double servoTarget;
-    public double intakeSpeed;
+    public double intakeSpeed, intakeBack;
 
     //this is supposed to have 7 values in it but rn it only has 2 because we haven't tested heights yet
     public final double[] servoPos = {0.21, 0.7};
@@ -17,7 +17,7 @@ public class Intake extends Subsystem{
     //why is boolean auton a parameter
     @Override
     public void init(boolean auton){
-        increment = 0.0001; //how fast the servo will move
+        increment = 0.0005; //how fast the servo will move
         servoTarget= 0.5; //Change this to the resting/starting position of the servo
         servoDown = false;// these default to false in case you are in auton
         servoUp= false;
@@ -44,7 +44,7 @@ public class Intake extends Subsystem{
         }
 
         Robot.getInstance().intakeArm.setPosition(servoTarget);
-        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
+        Robot.getInstance().intakeSpin.setPower((intakeSpeed - intakeBack) * -0.8);
         //0.6 is the hard limit for intake speed. change as needed.
     }
 
@@ -56,7 +56,7 @@ public class Intake extends Subsystem{
     @Override
     public void printToTelemetry(Telemetry telemetry){
         telemetry.addData("Arm Servo Position: ", Robot.getInstance().intakeArm.getPosition());
-//        telemetry.addData("Spintake speed: ", intakeSpeed);
+        telemetry.addData("Spintake speed: ", intakeSpeed - intakeBack);
 
     }
 

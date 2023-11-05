@@ -24,11 +24,11 @@ public class DriverStation {
     }
 
     public double getXVel() {
-        return filterJoystick(gamepad1.left_stick_x);
+        return -1 * filterJoystick(gamepad1.left_stick_x);
     }
 
     public double getRotVel() {
-        return filterJoystick(gamepad1.right_stick_x);
+        return -1 * filterJoystick(gamepad1.right_stick_x);
     }
     public double getLT1(){
         return filterJoystick(gamepad1.left_trigger);
@@ -71,25 +71,28 @@ public class DriverStation {
     boolean lateRight = false;
     public boolean clampRight(){
         boolean out;
-        out = gamepad1.x && lateRight;
-        lateRight = gamepad1.x;
+        out = gamepad2.x && !lateRight;
+        lateRight = gamepad2.x;
         return out;
+//        return gamepad1.x;
     }
 
     boolean lateLeft = false;
     public boolean clampLeft(){
         boolean out;
-        out = gamepad1.y && lateLeft;
-        lateLeft = gamepad1.y;
+        out = gamepad2.y && !lateLeft;
+        lateLeft = gamepad2.y;
         return out;
+//        return gamepad1.y;
     }
 
     boolean lateDump = false;
     public boolean dump(){
         boolean out;
-        out = gamepad1.b && lateDump;
-        lateDump = gamepad1.b;
+        out = gamepad2.b && !lateDump;
+        lateDump = gamepad2.b;
         return out;
+//        return gamepad1.b;
     }
 
 //    boolean lateA = false;

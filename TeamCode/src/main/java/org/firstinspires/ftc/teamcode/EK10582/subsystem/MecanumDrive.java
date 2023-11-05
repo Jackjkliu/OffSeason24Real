@@ -57,10 +57,10 @@ public class MecanumDrive extends Subsystem{
         } else {
             ratio = magnitude / max * SPEED;
         }
-//        Robot.getInstance().leftFront.setPower(lf * ratio);
-//        Robot.getInstance().leftBack.setPower(lb * ratio);
-//        Robot.getInstance().rightFront.setPower(rf * ratio);
-//        Robot.getInstance().rightBack.setPower(rb * ratio);
+        Robot.getInstance().leftFront.setPower(lf * ratio);
+        Robot.getInstance().leftBack.setPower(lb * ratio);
+        Robot.getInstance().rightFront.setPower(rf * ratio);
+        Robot.getInstance().rightBack.setPower(rb * ratio);
     }
 
 //    public double calculateBias() {

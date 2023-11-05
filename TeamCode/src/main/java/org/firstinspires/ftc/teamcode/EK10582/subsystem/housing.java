@@ -14,6 +14,10 @@ public class housing extends Subsystem {
     public boolean left, right, dump;
     boolean leftLate, rightLate, dumpLate;
 
+    private double increment;
+    private double pixelHolderTarget;
+    private double dumperTarget;
+
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
 
     //this is supposed to have 7 values in it but rn it only has 2 because we haven't tested heights yet
@@ -23,6 +27,7 @@ public class housing extends Subsystem {
     @Override
     public void init(boolean auton) {
         //TODO: Change the values to its appropriate values
+        increment = 0.001;
 
         left = false;
         right = false;
@@ -32,6 +37,8 @@ public class housing extends Subsystem {
         rightLate = false;
         dumpLate = false;
 
+        pixelHolderTarget = 0.5;
+        dumperTarget = 0.5;
 
         //in auton, just set servoTarget directly
 
@@ -42,38 +49,52 @@ public class housing extends Subsystem {
     public void update() {
 
         //if servoup/down is true, it will change pos of servo
-        if (right) {
+        if (right) { //x
+
+            pixelHolderTarget = 0.7; //right is x
+
+
             //rightlate means holder position is already set to the right
-            if(!rightLate) {
-                Robot.getInstance().pixelHolder.setPosition(housingpos[2]);
-                rightLate = true;
-            }
-            else{
-                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
-                rightLate = false;
-            }
+//            if(!rightLate) {
+//                Robot.getInstance().pixelHolder.setPosition(housingpos[2]);
+//                rightLate = true;
+//            }
+//            else{
+//                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
+//                rightLate = false;
+//            }
         }
-        if (left) {
-            if(!leftLate) {
-                Robot.getInstance().pixelHolder.setPosition(housingpos[0]);
-                leftLate = true;
-            }
-            else{
-                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
-                leftLate = false;
-            }
+        else if (left) {
+
+            pixelHolderTarget = 0.45;
+
+
+//            if(!leftLate) {
+//                Robot.getInstance().pixelHolder.setPosition(housingpos[0]);
+//                leftLate = true;
+//            }
+//            else{
+//                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
+//                leftLate = false;
+//            }
         }
+        Robot.getInstance().pixelHolder.setPosition(pixelHolderTarget);
 
         if (dump) {
+
+            dumperTarget = 1;
+
             if(!dumpLate) {
-                Robot.getInstance().dumper.setPosition(housingpos[4]);
+                dumperTarget = 0.96;
                 dumpLate = true;
             }
             else {
-                Robot.getInstance().dumper.setPosition(housingpos[3]);
+                dumperTarget = 0.4;
                 dumpLate = false;
             }
         }
+
+        Robot.getInstance().dumper.setPosition(dumperTarget);
 
     }
 

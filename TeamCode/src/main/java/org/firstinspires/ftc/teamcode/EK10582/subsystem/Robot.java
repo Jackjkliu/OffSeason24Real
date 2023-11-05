@@ -101,7 +101,7 @@ public class Robot {
         intakeArm = hardwareMap.get(Servo.class, "intakeArm");
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
-        dumper = hardwareMap.get(Servo.class, "Dumper");
+        dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
         intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
 
