@@ -58,14 +58,13 @@ public class Robot {
     public AprilTags aprilTags = new AprilTags();
     public Slides slides = new Slides();
     public housing housing = new housing();
-
-//    public openCV opencv = new openCV();
+    public OpenCV openCV = new OpenCV();
 
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing);
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done

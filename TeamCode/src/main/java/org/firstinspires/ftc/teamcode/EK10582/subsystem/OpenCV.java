@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-public class openCV extends Subsystem{
+public class OpenCV extends Subsystem{
 
     @Override
     public void init(boolean auton){
