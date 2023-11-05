@@ -44,8 +44,7 @@ public class Intake extends Subsystem{
         }
 
         Robot.getInstance().intakeArm.setPosition(servoTarget);
-
-//        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
+        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
         //0.6 is the hard limit for intake speed. change as needed.
     }
 

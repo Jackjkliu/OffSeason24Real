@@ -19,11 +19,11 @@ public class Drive extends EKLinear {
 
 
             //drive
+
             robot.mecanumDrive.lx = driverStation.getXVel();
             robot.mecanumDrive.ly = driverStation.getYVel();
             robot.mecanumDrive.rx = driverStation.getRotVel();
 
-//            intake
             robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
             robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
             robot.intake.intakeSpeed = driverStation.getLT1(); //left trigger

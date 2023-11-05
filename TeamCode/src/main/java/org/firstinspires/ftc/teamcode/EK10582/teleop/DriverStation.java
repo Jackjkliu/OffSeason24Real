@@ -44,6 +44,9 @@ public class DriverStation {
         return filterJoystick(gamepad2.right_trigger);
     }
 
+    public boolean getDPadL(){return gamepad2.dpad_left;}
+    public boolean getDPadR(){return gamepad2.dpad_right;}
+
     public double filterJoystick(double input) {
         //implements both deadzone and scaled drive
         if(Math.abs(input) < JoystickConstants.DEADZONE) return 0;
@@ -76,6 +79,7 @@ public class DriverStation {
 
     //in teleop: DriverStation.getCollection() would return whether or not button a was just pressed & also update a
     //associates button press combinations with the functions that they want to accomplish rather than clouding up teleop
+
 
 
 }

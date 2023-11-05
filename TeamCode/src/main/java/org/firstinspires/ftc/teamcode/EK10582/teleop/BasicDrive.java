@@ -13,10 +13,6 @@ public class BasicDrive extends EKLinear {
     public void run() {
         while(opModeIsActive()) {
 
-            //drive
-//            robot.mecanumDrive.lx = driverStation.getXVel();
-//            robot.mecanumDrive.ly = driverStation.getYVel();
-//            robot.mecanumDrive.rx = driverStation.getRotVel();
 
             robot.update();
         }

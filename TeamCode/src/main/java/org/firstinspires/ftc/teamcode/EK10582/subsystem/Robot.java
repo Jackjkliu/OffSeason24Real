@@ -44,6 +44,9 @@ public class Robot {
     public BNO055IMU imu;
     public Servo intakeArm;
 
+    public Servo pixelHolder;
+    public Servo dumper;
+
     public WebcamName camera;
 
     public OpenCvWebcam webcam;
@@ -54,14 +57,16 @@ public class Robot {
     public Intake intake = new Intake();
     public AprilTags aprilTags = new AprilTags();
     public Slides slides = new Slides();
+    public housing housing = new housing();
 
-    public openCV opencv = new openCV();
+//    public openCV opencv = new openCV();
 
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, opencv, slides);
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, opencv, slides);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing);
+
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
@@ -95,10 +100,12 @@ public class Robot {
 
 //
         intakeArm = hardwareMap.get(Servo.class, "intakeArm");
+        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+
+        dumper = hardwareMap.get(Servo.class, "Dumper");
+        pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
         intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
 
-
-        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
