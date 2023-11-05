@@ -41,6 +41,9 @@ public class Robot {
     public BNO055IMU imu;
     public Servo intakeArm;
 
+    public Servo pixelHolder;
+    public Servo dumper;
+
     public WebcamName camera;
 
     //why are subsystems and other elements declared here instead of init?
@@ -49,14 +52,16 @@ public class Robot {
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
     public MecanumDrive mecanumDrive = new MecanumDrive();
     public Intake intake = new Intake();
-    public AprilTags aprilTags = new AprilTags();
+//    public AprilTags aprilTags = new AprilTags();
     public Slides slides = new Slides();
 
+    public housing housing = new housing();
+
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides);
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, slides,housing);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, slides);
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
@@ -75,21 +80,25 @@ public class Robot {
         //hardwareMap.get - method used to retrieve a specific hardware device from the hardwareMap
         //___.class - referencing the class instead of using an object of the class
         //deviceName refers to what will be shown on the phone
-        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
-        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
-        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
-        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+//        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+//        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+//        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+//        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
+        slide1.setTargetPosition(0);
         slide1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+//        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 //
         intakeArm = hardwareMap.get(Servo.class, "intakeArm");
-        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
 
-        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
+        dumper = hardwareMap.get(Servo.class, "Dumper");
+        pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
+//        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
+
+//        camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
 

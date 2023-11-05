@@ -51,7 +51,7 @@ public class Intake extends Subsystem{
         //intakeSpin is the motor that controls spinning of surgical tube
         //sets power to motor based of left trigger
         //set intake power to intake speed
-        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
+//        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
         //0.6 is the hard limit for intake speed. change as needed.
     }
 
