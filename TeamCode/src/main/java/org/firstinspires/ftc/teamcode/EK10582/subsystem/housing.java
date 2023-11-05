@@ -9,9 +9,10 @@ public class housing extends Subsystem {
     //TODO: Third value is the where the claw should go to clamp the right pixel.
     //TODO: 4th value is the housing should be before dumping the pixels
     //TODO: 5th value is the where the housing should go to in order to dump the pixels
-    public final double[] slidepos = {0, .5, 1, 0.1, .8};
+    public final double[] housingpos = {.4, .5, .6, .5, .6};
 
     public boolean left, right, dump;
+    boolean leftLate, rightLate, dumpLate;
 
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
 
@@ -27,6 +28,10 @@ public class housing extends Subsystem {
         right = false;
         dump = false;
 
+        leftLate = false;
+        rightLate = false;
+        dumpLate = false;
+
 
         //in auton, just set servoTarget directly
 
@@ -38,26 +43,38 @@ public class housing extends Subsystem {
 
         //if servoup/down is true, it will change pos of servo
         if (right) {
-            Robot.getInstance().pixelHolder.setPosition(slidepos[2]);
+            //rightlate means holder position is already set to the right
+            if(!rightLate) {
+                Robot.getInstance().pixelHolder.setPosition(housingpos[2]);
+                rightLate = true;
+            }
+            else{
+                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
+                rightLate = false;
+            }
         }
         if (left) {
-            Robot.getInstance().pixelHolder.setPosition(slidepos[0]);
+            if(!leftLate) {
+                Robot.getInstance().pixelHolder.setPosition(housingpos[0]);
+                leftLate = true;
+            }
+            else{
+                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
+                leftLate = false;
+            }
         }
 
         if (dump) {
-            Robot.getInstance().pixelHolder.setPosition(slidepos[1]);
-            Robot.getInstance().dumper.setPosition(slidepos[4]);
-
-        } else if (!dump) {
-            Robot.getInstance().dumper.setPosition(slidepos[3]);
+            if(!dumpLate) {
+                Robot.getInstance().dumper.setPosition(housingpos[4]);
+                dumpLate = true;
+            }
+            else {
+                Robot.getInstance().dumper.setPosition(housingpos[3]);
+                dumpLate = false;
+            }
         }
 
-
-        //intakeSpin is the motor that controls spinning of surgical tube
-        //sets power to motor based of left trigger
-        //set intake power to intake speed
-//        Robot.getInstance().intakeSpin.setPower(intakeSpeed * -0.6);
-        //0.6 is the hard limit for intake speed. change as needed.
     }
 
     @Override

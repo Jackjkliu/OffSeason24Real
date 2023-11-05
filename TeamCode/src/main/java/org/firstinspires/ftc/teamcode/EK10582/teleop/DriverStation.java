@@ -68,6 +68,29 @@ public class DriverStation {
         return gamepad1.dpad_down;
     }
 
+    boolean lateRight = false;
+    public boolean clampRight(){
+        boolean out;
+        out = gamepad1.x && lateRight;
+        lateRight = gamepad1.x;
+        return out;
+    }
+
+    boolean lateLeft = false;
+    public boolean clampLeft(){
+        boolean out;
+        out = gamepad1.y && lateLeft;
+        lateLeft = gamepad1.y;
+        return out;
+    }
+
+    boolean lateDump = false;
+    public boolean dump(){
+        boolean out;
+        out = gamepad1.b && lateDump;
+        lateDump = gamepad1.b;
+        return out;
+    }
 
 //    boolean lateA = false;
 //    public boolean getCollection() {

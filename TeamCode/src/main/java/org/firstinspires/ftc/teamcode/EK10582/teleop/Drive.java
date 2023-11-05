@@ -30,6 +30,11 @@ public class Drive extends EKLinear {
 
             robot.slides.slideUp = driverStation.getLT2();
             robot.slides.slideDown = driverStation.getRT2();
+
+            robot.housing.right = driverStation.clampRight(); //
+            robot.housing.left = driverStation.clampLeft();
+            robot.housing.dump = driverStation.dump();
+
             robot.update();
 
         }
