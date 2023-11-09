@@ -16,22 +16,23 @@ public class Drive extends EKLinear {
             dpad_down is lower arm
             LT is spin
              */
-
-
+            
             //drive
-
             robot.mecanumDrive.lx = driverStation.getXVel();
             robot.mecanumDrive.ly = driverStation.getYVel();
             robot.mecanumDrive.rx = driverStation.getRotVel();
 
+            //intake
             robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
             robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
             robot.intake.intakeSpeed = driverStation.getLT1(); //left trigger
             robot.intake.intakeBack = driverStation.getRT1(); //right trigger
 
+            //slides
             robot.slides.slideUp = driverStation.getLT2();
             robot.slides.slideDown = driverStation.getRT2();
 
+            //housing
             robot.housing.right = driverStation.clampRight(); //
             robot.housing.left = driverStation.clampLeft();
             robot.housing.dump = driverStation.dump();
