@@ -46,52 +46,8 @@ public class Housing extends Subsystem {
     //
     @Override
     public void update() {
-
-        //if servoup/down is true, it will change pos of servo
-//        if (right) { //x
-//
-//            pixelHolderTarget = 0.7; //right is x
-//
-//
-//            //rightlate means holder position is already set to the right
-////            if(!rightLate) {
-////                Robot.getInstance().pixelHolder.setPosition(housingpos[2]);
-////                rightLate = true;
-////            }
-////            else{
-////                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
-////                rightLate = false;
-////            }
-//        }
-//        else if (left) {
-//
-//            pixelHolderTarget = 0.45;
-//
-//
-////            if(!leftLate) {
-////                Robot.getInstance().pixelHolder.setPosition(housingpos[0]);
-////                leftLate = true;
-////            }
-////            else{
-////                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
-////                leftLate = false;
-////            }
-//        }
         Robot.getInstance().pixelHolder.setPosition(0.585);
 
-//        if (dump) {
-//
-//            dumperTarget = 1;
-//
-//            if(!dumpLate) {
-//                dumperTarget = 0.96;
-//                dumpLate = true;
-//            }
-//            else {
-//                dumperTarget = 0.4;
-//                dumpLate = false;
-//            }
-//        }
         if(dump) {
             isDump = !isDump;
         }

@@ -10,7 +10,6 @@ import org.firstinspires.ftc.teamcode.PIDController;
 //What is mecanumDrive:
 //drive system is the use of special wheels called mecanum wheels
 //child class of subsystem
-@Config
 public class MecanumDrive extends Subsystem{
     //MecanumDrive is a subsystem that controls the drive. It sets the motor powers
     //according to the lx, ly and rx values.
