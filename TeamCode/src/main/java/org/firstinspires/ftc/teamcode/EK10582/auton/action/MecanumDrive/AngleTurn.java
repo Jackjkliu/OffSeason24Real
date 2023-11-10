@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
 public class AngleTurn extends Action {
-    private double theta;
-    private double speed;
+    private final double theta;
+    private final double speed;
     private int direction = 1; // 1 is counterclockwise, -1 is clockwise
 
     public AngleTurn(double theta, double speed) {
@@ -15,20 +13,8 @@ public class AngleTurn extends Action {
         this.speed = speed;
     }
 
-
     @Override
     public void start() {
-        //reset motor encoders
-        // might not be necessary for turning?
-//        Robot.getInstance().leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        Robot.getInstance().leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        Robot.getInstance().leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        Robot.getInstance().leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        Robot.getInstance().rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        Robot.getInstance().rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        Robot.getInstance().rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        Robot.getInstance().rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
         setDirection();
 
         //set motor powers
@@ -58,14 +44,11 @@ public class AngleTurn extends Action {
     private void setDirection() {
         double currentAngle = Robot.getInstance().imu.getAngularOrientation().firstAngle;
         // should work for all cases
-        if ((currentAngle - theta) >= 180) {
-            direction = -1;
+        if (Math.abs(currentAngle - theta) >= 180) {
+            direction = (currentAngle >= theta) ? -1 : 1;
         }
         else if (currentAngle <= theta) {
             direction = -1;
-        }
-        else { // might not be necessary
-            direction = 1;
         }
     }
 }

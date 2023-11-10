@@ -10,6 +10,7 @@ public class AngleMove extends Action {
     double theta;
     double distance;
     double speed; //0 to 0.8 because negative is already accounted in Math.sin
+    final double TICKS_TO_INCHES = 23428; // placeholder, change later
 
     public AngleMove(double theta, double distance, double speed) {
         this.theta = theta;
@@ -41,7 +42,7 @@ public class AngleMove extends Action {
     public void update() {
         double leftDiagonal = (Robot.getInstance().leftFront.getCurrentPosition() + Robot.getInstance().rightBack.getCurrentPosition())/2.0;
         double rightDiagonal = (Robot.getInstance().leftBack.getCurrentPosition() + Robot.getInstance().rightFront.getCurrentPosition())/2.0;
-        if(Math.sqrt(Math.pow(leftDiagonal, 2) + Math.pow(rightDiagonal, 2)) >= distance) {
+        if(Math.sqrt(Math.pow(leftDiagonal, 2) + Math.pow(rightDiagonal, 2)) * TICKS_TO_INCHES >= distance) {
             Robot.getInstance().leftFront.setPower(0);
             Robot.getInstance().leftBack.setPower(0);
             Robot.getInstance().rightFront.setPower(0);
