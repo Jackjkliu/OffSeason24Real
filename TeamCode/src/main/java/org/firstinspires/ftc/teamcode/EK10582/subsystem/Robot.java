@@ -7,10 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
@@ -57,7 +55,7 @@ public class Robot {
     public Intake intake = new Intake();
     public AprilTags aprilTags = new AprilTags();
     public Slides slides = new Slides();
-    public housing housing = new housing();
+    public Housing housing = new Housing();
     public OpenCV openCV = new OpenCV();
 
     //Add all subsystems to a list to be initiated and updated through

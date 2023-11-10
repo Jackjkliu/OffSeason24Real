@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class housing extends Subsystem {
+public class Housing extends Subsystem {
 
     //TODO: First value is the where the claw should go to clamp the left pixel.
     //TODO: Second value is the claws middle position
@@ -12,7 +12,7 @@ public class housing extends Subsystem {
     public final double[] housingpos = {.4, .5, .6, .5, .6};
 
     public boolean left, right, dump;
-    boolean leftLate, rightLate, dumpLate;
+    boolean leftLate, rightLate, isDump;
 
     private double increment;
     private double pixelHolderTarget;
@@ -35,10 +35,9 @@ public class housing extends Subsystem {
 
         leftLate = false;
         rightLate = false;
-        dumpLate = false;
 
-        pixelHolderTarget = 0.5;
-        dumperTarget = 0.5;
+        pixelHolderTarget = 0.55; //default
+        dumperTarget = 0.375;
 
         //in auton, just set servoTarget directly
 
@@ -49,49 +48,58 @@ public class housing extends Subsystem {
     public void update() {
 
         //if servoup/down is true, it will change pos of servo
-        if (right) { //x
+//        if (right) { //x
+//
+//            pixelHolderTarget = 0.7; //right is x
+//
+//
+//            //rightlate means holder position is already set to the right
+////            if(!rightLate) {
+////                Robot.getInstance().pixelHolder.setPosition(housingpos[2]);
+////                rightLate = true;
+////            }
+////            else{
+////                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
+////                rightLate = false;
+////            }
+//        }
+//        else if (left) {
+//
+//            pixelHolderTarget = 0.45;
+//
+//
+////            if(!leftLate) {
+////                Robot.getInstance().pixelHolder.setPosition(housingpos[0]);
+////                leftLate = true;
+////            }
+////            else{
+////                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
+////                leftLate = false;
+////            }
+//        }
+        Robot.getInstance().pixelHolder.setPosition(0.585);
 
-            pixelHolderTarget = 0.7; //right is x
-
-
-            //rightlate means holder position is already set to the right
-//            if(!rightLate) {
-//                Robot.getInstance().pixelHolder.setPosition(housingpos[2]);
-//                rightLate = true;
+//        if (dump) {
+//
+//            dumperTarget = 1;
+//
+//            if(!dumpLate) {
+//                dumperTarget = 0.96;
+//                dumpLate = true;
 //            }
-//            else{
-//                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
-//                rightLate = false;
+//            else {
+//                dumperTarget = 0.4;
+//                dumpLate = false;
 //            }
+//        }
+        if(dump) {
+            isDump = !isDump;
         }
-        else if (left) {
 
-            pixelHolderTarget = 0.45;
-
-
-//            if(!leftLate) {
-//                Robot.getInstance().pixelHolder.setPosition(housingpos[0]);
-//                leftLate = true;
-//            }
-//            else{
-//                Robot.getInstance().pixelHolder.setPosition(housingpos[1]);
-//                leftLate = false;
-//            }
-        }
-        Robot.getInstance().pixelHolder.setPosition(pixelHolderTarget);
-
-        if (dump) {
-
-            dumperTarget = 1;
-
-            if(!dumpLate) {
-                dumperTarget = 0.96;
-                dumpLate = true;
-            }
-            else {
-                dumperTarget = 0.4;
-                dumpLate = false;
-            }
+        if(isDump) {
+            dumperTarget = 0.96;
+        } else {
+            dumperTarget = 0.39;
         }
 
         Robot.getInstance().dumper.setPosition(dumperTarget);
@@ -107,7 +115,7 @@ public class housing extends Subsystem {
     public void printToTelemetry(Telemetry telemetry) {
         telemetry.addData("ClawPos: ", Robot.getInstance().pixelHolder.getPosition());
         telemetry.addData("Dumper: ", Robot.getInstance().dumper.getPosition());
-
+        telemetry.addData("Dumper Position: ", isDump);
     }
 
     // 1 = rest dumper pos, 2 = dumper dumping pos
