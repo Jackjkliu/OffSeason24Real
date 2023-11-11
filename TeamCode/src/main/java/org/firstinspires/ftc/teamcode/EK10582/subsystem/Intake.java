@@ -5,19 +5,19 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 //child class of subsystem
 public class Intake extends Subsystem{
 
-    private double increment;
+    private double intakeIncrement;
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
     public boolean servoUp, servoDown;
     public double servoTarget;
     public double intakeSpeed, intakeBack;
 
     //this is supposed to have 7 values in it but rn it only has 2 because we haven't tested heights yet
-    public final double[] servoPos = {0.21, 0.7};
+    public final double[] servoPos = SubsystemConstants.servoPos;
 
     //why is boolean auton a parameter
     @Override
     public void init(boolean auton){
-        increment = 0.0005; //how fast the servo will move
+        intakeIncrement = SubsystemConstants.intakeIncrement; //how fast the servo will move
         servoTarget= 0.5; //Change this to the resting/starting position of the servo
         servoDown = false;// these default to false in case you are in auton
         servoUp= false;
@@ -30,10 +30,10 @@ public class Intake extends Subsystem{
     public void update(){
 
         if (servoUp) {
-            servoTarget += increment;
+            servoTarget += intakeIncrement;
         }
         if(servoDown){
-            servoTarget -= increment;
+            servoTarget -= intakeIncrement;
         }
         //set intake arm's position to the servotarget. Added failsafes
         if(servoTarget >1) {

@@ -10,19 +10,19 @@ public class Slides extends Subsystem{
 
     public double speed;
 
-    private final int SLIDEMAX = 800;
+    private final int SLIDEMAX = SubsystemConstants.SLIDEMAX;
 
     private int slideTarget;
 
 
 
     //TODO: change vals to actual pos
-    public final int[] slidepos = {0,200, 400};
+    public final int[] slidepos = SubsystemConstants.slidepos;
 
     //why is boolean auton a parameter
     @Override
     public void init(boolean auton){
-       speed = .8;
+       speed = SubsystemConstants.speed;
     }
 
     @Override

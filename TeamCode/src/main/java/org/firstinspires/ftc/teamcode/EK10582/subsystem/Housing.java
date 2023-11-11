@@ -9,14 +9,13 @@ public class Housing extends Subsystem {
     //TODO: Third value is the where the claw should go to clamp the right pixel.
     //TODO: 4th value is the housing should be before dumping the pixels
     //TODO: 5th value is the where the housing should go to in order to dump the pixels
-    public final double[] housingpos = {.4, .5, .6, .5, .6};
 
     public boolean left, right, dump;
     boolean leftLate, rightLate, isDump;
 
-    private double increment;
-    private double pixelHolderTarget;
-    private double dumperTarget;
+    private double increment = SubsystemConstants.housingIncrement;
+    private double pixelHolderTarget = SubsystemConstants.pixelHolderTarget;
+    private double dumperTarget = SubsystemConstants.dumperTarget;
 
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
 
@@ -27,7 +26,6 @@ public class Housing extends Subsystem {
     @Override
     public void init(boolean auton) {
         //TODO: Change the values to its appropriate values
-        increment = 0.001;
 
         left = false;
         right = false;
@@ -36,8 +34,6 @@ public class Housing extends Subsystem {
         leftLate = false;
         rightLate = false;
 
-        pixelHolderTarget = 0.55; //default
-        dumperTarget = 0.375;
 
         //in auton, just set servoTarget directly
 

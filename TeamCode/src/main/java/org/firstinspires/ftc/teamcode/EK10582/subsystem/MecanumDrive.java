@@ -13,16 +13,16 @@ import org.firstinspires.ftc.teamcode.PIDController;
 public class MecanumDrive extends Subsystem{
     //MecanumDrive is a subsystem that controls the drive. It sets the motor powers
     //according to the lx, ly and rx values.
-    public double SPEED = 0.8;
+    public double SPEED = SubsystemConstants.SPEED;
 
     //what is gyro0n for?
     //__
-    public boolean gyroOn = false;
+    public boolean gyroOn = SubsystemConstants.gyroOn;
     //PIDController gyroPID = new PIDController(4, 0, 0.03);
 
     //these values are set in Drive
     public double rx, lx, ly;
-    private double targetAngle = 0;
+    private double targetAngle = SubsystemConstants.targetAngle;
 
 
     //why are var not instantiated in init?

@@ -50,7 +50,7 @@ public class AprilTags extends Subsystem {
     private AprilTagProcessor aprilTag;
     private VisionPortal visionPortal;
 
-    public int targetAprilTag = 8;
+    public int targetAprilTag = SubsystemConstants.targetAprilTag;
     //TODO: make this changable by buttons or sm so you can change what april tag you're looking for
 
     public boolean seeTag = false;
@@ -60,8 +60,8 @@ public class AprilTags extends Subsystem {
 
     // Decimation: 1 means low rate high range, 3 means low range high rate
     // Note: Decimation can be changed on-the-fly to adapt during a match.
-    private int decimation = 3;
-    public boolean aprilTagsEnabled = true;
+    private int decimation;
+    public boolean aprilTagsEnabled = SubsystemConstants.aprilTagsEnabled;
 
     //makes a list called currentDetections
     private List<AprilTagDetection> currentDetections;
@@ -71,7 +71,7 @@ public class AprilTags extends Subsystem {
     //if in auton, then certain things will happen due to certain if statements specific to auton
     @Override
     public void init(boolean auton) {
-
+        decimation = SubsystemConstants.decimation;
         // Create the AprilTag processor.
         aprilTag = new AprilTagProcessor.Builder()
 
