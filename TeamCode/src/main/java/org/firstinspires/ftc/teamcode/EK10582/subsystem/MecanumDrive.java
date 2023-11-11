@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
-import com.acmerobotics.dashboard.config.Config;
+//import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
