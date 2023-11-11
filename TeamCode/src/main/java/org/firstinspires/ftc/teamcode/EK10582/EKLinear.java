@@ -35,6 +35,6 @@ public abstract class EKLinear extends LinearOpMode {
         }
 
         //after start
-        //matchTimer.reset();
+        matchTimer.reset();
     }
 }
