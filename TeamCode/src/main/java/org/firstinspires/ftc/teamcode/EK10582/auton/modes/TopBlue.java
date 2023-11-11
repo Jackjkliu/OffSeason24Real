@@ -5,18 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositions;
 
 @Autonomous(name="TopBlue")
 @Config
 public class TopBlue extends AutonBase {
 
-    SpikePositions spikePosition = SpikePositions.LEFT;
 
     @Override
     public void runOpMode() {
         waitForStart();
-        switch(spikePosition){
+        switch(cameraPipeline.spikePosition){
             case LEFT:
                 runAction(new AngleMove(Math.PI/2, 40, 0.6));
                 runAction(new AngleMove(0, 40, 0.6));

@@ -8,6 +8,8 @@ public class cameraPipeline extends OpenCvPipeline {
     public enum SpikePositions{
         LEFT, RIGHT, MIDDLE;
     }
+    public static SpikePositions spikePosition;
+
 
     @Override
     public Mat processFrame(Mat input) {
