@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
@@ -11,6 +14,12 @@ public class AngleTurn extends Action {
     public AngleTurn(double theta, double speed) {
         this.theta = theta;
         this.speed = speed;
+    }
+
+    public AngleTurn(double theta, double speed, int dir) {
+        this.theta = theta;
+        this.speed = speed;
+        this.direction = dir;
     }
 
     @Override
@@ -27,7 +36,7 @@ public class AngleTurn extends Action {
     @Override
     public void update() {
         // stop motors once the current angle is close enough to the target angle (theta)
-        if (Math.abs(Robot.getInstance().imu.getAngularOrientation().firstAngle - theta) <= 0.01) {
+        if (Math.abs(Robot.getInstance().imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES).thirdAngle - theta) <= 2) {
             Robot.getInstance().leftFront.setPower(0);
             Robot.getInstance().leftBack.setPower(0);
             Robot.getInstance().rightFront.setPower(0);
@@ -42,7 +51,7 @@ public class AngleTurn extends Action {
     }
 
     private void setDirection() {
-        double currentAngle = Robot.getInstance().imu.getAngularOrientation().firstAngle;
+        double currentAngle = Robot.getInstance().imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES).thirdAngle;
         // should work for all cases
         if (Math.abs(currentAngle - theta) >= 180) {
             direction = (currentAngle >= theta) ? -1 : 1;

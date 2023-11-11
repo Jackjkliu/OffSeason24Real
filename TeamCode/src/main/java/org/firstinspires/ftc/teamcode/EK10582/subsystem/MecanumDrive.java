@@ -145,12 +145,12 @@ public class MecanumDrive extends Subsystem{
 
     public void turnTo(double targetAngle, double speed, double direction){
 
-        while (Math.abs(Robot.getInstance().imu.getAngularOrientation().firstAngle - targetAngle) > 0.01){
-            Robot.getInstance().leftBack.setPower(speed*direction);
-            Robot.getInstance().rightBack.setPower(speed*-1*direction);
-            Robot.getInstance().leftFront.setPower(speed*direction);
-            Robot.getInstance().rightFront.setPower(speed*-1*direction);
-        }
+//        while (Math.abs(Robot.getInstance().imu.getAngularOrientation().firstAngle - targetAngle) > 0.01){
+//            Robot.getInstance().leftBack.setPower(speed*direction);
+//            Robot.getInstance().rightBack.setPower(speed*-1*direction);
+//            Robot.getInstance().leftFront.setPower(speed*direction);
+//            Robot.getInstance().rightFront.setPower(speed*-1*direction);
+//        }
         Robot.getInstance().leftFront.setPower(0);
         Robot.getInstance().leftBack.setPower(0);
         Robot.getInstance().rightFront.setPower(0);

@@ -12,10 +12,10 @@ public class AngleMove extends Action {
     double theta;
     double distance;
     double speed; //0 to 0.8 because negative is already accounted in Math.sin
-    final double TICKS_TO_INCHES = 1; // placeholder, change later
+    final double TICKS_TO_INCHES = 0.029; // placeholder, change later
 
     public AngleMove(double theta, double distance, double speed) {
-        this.theta = theta;
+        this.theta = Math.toRadians(theta);
         this.distance = distance;
         this.speed = speed;
     }
@@ -25,19 +25,19 @@ public class AngleMove extends Action {
     public void start() {
         //reset motor encoders
         Robot.getInstance().leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Robot.getInstance().leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Robot.getInstance().leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Robot.getInstance().leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Robot.getInstance().leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Robot.getInstance().leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Robot.getInstance().rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Robot.getInstance().rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Robot.getInstance().rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Robot.getInstance().rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Robot.getInstance().rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Robot.getInstance().rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //set motor powers
-        Robot.getInstance().leftFront.setPower(speed*Math.sin(theta+3*Math.PI/4));
-        Robot.getInstance().leftBack.setPower(speed*Math.sin(theta+Math.PI/4));
-        Robot.getInstance().rightFront.setPower(speed*Math.sin(theta+Math.PI/4));
-        Robot.getInstance().rightBack.setPower(speed*Math.sin(theta+3*Math.PI/4));
+        Robot.getInstance().leftFront.setPower(speed*Math.sin(theta+Math.PI/4));
+        Robot.getInstance().leftBack.setPower(speed*Math.sin(theta+3*Math.PI/4));
+        Robot.getInstance().rightFront.setPower(speed*Math.sin(theta+3*Math.PI/4));
+        Robot.getInstance().rightBack.setPower(speed*Math.sin(theta+Math.PI/4));
     }
 
     @Override
