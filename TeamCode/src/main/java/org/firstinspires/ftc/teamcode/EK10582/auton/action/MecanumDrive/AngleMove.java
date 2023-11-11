@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
@@ -10,7 +12,7 @@ public class AngleMove extends Action {
     double theta;
     double distance;
     double speed; //0 to 0.8 because negative is already accounted in Math.sin
-    final double TICKS_TO_INCHES = 23428; // placeholder, change later
+    final double TICKS_TO_INCHES = 1; // placeholder, change later
 
     public AngleMove(double theta, double distance, double speed) {
         this.theta = theta;

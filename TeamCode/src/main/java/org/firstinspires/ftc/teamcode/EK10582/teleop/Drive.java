@@ -8,8 +8,10 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMov
 
 @TeleOp(name="New Drive")
 public class Drive extends EKLinear {
+
     @Override
-    public void run(){
+    public void runOpMode(){
+        waitForStart();
         while(opModeIsActive()) {
             /*
             Controls:

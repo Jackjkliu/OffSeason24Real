@@ -9,13 +9,11 @@ public class OpenCV extends Subsystem{
 
     @Override
     public void init(boolean auton){
-        Robot.getInstance().webcam.setPipeline(new cameraPipeline());
-        Robot.getInstance().webcam.setMillisecondsPermissionTimeout(2500); // Timeout for obtaining permission is configurable. Set before opening.
-        OpenCvWebcam finalWebcam = Robot.getInstance().webcam;
+//        Robot.getInstance().webcam.setPipeline(new cameraPipeline());
         Robot.getInstance().webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                finalWebcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                Robot.getInstance().webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
             @Override
             public void onError(int errorCode) {
@@ -34,7 +32,7 @@ public class OpenCV extends Subsystem{
 
     @Override
     public void stop(){
-
+        Robot.getInstance().webcam.stopStreaming();
     }
 
     @Override

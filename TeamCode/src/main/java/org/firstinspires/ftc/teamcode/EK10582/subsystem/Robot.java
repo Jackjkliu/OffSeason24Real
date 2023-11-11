@@ -59,10 +59,12 @@ public class Robot {
     public OpenCV openCV = new OpenCV();
 
     //Add all subsystems to a list to be initiated and updated through
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
+    //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
+    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing);
 
     //add all subsystems that need to go through telemetry
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList();
+    //private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
@@ -81,6 +83,8 @@ public class Robot {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
+
+
         slide1 = hardwareMap.get(DcMotor.class, "slide1");
         slide2 = hardwareMap.get(DcMotor.class, "slide2");
         slide1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -92,8 +96,8 @@ public class Robot {
         slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //
         intakeArm = hardwareMap.get(Servo.class, "intakeArm");
@@ -148,6 +152,9 @@ public class Robot {
         //Update every single subsystem in the subsystems array initialized earlier
         for(Subsystem subsystem : subsystems) {
             subsystem.update();
+            if(linearOpMode.isStopRequested()){
+                return;
+            }
         }
 
         //Updates every single action in the list of actions that are currently being done

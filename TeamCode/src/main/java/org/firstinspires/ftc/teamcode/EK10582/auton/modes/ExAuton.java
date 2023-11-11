@@ -7,7 +7,8 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 public class ExAuton extends AutonBase {
 
     @Override
-    public void run() {
+    public void runOpMode() {
+        //waitForStart();
         //runAction(insert action here);
 
     }

@@ -7,8 +7,9 @@ import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 
 @TeleOp(name="Servo Tester (intake arm port)")
 public class ServoTester extends LinearOpMode {
-    //@Override
-    public void run(){
+
+    @Override
+    public void runOpMode() throws InterruptedException {
         double servoPosition = 0.5;
         while(opModeIsActive()) {
 //            servoPosition += driverStation.getLT1() - driverStation.getRT1();
@@ -18,10 +19,5 @@ public class ServoTester extends LinearOpMode {
             telemetry.update();
             //robot.update();
         }
-    }
-
-    @Override
-    public void runOpMode() throws InterruptedException {
-
     }
 }

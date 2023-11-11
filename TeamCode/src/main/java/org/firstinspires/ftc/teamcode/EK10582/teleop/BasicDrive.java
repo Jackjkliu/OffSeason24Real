@@ -10,7 +10,8 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 public class BasicDrive extends EKLinear {
 
     @Override
-    public void run() {
+    public void runOpMode() {
+        waitForStart();
         while(opModeIsActive()) {
 
 

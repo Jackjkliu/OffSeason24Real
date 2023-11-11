@@ -8,7 +8,8 @@ import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 @TeleOp(name="Slide test")
 public class SlideTester extends EKLinear {
     @Override
-    public void run(){
+    public void runOpMode(){
+        waitForStart();
         while(opModeIsActive()) {
 
             robot.slides.slideUp = driverStation.getLT2();

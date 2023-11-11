@@ -18,17 +18,17 @@ public class DriverStation {
         this.gamepad1 = gamepad1;
         this.gamepad2 = gamepad2;
     }
-
+ 
     public double getYVel() {
-        return filterJoystick(gamepad1.left_stick_y);
+        return -filterJoystick(gamepad1.left_stick_y);
     }
 
     public double getXVel() {
-        return -1 * filterJoystick(gamepad1.left_stick_x);
+        return filterJoystick(gamepad1.left_stick_x);
     }
 
     public double getRotVel() {
-        return -1 * filterJoystick(gamepad1.right_stick_x);
+        return filterJoystick(gamepad1.right_stick_x);
     }
     public double getLT1(){
         return filterJoystick(gamepad1.left_trigger);

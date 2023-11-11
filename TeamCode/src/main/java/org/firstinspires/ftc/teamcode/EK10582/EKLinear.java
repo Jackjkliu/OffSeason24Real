@@ -20,10 +20,8 @@ public abstract class EKLinear extends LinearOpMode {
     public ElapsedTime matchTimer;
     public DriverStation driverStation;
 
-    public abstract void run();
-
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void waitForStart() {
         //initing things
         dashboard = FtcDashboard.getInstance();
         allTelemetry = new MultipleTelemetry(dashboard.getTelemetry(), this.telemetry);
@@ -31,10 +29,12 @@ public abstract class EKLinear extends LinearOpMode {
         driverStation = new DriverStation(gamepad1, gamepad2);
         robot.init(hardwareMap, this);
 
-        waitForStart();
+        while(!isStarted() && !isStopRequested()){
+            telemetry.addData("Waiting for Start","");
+            telemetry.update();
+        }
 
         //after start
-        matchTimer.reset();
-        run();
+        //matchTimer.reset();
     }
 }
