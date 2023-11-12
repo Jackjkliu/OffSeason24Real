@@ -16,7 +16,7 @@ public class OpenCVTest extends EKLinear {
         waitForStart();
 
         while(opModeIsActive()) {
-            telemetry.addData("pixelpos: ", cameraPipeline.max);
+//            telemetry.addData("pixelpos: ", cameraPipeline.max);
             robot.update();
             telemetry.update();
         }

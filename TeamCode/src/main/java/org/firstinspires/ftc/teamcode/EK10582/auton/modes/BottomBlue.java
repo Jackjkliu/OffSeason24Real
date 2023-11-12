@@ -9,9 +9,9 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsBlue;
 
-@Autonomous(name="TopBlue")
+@Autonomous(name="BottomBlue")
 @Config
-public class TopBlue extends AutonBase {
+public class BottomBlue extends AutonBase {
 
     @Override
     public void runOpMode() {
@@ -31,8 +31,6 @@ public class TopBlue extends AutonBase {
                 runAction(new AngleMove(-110, 38, 0.6));
                 sleep(500);
                 runAction(new AngleMove(90, 30, 0.6));
-                sleep(500);
-                runAction(new AngleMove(180, 30, 0.6));
                 break;
             case RIGHT:
                 //right case
@@ -42,20 +40,12 @@ public class TopBlue extends AutonBase {
                 runAction(new AngleMove(-40, 23, 0.4));
                 sleep(500);
                 runAction(new AngleMove(90, 3, 0.4));
-                sleep(500);
-                runAction(new AngleMove(180, 30, 0.4));
-                sleep(500);
-                runAction(new AngleMove(115, 43, 0.6));
-                sleep(500);
-                runAction(new AngleMove(180, 15, 0.6));
                 break;
             case MIDDLE:
                 //middle case
                 runAction(new AngleMove(-90, 47, 0.6));
                 sleep(500);
-                runAction(new AngleMove(90, 34, 0.6));
-                sleep(500);
-                runAction(new AngleMove(180, 52, 0.6));
+                runAction(new AngleMove(90, 5, 0.6));
                 break;
         }
         sleep(1000);
