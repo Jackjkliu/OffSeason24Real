@@ -11,10 +11,10 @@ public class SlideTester extends EKLinear {
     public void runOpMode(){
         waitForStart();
         while(opModeIsActive()) {
-
-            robot.slides.slideUp = driverStation.getLT2();
-            robot.slides.slideDown = driverStation.getRT2();
-            robot.update();
+//
+//            robot.slides.slideUp = driverStation.getLT2();
+//            robot.slides.slideDown = driverStation.getRT2();
+//            robot.update();
 
         }
     }

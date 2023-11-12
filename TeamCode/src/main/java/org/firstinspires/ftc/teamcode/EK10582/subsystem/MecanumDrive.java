@@ -14,6 +14,8 @@ public class MecanumDrive extends Subsystem{
     //MecanumDrive is a subsystem that controls the drive. It sets the motor powers
     //according to the lx, ly and rx values.
     public double SPEED = SubsystemConstants.SPEED;
+    private double slowmode = 0.5;
+    public boolean slowMode = false;
 
     //what is gyro0n for?
     //__
@@ -56,10 +58,20 @@ public class MecanumDrive extends Subsystem{
         } else {
             ratio = magnitude / max * SPEED;
         }
-        Robot.getInstance().leftFront.setPower(lf * ratio);
-        Robot.getInstance().leftBack.setPower(lb * ratio);
-        Robot.getInstance().rightFront.setPower(rf * ratio);
-        Robot.getInstance().rightBack.setPower(rb * ratio);
+
+        if(slowMode){
+            if(slowmode == 1){
+                slowmode = 0.5;
+            }
+            else{
+                slowmode = 1;
+            }
+        }
+
+        Robot.getInstance().leftFront.setPower(lf * ratio * slowmode);
+        Robot.getInstance().leftBack.setPower(lb * ratio * slowmode);
+        Robot.getInstance().rightFront.setPower(rf * ratio * slowmode);
+        Robot.getInstance().rightBack.setPower(rb * ratio * slowmode);
     }
 
 //    public double calculateBias() {
@@ -90,6 +102,8 @@ public class MecanumDrive extends Subsystem{
         telemetry.addData("lx", lx);
         telemetry.addData("rx", rx);
         telemetry.addData("targetAngle", targetAngle);
+        telemetry.addData("slowmode: ", slowmode);
+        telemetry.addData("slowmodePressed: ", slowMode);
     }
 
     public void resetEncoders(){

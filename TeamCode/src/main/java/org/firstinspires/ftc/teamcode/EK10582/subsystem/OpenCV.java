@@ -9,7 +9,7 @@ public class OpenCV extends Subsystem{
 
     @Override
     public void init(boolean auton){
-//        Robot.getInstance().webcam.setPipeline(new cameraPipeline());
+        Robot.getInstance().webcam.setPipeline(new cameraPipeline());
         Robot.getInstance().webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {

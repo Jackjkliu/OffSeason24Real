@@ -5,26 +5,41 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositions;
 
 @Autonomous(name="TopBlue")
 @Config
 public class TopBlue extends AutonBase {
-    SpikePositions spikePosition = SpikePositions.RIGHT;
 
     @Override
     public void runOpMode() {
+
+        robot.openCV.update();
+        int pos = cameraPipeline.max;
+        telemetry.addData("pos: ",pos);
+        telemetry.update();
+
         waitForStart();
-        switch(cameraPipeline.spikePosition){
-            case LEFT:
+
+        robot.openCV.update();
+        pos = cameraPipeline.max;
+        telemetry.addData("pos: ",pos);
+        telemetry.update();
+        sleep(1000);
+
+        switch(pos){
+            case 0:
+                //left case
                 runAction(new AngleMove(-99, 40, 0.6));
                 sleep(500);
                 runAction(new AngleMove(90, 30, 0.6));
                 sleep(500);
                 runAction(new AngleMove(180, 25, 0.6));
                 break;
-            case RIGHT:
+            case 2:
+                //right case
                 runAction(new AngleMove(-90, 26, 0.6));
                 sleep(500);
 //                runAction(new AngleTurn(-90,0.3, -1));
@@ -38,7 +53,8 @@ public class TopBlue extends AutonBase {
                 sleep(500);
                 runAction(new AngleMove(180, 15, 0.6));
                 break;
-            case MIDDLE:
+            case 1:
+                //middle case
                 runAction(new AngleMove(-90, 49, 0.6));
                 sleep(500);
                 runAction(new AngleMove(90, 34, 0.6));
@@ -46,6 +62,6 @@ public class TopBlue extends AutonBase {
                 runAction(new AngleMove(180, 30, 0.6));
                 break;
         }
-//        sleep(1000);
+        sleep(1000);
     }
 }

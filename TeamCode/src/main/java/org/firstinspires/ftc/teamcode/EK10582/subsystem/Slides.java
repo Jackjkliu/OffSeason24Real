@@ -6,7 +6,7 @@ public class Slides extends Subsystem{
 
 
     //not init
-    public double slideUp, slideDown;
+    public double slideControl;
 
     public double speed;
 
@@ -37,8 +37,8 @@ public class Slides extends Subsystem{
 //            Robot.getInstance().slide2.setPower(0);
 //        }
 //        else{
-            Robot.getInstance().slide1.setPower((slideUp - slideDown) * speed);
-            Robot.getInstance().slide2.setPower((slideUp - slideDown) * speed);
+            Robot.getInstance().slide1.setPower((slideControl) * speed);
+            Robot.getInstance().slide2.setPower((slideControl) * speed);
 //        }
     }
 
@@ -50,9 +50,7 @@ public class Slides extends Subsystem{
     @Override
     public void printToTelemetry(Telemetry telemetry){
         telemetry.addData("target Position: ", slideTarget);
-        telemetry.addData("slideUp", slideUp);
-        telemetry.addData("slideDown", slideDown);
-        telemetry.addData("slidesPower", slideUp - slideDown);
+        telemetry.addData("slideControl", slideControl);
     }
 
     //position goes from 0 to 6. 1 is ground, 6 is all the way up

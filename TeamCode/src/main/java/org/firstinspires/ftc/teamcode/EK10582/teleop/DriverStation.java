@@ -44,6 +44,8 @@ public class DriverStation {
         return filterJoystick(gamepad2.right_trigger);
     }
 
+    public double getSlidePower(){return filterJoystick(gamepad2.left_stick_y);}
+
     public boolean getDPadL(){return gamepad2.dpad_left;}
     public boolean getDPadR(){return gamepad2.dpad_right;}
 
@@ -61,11 +63,11 @@ public class DriverStation {
     // example of button for subsystem
 
     public boolean raiseIntakeArm() {
-        return gamepad1.dpad_up;
+        return gamepad2.dpad_up;
     }
 
     public boolean lowerIntakeArm() {
-        return gamepad1.dpad_down;
+        return gamepad2.dpad_down;
     }
 
     boolean lateRight = false;
@@ -93,6 +95,14 @@ public class DriverStation {
         lateDump = gamepad2.b;
         return out;
 //        return gamepad1.b;
+    }
+
+    boolean latea = false;
+    public boolean slowmode(){
+        boolean out;
+        out = gamepad1.a && !latea;
+        latea = gamepad1.a;
+        return out;
     }
 
 //    boolean lateA = false;
