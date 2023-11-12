@@ -28,23 +28,26 @@ public class BottomRed extends AutonBase {
         switch(pos){
             case RIGHT:
                 //left case
-                runAction(new AngleMove(110, 38, 0.6));
+                runAction(new AngleMove(-90, 31, 0.6));
                 sleep(500);
-                runAction(new AngleMove(-90, 30, 0.6));
+                runAction(new AngleMove(-40, 23, 0.4));
+                sleep(500);
+                runAction(new AngleMove(90, 3, 0.4));
                 break;
+
             case LEFT:
                 //right case
-                runAction(new AngleMove(90, 31, 0.6));
+                runAction(new AngleMove(-110, 38, 0.6));
                 sleep(500);
-                runAction(new AngleMove(40, 23, 0.4));
-                sleep(500);
-                runAction(new AngleMove(-90, 3, 0.4));
+                runAction(new AngleMove(90, 10, 0.6));
                 break;
             case MIDDLE:
                 //middle case
-                runAction(new AngleMove(90, 47, 0.6));
+                runAction(new AngleMove(-90, 47, 0.6));
                 sleep(500);
-                runAction(new AngleMove(-90, 5, 0.6));
+                runAction(new AngleMove(90, 34, 0.6));
+                sleep(500);
+                runAction(new AngleMove(0, 52, 0.6));
                 break;
         }
         sleep(1000);

@@ -28,18 +28,18 @@ public class BottomBlue extends AutonBase {
         switch(pos){
             case LEFT:
                 //left case
-                runAction(new AngleMove(-110, 38, 0.6));
-                sleep(500);
-                runAction(new AngleMove(90, 30, 0.6));
-                break;
-            case RIGHT:
-                //right case
                 runAction(new AngleMove(-90, 31, 0.6));
                 sleep(500);
-//                runAction(new AngleTurn(-90,0.3, -1));
-                runAction(new AngleMove(-40, 23, 0.4));
+                runAction(new AngleMove(-140, 23, 0.4));
                 sleep(500);
                 runAction(new AngleMove(90, 3, 0.4));
+                break;
+
+            case RIGHT:
+                //right case
+                runAction(new AngleMove(-70, 38, 0.6));
+                sleep(500);
+                runAction(new AngleMove(90, 30, 0.6));
                 break;
             case MIDDLE:
                 //middle case
