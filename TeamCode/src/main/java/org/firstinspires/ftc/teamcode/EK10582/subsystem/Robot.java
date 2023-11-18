@@ -162,7 +162,7 @@ public class Robot {
     public void update() {
         //Update every single subsystem in the subsystems array initialized earlier
         for(Subsystem subsystem : subsystems) {
-            subsystem.update();
+            subsystem.update(false);
             if(linearOpMode.isStopRequested()){
                 return;
             }

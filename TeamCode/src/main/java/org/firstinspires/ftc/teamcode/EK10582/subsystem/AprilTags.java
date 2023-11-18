@@ -110,7 +110,11 @@ public class AprilTags extends Subsystem {
 
 
     @Override
-    public void update(){
+    public void update(boolean auton){
+        if (auton) {
+            return;
+        }
+
         currentDetections = aprilTag.getDetections();
         // Step through the list of detections and display info for each one.
         for (AprilTagDetection detection : currentDetections) {

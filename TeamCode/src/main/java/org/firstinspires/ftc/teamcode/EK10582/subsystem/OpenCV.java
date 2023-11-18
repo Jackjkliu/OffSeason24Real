@@ -27,7 +27,7 @@ public class OpenCV extends Subsystem{
 
 
     @Override
-    public void update(){
+    public void update(boolean auton){
 
     }
 
