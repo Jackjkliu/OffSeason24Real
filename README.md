@@ -1,3 +1,11 @@
+#What we are working on right now
+- Adding Road Runner to auton
+- Writing trajectories
+- Adding markers
+- testing and tuning RR
+
+
+
 # Fancy Code Base Documentation
 
 ## Folders
