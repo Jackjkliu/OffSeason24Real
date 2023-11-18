@@ -18,8 +18,8 @@ public class BottomBlue extends AutonBase {
 
         waitForStart();
 
-        robot.openCV.init(false);
-        robot.openCV.update();
+        robot.openCV.init(true);
+        robot.openCV.update(true);
         SpikePositionsBlue pos = cameraPipeline.spikePositionB;
         telemetry.addData("pos: ", pos);
         telemetry.update();
