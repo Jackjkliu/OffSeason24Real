@@ -18,8 +18,8 @@ public class BottomRed extends AutonBase {
 
         waitForStart();
 
-        robot.openCV.init(false);
-        robot.openCV.update();
+        robot.openCV.init(true);
+        robot.openCV.update(true);
         SpikePositionsRed pos = cameraPipeline.spikePositionR;
         telemetry.addData("pos: ", pos);
         telemetry.update();
