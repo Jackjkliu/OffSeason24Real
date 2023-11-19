@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
 
-@Autonomous(name="BottomRed")
+@Autonomous(name="BottomRedRR")
 @Config
 public class BottomRedRR extends AutonBase {
 
@@ -26,8 +26,7 @@ public class BottomRedRR extends AutonBase {
 
         //close opencv and open apriltags
         robot.openCV.stop();
-        robot.subsystems.remove(robot.openCV);
-        robot.subsystems.add(robot.aprilTags);
+        robot.removeOpenCV();
 
 
         telemetry.addData("pos: ", pos);
@@ -37,9 +36,13 @@ public class BottomRedRR extends AutonBase {
         switch(pos){
             case RIGHT:
                 robot.aprilTags.targetAprilTag = 6;
+                robot.aprilTags.init(true);
+                robot.aprilTags.update(true);
+                telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
+                telemetry.update();
                 //left case
                 //TODO: THIS IS AN EXAMPLE OF A TRAJECTORY!! ADD YOUR TRAJECTORIES HERE
-                Trajectory traj1 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
+                /*Trajectory traj1 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
                         //This gives you a starting position
                         .strafeLeft(27)
                         .strafeRight(3)
@@ -48,19 +51,31 @@ public class BottomRedRR extends AutonBase {
                         .forward(8)
                         .strafeLeft(20)
                         .back(16)
-                        .build();
+                        .build();*/
 
                 break;
             case LEFT:
                 //right case
                 robot.aprilTags.targetAprilTag = 4;
+                robot.aprilTags.init(true);
+                robot.aprilTags.update(true);
+                telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
+                telemetry.update();
 
                 break;
             case MIDDLE:
                 //middle case
                 robot.aprilTags.targetAprilTag = 5;
+                robot.aprilTags.init(true);
+                robot.aprilTags.update(true);
+                telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
+                telemetry.update();
 
                 break;
         }
+
+        telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
+        telemetry.update();
+        sleep(5000);
     }
 }

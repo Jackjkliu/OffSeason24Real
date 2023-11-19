@@ -19,7 +19,7 @@ public class Drive extends EKLinear {
             dpad_down is lower arm
             LT is spin
              */
-
+/*
             //drive
             robot.mecanumDrive.lx = driverStation.getXVel();
             robot.mecanumDrive.ly = driverStation.getYVel();
@@ -39,7 +39,7 @@ public class Drive extends EKLinear {
             robot.housing.right = driverStation.clampRight(); //
             robot.housing.left = driverStation.clampLeft();
             robot.housing.dump = driverStation.dump();
-
+*/
             robot.update();
 
         }
