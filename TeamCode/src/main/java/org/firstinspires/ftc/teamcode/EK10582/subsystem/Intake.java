@@ -27,7 +27,10 @@ public class Intake extends Subsystem{
 
     //
     @Override
-    public void update(){
+    public void update(boolean auton){
+        if (auton) {
+            return;
+        }
 
         if (servoUp) {
             servoTarget += intakeIncrement;

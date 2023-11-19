@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public abstract class Subsystem {
     public abstract void init(boolean auton);
 
-    public abstract void update();
+    public abstract void update(boolean auton);
 
     public abstract void stop();
 

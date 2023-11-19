@@ -21,6 +21,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
+import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvWebcam;
 
@@ -40,6 +41,7 @@ public class Robot {
 
     //declares a custom EK LinearOpMode named linearOpMode
     EKLinear linearOpMode;
+    public SampleMecanumDrive roadRunner;
 
     //declare hardware here
     public DcMotor leftFront, leftBack, rightFront, rightBack, intakeSpin;
@@ -85,6 +87,7 @@ public class Robot {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = (EKLinear)linearOpMode;
 
+        roadRunner = new SampleMecanumDrive(hardwareMap);
 
         leftFront = hardwareMap.get(DcMotor.class, "leftFront");
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
@@ -162,7 +165,7 @@ public class Robot {
     public void update() {
         //Update every single subsystem in the subsystems array initialized earlier
         for(Subsystem subsystem : subsystems) {
-            subsystem.update();
+            subsystem.update(false);
             if(linearOpMode.isStopRequested()){
                 return;
             }

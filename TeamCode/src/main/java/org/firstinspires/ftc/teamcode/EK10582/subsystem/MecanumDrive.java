@@ -36,7 +36,11 @@ public class MecanumDrive extends Subsystem{
     }
 
     @Override
-    public void update() {
+    public void update(boolean auton) {
+        if (auton) {
+            return;
+        }
+
         //keep updating, runtime loop
         double bias = 0;
 //        if(gyroOn) {
