@@ -53,7 +53,7 @@ public class Slides extends Subsystem{
         telemetry.addData("slideControl", slideControl);
     }
 
-    //position goes from 0 to 6. 1 is ground, 6 is all the way up
+
     public void setSlidePreset(int position){
         slideTarget = slidepos[position];
         Robot.getInstance().slide1.setTargetPosition(slideTarget);
