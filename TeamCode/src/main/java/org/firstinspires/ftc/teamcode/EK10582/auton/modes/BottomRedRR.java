@@ -23,12 +23,20 @@ public class BottomRedRR extends AutonBase {
         robot.openCV.init(true);
         robot.openCV.update(true);
         SpikePositionsRed pos = cameraPipeline.spikePositionR;
+
+        //close opencv and open apriltags
+        robot.openCV.stop();
+        robot.subsystems.remove(robot.openCV);
+        robot.subsystems.add(robot.aprilTags);
+
+
         telemetry.addData("pos: ", pos);
         telemetry.update();
         sleep(1000);
 
         switch(pos){
             case RIGHT:
+                robot.aprilTags.targetAprilTag = 6;
                 //left case
                 //TODO: THIS IS AN EXAMPLE OF A TRAJECTORY!! ADD YOUR TRAJECTORIES HERE
                 Trajectory traj1 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
@@ -45,13 +53,14 @@ public class BottomRedRR extends AutonBase {
                 break;
             case LEFT:
                 //right case
+                robot.aprilTags.targetAprilTag = 4;
 
                 break;
             case MIDDLE:
                 //middle case
+                robot.aprilTags.targetAprilTag = 5;
 
                 break;
         }
-        sleep(1000);
     }
 }
