@@ -27,16 +27,14 @@ public class BottomRedRR extends AutonBase {
         robot.openCV.stop();
         sleep(1000);
 
-
-
         telemetry.addData("pos: ", pos);
         telemetry.update();
         sleep(1000);
 
         switch(pos){
             case RIGHT:
-                robot.aprilTags.targetAprilTag = 6;
-                robot.aprilTags.init(true);
+                robot.aprilTags.targetAprilTag = 3;
+                robot.aprilTags.init(false);
                 robot.aprilTags.update(true);
                 telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
                 telemetry.update();
@@ -46,18 +44,20 @@ public class BottomRedRR extends AutonBase {
             case LEFT:
                 //right case
 
-                robot.aprilTags.targetAprilTag = 4;
-                robot.aprilTags.init(true);
-                robot.aprilTags.update(true);
-                telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
-                telemetry.update();
+                robot.aprilTags.targetAprilTag = 1;
+                robot.aprilTags.init(false);
+                while(opModeIsActive()){
+                    robot.aprilTags.update(true);
+                    telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
+                    telemetry.update();
+                }
 
 
                 break;
             case MIDDLE:
                 //middle case
-                robot.aprilTags.targetAprilTag = 5;
-                robot.aprilTags.init(true);
+                robot.aprilTags.targetAprilTag = 2;
+                robot.aprilTags.init(false);
                 robot.aprilTags.update(true);
                 telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
                 telemetry.update();
