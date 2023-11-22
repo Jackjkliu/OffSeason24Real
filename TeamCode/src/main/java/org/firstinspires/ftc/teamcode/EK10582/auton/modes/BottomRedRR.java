@@ -39,27 +39,49 @@ public class BottomRedRR extends AutonBase {
                 robot.aprilTags.targetAprilTag = 6;
                 //left case
                 //TODO: THIS IS AN EXAMPLE OF A TRAJECTORY!! ADD YOUR TRAJECTORIES HERE
-                Trajectory traj1 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
+                Trajectory trajRR1 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
                         //This gives you a starting position
-                        .strafeLeft(27)
-                        .strafeRight(3)
-                        .forward(40)
-                        .lineToLinearHeading(new Pose2d(48, -38, Math.toRadians(180)))
-                        .forward(8)
-                        .strafeLeft(20)
-                        .back(16)
-                        .build();
+                                        .lineToSplineHeading(new Pose2d(-40, -32, Math.toRadians(90)))
+                                        .strafeRight(4)
+                                        .back(24)
+                                        .strafeRight(36)
+                                        .splineToSplineHeading(new Pose2d(56, -36, Math.toRadians(180)), 0)
+                                        .forward(3)
+                                        .strafeLeft(24)
+                                        .back(6)
+                                        .build();
+
 
                 break;
             case LEFT:
                 //right case
                 robot.aprilTags.targetAprilTag = 4;
+                Trajectory trajRR2 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
+                                        //This gives you a starting position
+                                        .lineToSplineHeading(new Pose2d(-30, -30, Math.toRadians(-90)))
+                                        .lineToSplineHeading(new Pose2d(-36, -60, 0))
+                                        .lineToSplineHeading(new Pose2d(0, -60, 0))
+                                        .splineToSplineHeading(new Pose2d(56, -36, Math.toRadians(180)), 0)
+                                        .forward(3)
+                                        .strafeLeft(24)
+                                        .back(6)
+                                        .build();
 
                 break;
             case MIDDLE:
                 //middle case
-                robot.aprilTags.targetAprilTag = 5;
 
+                robot.aprilTags.targetAprilTag = 5;
+                Trajectory trajRR3 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36, -60, 0))
+                                        //This gives you a starting position
+                                        .lineToSplineHeading(new Pose2d(-36, -30, 0))
+                                        .lineToSplineHeading(new Pose2d(-36, -60, 0))
+                                        .lineToSplineHeading(new Pose2d(0, -60, 0))
+                                        .splineToSplineHeading(new Pose2d(56, -36, Math.toRadians(180)), 0)
+                                        .forward(3)
+                                        .strafeLeft(24)
+                                        .back(6)
+                                        .build();
                 break;
         }
     }

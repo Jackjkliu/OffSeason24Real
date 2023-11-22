@@ -28,6 +28,7 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequenceRunner;
@@ -98,13 +99,13 @@ public class SampleMecanumDrive extends MecanumDrive {
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 DriveConstants.LOGO_FACING_DIR, DriveConstants.USB_FACING_DIR));
         imu.initialize(parameters);
+//
+//        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+//        leftRear = hardwareMap.get(DcMotorEx.class, "leftBack");
+//        rightRear = hardwareMap.get(DcMotorEx.class, "rightBack");
+//        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
-
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        motors = Arrays.asList(Robot.getInstance().leftFront, Robot.getInstance().leftBack, Robot.getInstance().rightBack, Robot.getInstance().rightFront);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -282,10 +283,14 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v);
-        leftRear.setPower(v1);
-        rightRear.setPower(v2);
-        rightFront.setPower(v3);
+        Robot.getInstance().leftFront.setPower(v);
+        Robot.getInstance().leftBack.setPower(v1);
+        Robot.getInstance().rightBack.setPower(v2);
+        Robot.getInstance().rightFront.setPower(v3);
+//        leftFront.setPower(v);
+//        leftRear.setPower(v1);
+//        rightRear.setPower(v2);
+//        rightFront.setPower(v3);
     }
 
     @Override

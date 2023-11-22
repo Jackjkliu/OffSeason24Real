@@ -48,7 +48,6 @@ public class Slides extends Subsystem{
 
     @Override
     public void stop(){
-
     }
 
     @Override

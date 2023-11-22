@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
@@ -28,11 +30,17 @@ public class BottomBlue extends AutonBase {
         switch(pos){
             case LEFT:
                 //left case
-                runAction(new AngleMove(-90, 31, 0.6));
-                sleep(500);
-                runAction(new AngleMove(-140, 23, 0.4));
-                sleep(500);
-                runAction(new AngleMove(90, 3, 0.4));
+                Trajectory trajRR1 = robot.roadRunner.trajectoryBuilder(new Pose2d(-36,60,0))
+                        .lineToSplineHeading(new Pose2d(-40,32,Math.toRadians(90)))
+                        .strafeRight(4)
+                        .forward(24)
+                        .strafeRight(34)
+                        .splineToSplineHeading(new Pose2d(56,36, Math.toRadians(180)),0)
+                        .forward(3)
+                        .strafeRight(24)
+                        .back(6)
+                        .build();
+
                 break;
 
             case RIGHT:
