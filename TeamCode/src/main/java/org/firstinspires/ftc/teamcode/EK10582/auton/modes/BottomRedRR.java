@@ -27,13 +27,10 @@ public class BottomRedRR extends AutonBase {
         robot.openCV.stop();
         sleep(1000);
 
-        //TODO: note to whoever: auton is false because if its true then it will not init
-        robot.aprilTags.init(false);
 
 
         telemetry.addData("pos: ", pos);
         telemetry.update();
-        robot.aprilTags.update(false);
         sleep(1000);
 
         switch(pos){
