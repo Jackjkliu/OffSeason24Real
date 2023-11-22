@@ -61,7 +61,8 @@ public class AprilTags extends Subsystem {
     // Decimation: 1 means low rate high range, 3 means low range high rate
     // Note: Decimation can be changed on-the-fly to adapt during a match.
     private int decimation;
-    public boolean aprilTagsEnabled = SubsystemConstants.aprilTagsEnabled;
+    public boolean aprilTagsEnabled = false;
+    //TODO: set this to true when opencv closes
 
     //makes a list called currentDetections
     private List<AprilTagDetection> currentDetections;
@@ -71,6 +72,9 @@ public class AprilTags extends Subsystem {
     //if in auton, then certain things will happen due to certain if statements specific to auton
     @Override
     public void init(boolean auton) {
+        if(auton){
+            return;
+        }
         decimation = SubsystemConstants.decimation;
         // Create the AprilTag processor.
         aprilTag = new AprilTagProcessor.Builder()
@@ -111,9 +115,9 @@ public class AprilTags extends Subsystem {
 
     @Override
     public void update(boolean auton){
-//        if (auton) {
-//            return;
-//        }
+        if (auton) {
+            return;
+        }
 
         currentDetections = aprilTag.getDetections();
         // Step through the list of detections and display info for each one.

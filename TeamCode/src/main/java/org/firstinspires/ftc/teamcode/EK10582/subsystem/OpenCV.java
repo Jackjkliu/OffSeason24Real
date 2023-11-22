@@ -34,6 +34,7 @@ public class OpenCV extends Subsystem{
     @Override
     public void stop(){
         Robot.getInstance().webcam.stopStreaming();
+        Robot.getInstance().webcam.closeCameraDevice();
     }
 
     @Override
