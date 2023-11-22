@@ -15,7 +15,7 @@ public class Housing extends Subsystem {
 
     private double increment = SubsystemConstants.housingIncrement;
     private double pixelHolderTarget = SubsystemConstants.pixelHolderTarget;
-    private double dumperTarget = SubsystemConstants.dumperTarget;
+    private double dumperTarget;
 
     //servoUpButton and servoDownButton are the buttons that control how much the arm servo go up and down
 
@@ -53,9 +53,9 @@ public class Housing extends Subsystem {
         }
 
         if(isDump) {
-            dumperTarget = 0.96;
+            dumperTarget = SubsystemConstants.dumperTop; //dumped position
         } else {
-            dumperTarget = 0.39;
+            dumperTarget = SubsystemConstants.dumperBottom; //reset and ready position
         }
 
         Robot.getInstance().dumper.setPosition(dumperTarget);

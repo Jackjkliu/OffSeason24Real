@@ -62,20 +62,20 @@ public class Robot {
 
 
     //Declare subsystems here: Ex. mecanumDrive, collection, slides, sorting, etc.
-    public MecanumDrive mecanumDrive = new MecanumDrive();
-    public Intake intake = new Intake();
+    //public MecanumDrive mecanumDrive = new MecanumDrive();
+    //public Intake intake = new Intake();
     public AprilTags aprilTags = new AprilTags();
-    public Slides slides = new Slides();
-    public Housing housing = new Housing();
+    //public Slides slides = new Slides();
+   // public Housing housing = new Housing();
     public OpenCV openCV = new OpenCV();
 
     //Add all subsystems to a list to be initiated and updated through
     //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
-    private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing);
+    private List<Subsystem> subsystems = Arrays.asList(openCV);
 
     //add all subsystems that need to go through telemetry
 //    private List<Subsystem> telemetrySubsystems = Arrays.asList();
-    private List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, slides, housing, openCV);
+    private List<Subsystem> telemetrySubsystems = Arrays.asList(openCV);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
@@ -88,12 +88,13 @@ public class Robot {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = (EKLinear)linearOpMode;
 
-        roadRunner = new SampleMecanumDrive(hardwareMap);
+        //roadRunner = new SampleMecanumDrive(hardwareMap);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
-        rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
+        //leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        /*leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+>>>>>>> 130ac1dc399ea0c89a4eefdf98d657c16d171e81
 
         leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -115,26 +116,30 @@ public class Robot {
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //
-        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
+        intakeArm = hardwareMap.get(Servo.class, "intakeArm"); */
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
-        dumper = hardwareMap.get(Servo.class, "dumper");
+        /*dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
+
         intakeSpin = hardwareMap.get(DcMotorEx.class, "intakeSpin");
+
+        intakeSpin = hardwareMap.get(DcMotor.class, "intakeSpin");
+        */
 
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        imu = hardwareMap.get(BHI260IMU.class, "imu");
+        //imu = hardwareMap.get(BHI260IMU.class, "imu");
 
         //.Parameters refers to a nested class within BNO055IMU
         //.Parameters class has more methods and uses specific to our use of imu
-        BHI260IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP));
+        //BHI260IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP));
 
         //sets parameter obj to another nested class called AngleUnit to increase capabilities
-        imu.initialize(parameters);
-        imu.resetYaw();
+        //imu.initialize(parameters);
+        //imu.resetYaw();
 
 
 
@@ -192,5 +197,11 @@ public class Robot {
             subsystem.printToTelemetry(linearOpMode.allTelemetry);
         }
         linearOpMode.allTelemetry.update();
+
+    }
+
+    public void removeOpenCV(){
+        subsystems.remove(openCV);
+        subsystems.add(aprilTags);
     }
 }
