@@ -19,11 +19,13 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 public class LocalizationTest extends EKLinear {
     @Override
     public void runOpMode() throws InterruptedException {
+
+
+        waitForStart();
+
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        waitForStart();
 
         while (!isStopRequested()) {
             drive.setWeightedDrivePower(
