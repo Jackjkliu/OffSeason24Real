@@ -45,7 +45,7 @@ public class Robot {
     public SampleMecanumDrive roadRunner;
 
     //declare hardware here
-    public DcMotorEx leftFront, leftBack, rightFront, rightBack, intakeSpin;
+    public DcMotorEx leftFront, leftBack, rightFront, rightBack, intakeSpin, odo;
 
     public DcMotorEx slide1;
     public DcMotorEx slide2;
@@ -88,8 +88,6 @@ public class Robot {
         this.hardwareMap = hardwareMap;
         this.linearOpMode = (EKLinear)linearOpMode;
 
-        roadRunner = new SampleMecanumDrive(hardwareMap);
-
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
@@ -121,6 +119,7 @@ public class Robot {
         dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
         intakeSpin = hardwareMap.get(DcMotorEx.class, "intakeSpin");
+        odo = hardwareMap.get(DcMotorEx.class, "odo");
 
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -136,12 +135,13 @@ public class Robot {
         imu.initialize(parameters);
         imu.resetYaw();
 
-
+        roadRunner = new SampleMecanumDrive(hardwareMap);
 
         for(Subsystem subsystem : subsystems) {
             //initialize the subsystems
             subsystem.init(false); //change this
         }
+
 
         cycleTimer.reset();
     }

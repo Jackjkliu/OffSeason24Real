@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
 
-@Autonomous(name="BottomRed")
+@Autonomous(name="BottomRedRR")
 @Config
 public class BottomRedRR extends AutonBase {
 

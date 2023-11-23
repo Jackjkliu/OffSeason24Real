@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.StandardTrackingWheelLocalizer;
 
@@ -63,7 +64,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.StandardTrackingWheelLoca
  */
 @Config
 @TeleOp(group = "drive")
-public class TrackingWheelLateralDistanceTuner extends LinearOpMode {
+public class TrackingWheelLateralDistanceTuner extends EKLinear {
     public static int NUM_TURNS = 10;
 
     @Override
