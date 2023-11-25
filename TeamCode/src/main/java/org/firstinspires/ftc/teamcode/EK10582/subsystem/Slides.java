@@ -41,9 +41,8 @@ public class Slides extends Subsystem{
 //            Robot.getInstance().slide2.setPower(0);
 //        }
 //        else{
-            Robot.getInstance().slide1.setPower((slideControl) * speed);
-            Robot.getInstance().slide2.setPower((slideControl) * speed);
-//        }
+        Robot.getInstance().slide1.setPower((slideControl) * speed);
+        Robot.getInstance().slide2.setPower((slideControl) * speed);
     }
 
     @Override
@@ -54,6 +53,7 @@ public class Slides extends Subsystem{
     public void printToTelemetry(Telemetry telemetry){
         telemetry.addData("target Position: ", slideTarget);
         telemetry.addData("slideControl", slideControl);
+        telemetry.addData("slide position", Robot.getInstance().slide1.getCurrentPosition());
     }
 
 
