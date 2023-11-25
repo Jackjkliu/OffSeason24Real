@@ -10,7 +10,7 @@ public class SubsystemConstants {
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
     public static double pixelHolderTarget = 0.55;
-    public static double dumperTop = 0.96;
+    public static double dumperTop = 1;
     public static double dumperBottom = 0.39;
 
     //Intake
