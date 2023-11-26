@@ -34,7 +34,7 @@ public class Drive extends EKLinear {
             robot.intake.intakeBack = driverStation.getRT2(); //right trigger
 
             //slides
-            robot.slides.slideControl = driverStation.getSlidePower();
+            robot.slides.joystickInput = driverStation.getSlidePower();
             if(driverStation.getSlideToCollectionPos()) {
                 robot.addAction(new SlidesMoveTo(-109));
             }

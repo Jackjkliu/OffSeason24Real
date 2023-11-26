@@ -28,9 +28,8 @@ public class PIDController {
         d = kD * (error - previousError) / (timer.seconds());
 
         double bias = p + i + d;
-
+        previousError = error;
         timer.reset();
-
         return bias;
     }
 }
