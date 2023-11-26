@@ -4,8 +4,7 @@ package org.firstinspires.ftc.teamcode.EK10582.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.Slides.SlidesMoveTo;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 
 @TeleOp(name="New Drive")
 public class Drive extends EKLinear {
@@ -35,9 +34,10 @@ public class Drive extends EKLinear {
 
             //slides
             robot.slides.joystickInput = driverStation.getSlidePower();
-            if(driverStation.getSlideToCollectionPos()) {
-                robot.addAction(new SlidesMoveTo(-109));
+            if (driverStation.getSlideCollect()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.COLLECT;
             }
+//            else if (driverStation.getSlideCollect())
 
             //housing
             robot.housing.right = driverStation.clampRight(); //

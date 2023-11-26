@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @Config
@@ -47,7 +46,7 @@ public class DriverStation {
     public double getSlidePower(){return filterJoystick(gamepad2.left_stick_y);}
 
     boolean lateX2 = false;
-    public boolean getSlideToCollectionPos() {
+    public boolean getSlideCollect() {
         boolean out;
         out = gamepad2.x && !lateX2;
         lateX2 = gamepad2.x;
