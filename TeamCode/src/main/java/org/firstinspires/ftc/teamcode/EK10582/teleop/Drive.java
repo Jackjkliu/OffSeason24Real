@@ -38,10 +38,13 @@ public class Drive extends EKLinear {
             if(driverStation.getSlideToCollectionPos()) {
                 robot.addAction(new SlidesMoveTo(-109));
             }
+            if(driverStation.cancelSlideAction()) {
+                robot.slides.freeControl = true;
+            }
 
             //housing
-            robot.housing.right = driverStation.clampRight(); //
-            robot.housing.left = driverStation.clampLeft();
+            //robot.housing.right = driverStation.clampRight(); //
+            //robot.housing.left = driverStation.clampLeft();
             robot.housing.dump = driverStation.dump();
 
             robot.update();

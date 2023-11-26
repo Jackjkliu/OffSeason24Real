@@ -173,13 +173,14 @@ public class Robot {
         }
 
         //Updates every single action in the list of actions that are currently being done
-        for(Action action : actions) {
-            action.update();
+        for(int i = 0; i < actions.size(); i++) {
+            actions.get(i).update();
 
             //if an action is finished, end said action and remove it from the list of things to do
-            if(action.isComplete) {
-                action.end();
-                actions.remove(action);
+            if(actions.get(i).isComplete) {
+                actions.get(i).end();
+                actions.remove(actions.get(i));
+                i--;
             }
         }
 

@@ -46,14 +46,6 @@ public class DriverStation {
 
     public double getSlidePower(){return filterJoystick(gamepad2.left_stick_y);}
 
-    boolean lateX2 = false;
-    public boolean getSlideToCollectionPos() {
-        boolean out;
-        out = gamepad2.x && !lateX2;
-        lateX2 = gamepad2.x;
-        return out;
-    }
-
     public boolean getDPadL(){return gamepad2.dpad_left;}
     public boolean getDPadR(){return gamepad2.dpad_right;}
 
@@ -78,23 +70,39 @@ public class DriverStation {
         return gamepad2.dpad_down;
     }
 
-    boolean lateRight = false;
-    public boolean clampRight(){
+    boolean lateX2 = false;
+    public boolean getSlideToCollectionPos() {
         boolean out;
-        out = gamepad2.x && !lateRight;
-        lateRight = gamepad2.x;
+        out = gamepad2.x && !lateX2;
+        lateX2 = gamepad2.x;
         return out;
-//        return gamepad1.x;
     }
 
-    boolean lateLeft = false;
-    public boolean clampLeft(){
+    boolean lateY2 = false;
+    public boolean cancelSlideAction() {
         boolean out;
-        out = gamepad2.y && !lateLeft;
-        lateLeft = gamepad2.y;
+        out = gamepad2.y && !lateY2;
+        lateY2 = gamepad2.y;
         return out;
-//        return gamepad1.y;
     }
+
+//    boolean lateRight = false;
+//    public boolean clampRight(){
+//        boolean out;
+//        out = gamepad2.x && !lateRight;
+//        lateRight = gamepad2.x;
+//        return out;
+////        return gamepad1.x;
+//    }
+//
+//    boolean lateLeft = false;
+//    public boolean clampLeft(){
+//        boolean out;
+//        out = gamepad2.y && !lateLeft;
+//        lateLeft = gamepad2.y;
+//        return out;
+////        return gamepad1.y;
+//    }
 
     boolean lateDump = false;
     public boolean dump(){
