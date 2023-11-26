@@ -4,7 +4,6 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.action.Action;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
 public class SlidesMoveTo extends Action {
-
     private int targetPosition;
 
     public SlidesMoveTo(int targetPosition) {
@@ -13,21 +12,20 @@ public class SlidesMoveTo extends Action {
 
     @Override
     public void start() {
-        Robot.getInstance().slides.freeControl = false;
-        double diff = targetPosition - Robot.getInstance().slides.getSlidePosition();
-        Robot.getInstance().slides.autoSlidePower = 0.4 * diff / Math.abs(diff);
+        Robot.getInstance().slides.setFreeControl(false);
+        Robot.getInstance().slides.setAutoSlidePower(targetPosition);
     }
 
     @Override
     public void update() {
         if(Math.abs(targetPosition - Robot.getInstance().slides.getSlidePosition()) <= 40) {
-            Robot.getInstance().slides.autoSlidePower = 0;
+            Robot.getInstance().slides.setSpeed(0);
             isComplete = true;
         }
     }
 
     @Override
     public void end() {
-        Robot.getInstance().slides.freeControl = true;
+        Robot.getInstance().slides.setFreeControl(true);
     }
 }

@@ -23,8 +23,11 @@ public class SubsystemConstants {
     public static double targetAngle = 0;
 
     //Slides
-    public static final int SLIDEMAX = 800;
+    public static final int SLIDEMAX = -1400;
     public static final int[] slidepos = {0,200, 400};
     public static double speed = 0.8;
+    public static double kP = 0;
+    public static double kI = 0;
+    public static double kD = 0;
 
 }
