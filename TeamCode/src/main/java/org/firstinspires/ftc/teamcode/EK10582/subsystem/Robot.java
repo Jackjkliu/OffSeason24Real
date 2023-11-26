@@ -71,11 +71,11 @@ public class Robot {
 
     //Add all subsystems to a list to be initiated and updated through
     //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing);
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing, aprilTags);
 
     //add all subsystems that need to go through telemetry
 //    private List<Subsystem> telemetrySubsystems = Arrays.asList();
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, slides, housing, openCV);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, slides, housing, openCV, aprilTags);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done

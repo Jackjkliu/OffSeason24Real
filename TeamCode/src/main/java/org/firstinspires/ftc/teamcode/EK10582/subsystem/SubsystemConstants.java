@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 public class SubsystemConstants {
     //AprilTags
-    public static int targetAprilTag = 8;
+    public static int targetAprilTag = 1;
     public static boolean aprilTagsEnabled = true;
     public static int decimation = 3;
 

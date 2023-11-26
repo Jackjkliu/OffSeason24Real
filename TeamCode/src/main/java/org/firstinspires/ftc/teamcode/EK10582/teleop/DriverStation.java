@@ -110,7 +110,6 @@ public class DriverStation {
         out = gamepad2.b && !lateDump;
         lateDump = gamepad2.b;
         return out;
-//        return gamepad1.b;
     }
 
     boolean latea = false;
