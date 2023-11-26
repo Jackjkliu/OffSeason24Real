@@ -43,6 +43,10 @@ public class AprilTags extends Subsystem {
     //if in auton, then certain things will happen due to certain if statements specific to auton
     @Override
     public void init(boolean auton) {
+        if(!auton){
+            return;
+            //upon initialization, don't run init to save viewport for opencv
+        }
 
         decimation = SubsystemConstants.decimation;
         // Create the AprilTag processor.

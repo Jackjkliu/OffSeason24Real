@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsBlue;
 
 @Autonomous(name="camtest")
 @Config
@@ -20,55 +20,39 @@ public class cameraTesting extends AutonBase {
 
         waitForStart();
 
-//        robot.openCV.init(true);
-//        SpikePositionsRed pos = cameraPipeline.spikePositionR;
-//
-//        //close opencv and open apriltags
-//        robot.openCV.stop();
-//        sleep(1000);
+        SpikePositionsBlue pos = cameraPipeline.spikePositionB;
 
-//        telemetry.addData("pos: ", pos);
-//        telemetry.update();
-//        sleep(1000);
-//
-//        switch(pos){
-//            case RIGHT:
-//                robot.aprilTags.targetAprilTag = 3;
-//                robot.aprilTags.init(false);
-//                robot.aprilTags.update(true);
-//                telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
-//                telemetry.update();
-//                //left case
-//
-//                break;
-//            case LEFT:
-//                //right case
+        //close opencv and open apriltags
+        robot.openCV.stop();
+        sleep(1000);
 
-                robot.aprilTags.targetAprilTag = 1;
-                robot.aprilTags.init(false);
-                while(opModeIsActive()){
-                    robot.aprilTags.update(true);
-                    telemetry.addData("seetag ", robot.aprilTags.seeTag);
-                    telemetry.addData("tagx ", robot.aprilTags.tagX);
-                    telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
-                    telemetry.update();
-                }
-
-//
-//                break;
-//            case MIDDLE:
-//                //middle case
-//                robot.aprilTags.targetAprilTag = 2;
-//                robot.aprilTags.init(false);
-//                robot.aprilTags.update(true);
-//                telemetry.addData("Seetag: ", robot.aprilTags.seeTag);
-//                telemetry.update();
-//
-//                break;
-//        }
-
-        telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
+        telemetry.addData("pos: ", pos);
         telemetry.update();
-        sleep(5000);
+        sleep(2000);
+
+        switch(pos){
+            case RIGHT:
+                robot.aprilTags.targetAprilTag = 3;
+                break;
+
+
+            case LEFT:
+                robot.aprilTags.targetAprilTag = 1;
+                break;
+
+            case MIDDLE:
+                robot.aprilTags.targetAprilTag = 2;
+                break;
+        }
+        robot.aprilTags.init(true);
+        sleep(1000);
+
+        while(!isStopRequested()){
+            robot.aprilTags.update(true);
+            telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
+            telemetry.addData("tagx ", robot.aprilTags.tagX);
+            telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
+            telemetry.update();
+        }
     }
 }
