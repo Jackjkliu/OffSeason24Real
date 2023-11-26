@@ -14,7 +14,7 @@ public class SubsystemConstants {
     public static double dumperBottom = 0.39;
 
     //Intake
-    public static double intakeIncrement = 0.0005;
+    public static double intakeIncrement = 0.0015;
     public static final double[] servoPos = {0.21, 0.7};
 
     //MecanumDrive
