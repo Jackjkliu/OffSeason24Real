@@ -21,23 +21,28 @@ public class Drive extends EKLinear {
              */
 
             //drive
-            robot.mecanumDrive.lx = driverStation.getXVel();
-            robot.mecanumDrive.ly = driverStation.getYVel();
-            robot.mecanumDrive.rx = driverStation.getRotVel();
-            robot.mecanumDrive.slowMode = driverStation.slowmode();
+            robot.mecanumDrive.lx = driverStation.moveLeftAndRight();
+            robot.mecanumDrive.ly = driverStation.moveFrontAndBack();
+            robot.mecanumDrive.rx = driverStation.rotate();
+            robot.mecanumDrive.slowMode = driverStation.slowMode();
 
             //intake
             robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
             robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
-            robot.intake.intakeSpeed = driverStation.getLT2(); //left trigger
-            robot.intake.intakeBack = driverStation.getRT2(); //right trigger
+            robot.intake.intakeSpeed = driverStation.intakeOut(); //left trigger
+            robot.intake.intakeBack = driverStation.intakeIn(); //right trigger
 
             //slides
             robot.slides.joystickInput = driverStation.getSlidePower();
             if (driverStation.getSlideCollect()) {
                 robot.slides.currentState = SubsystemConstants.SlideStates.COLLECT;
             }
-//            else if (driverStation.getSlideCollect())
+            else if (driverStation.getSlideLow()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
+            }
+            else if (driverStation.getSlideFree()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.FREE;
+            }
 
             //housing
             robot.housing.right = driverStation.clampRight(); //
