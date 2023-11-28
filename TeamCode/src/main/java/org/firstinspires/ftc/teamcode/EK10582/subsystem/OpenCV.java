@@ -1,18 +1,14 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
-import com.acmerobotics.dashboard.FtcDashboard;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.stream.CameraStreamSource;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvWebcam;
 
 public class OpenCV extends Subsystem{
 
     @Override
     public void init(boolean auton){
-        Robot.getInstance().webcam.setPipeline(new cameraPipeline());
+        Robot.getInstance().webcam.setPipeline(new SpikePipeline());
         Robot.getInstance().webcam.setMillisecondsPermissionTimeout(2500);
 
         Robot.getInstance().webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {

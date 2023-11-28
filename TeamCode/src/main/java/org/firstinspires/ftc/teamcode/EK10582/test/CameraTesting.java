@@ -1,26 +1,22 @@
-package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
+package org.firstinspires.ftc.teamcode.EK10582.test;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsBlue;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePositionsBlue;
 
-@Autonomous(name="camtest")
+@Autonomous(name="Camera Testing")
 @Config
-public class cameraTesting extends AutonBase {
+public class CameraTesting extends AutonBase {
 
     @Override
     public void runOpMode() {
 
         waitForStart();
 
-        SpikePositionsBlue pos = cameraPipeline.spikePositionB;
+        SpikePositionsBlue pos = SpikePipeline.spikePositionB;
 
         //close opencv and open apriltags
         robot.openCV.stop();
@@ -34,7 +30,6 @@ public class cameraTesting extends AutonBase {
             case RIGHT:
                 robot.aprilTags.targetAprilTag = 3;
                 break;
-
 
             case LEFT:
                 robot.aprilTags.targetAprilTag = 1;

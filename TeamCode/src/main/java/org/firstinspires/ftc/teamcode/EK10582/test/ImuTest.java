@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
-@TeleOp
+@TeleOp (name = "IMU Test")
 public class ImuTest extends EKLinear {
     @Override
     public void runOpMode() {

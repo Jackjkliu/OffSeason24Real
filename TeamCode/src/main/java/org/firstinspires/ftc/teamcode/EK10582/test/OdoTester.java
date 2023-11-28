@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.RoadRunner.util.Encoder;
 
-@TeleOp(name="OdoTester")
+@TeleOp(name="Odo Test")
 public class OdoTester extends EKLinear {
 
     Encoder leftEncoder;

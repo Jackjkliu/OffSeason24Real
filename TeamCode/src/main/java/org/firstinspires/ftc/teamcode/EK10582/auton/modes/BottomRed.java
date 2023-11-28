@@ -5,9 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePositionsRed;
 
 @Autonomous(name="BottomRed")
 @Config
@@ -20,7 +19,7 @@ public class BottomRed extends AutonBase {
 
         robot.openCV.init(true);
         robot.openCV.update(true);
-        SpikePositionsRed pos = cameraPipeline.spikePositionR;
+        SpikePositionsRed pos = SpikePipeline.spikePositionR;
         telemetry.addData("pos: ", pos);
         telemetry.update();
         sleep(1000);

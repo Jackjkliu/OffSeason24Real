@@ -20,7 +20,7 @@ public class Intake extends Subsystem{
         intakeIncrement = SubsystemConstants.intakeIncrement; //how fast the servo will move
         servoTarget= 0.5; //Change this to the resting/starting position of the servo
         servoDown = false;// these default to false in case you are in auton
-        servoUp= false;
+        servoUp = false;
         //in auton, just set servoTarget directly
 
     }

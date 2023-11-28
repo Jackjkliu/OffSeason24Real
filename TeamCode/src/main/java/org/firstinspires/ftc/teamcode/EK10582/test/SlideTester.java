@@ -5,16 +5,15 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 
-@TeleOp(name="Slide test")
+@TeleOp(name="Slide Test")
 public class SlideTester extends EKLinear {
     @Override
     public void runOpMode(){
         waitForStart();
         while(opModeIsActive()) {
 //
-//            robot.slides.slideUp = driverStation.getLT2();
-//            robot.slides.slideDown = driverStation.getRT2();
-//            robot.update();
+            robot.slides.joystickInput = driverStation.getSlidePower();
+            robot.update();
 
         }
     }

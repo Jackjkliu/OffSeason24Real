@@ -6,10 +6,8 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePositionsRed;
 
 @Autonomous(name="BottomRedRR")
 @Config
@@ -22,7 +20,7 @@ public class BottomRedRR extends AutonBase {
 
         robot.openCV.init(true);
         robot.openCV.update(true);
-        SpikePositionsRed pos = cameraPipeline.spikePositionR;
+        SpikePositionsRed pos = SpikePipeline.spikePositionR;
 
         //close opencv and open apriltags
         robot.openCV.stop();

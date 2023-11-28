@@ -8,7 +8,7 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-public class cameraPipeline extends OpenCvPipeline {
+public class SpikePipeline extends OpenCvPipeline {
 
     public enum SpikePositionsBlue{
         LEFT, RIGHT, MIDDLE, NA;
