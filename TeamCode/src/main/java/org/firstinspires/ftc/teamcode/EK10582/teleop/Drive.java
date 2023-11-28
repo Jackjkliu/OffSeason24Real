@@ -21,9 +21,9 @@ public class Drive extends EKLinear {
              */
 
             //drive
-            robot.mecanumDrive.lx = driverStation.moveLeftAndRight();
-            robot.mecanumDrive.ly = driverStation.moveFrontAndBack();
-            robot.mecanumDrive.rx = driverStation.rotate();
+            robot.mecanumDrive.lx = driverStation.getXVel();
+            robot.mecanumDrive.ly = driverStation.getYVel();
+            robot.mecanumDrive.rx = driverStation.getRotVel();
             robot.mecanumDrive.slowMode = driverStation.slowMode();
 
             //intake
@@ -35,7 +35,7 @@ public class Drive extends EKLinear {
             //slides
             robot.slides.joystickInput = driverStation.getSlidePower();
             if (driverStation.getSlideCollect()) {
-                robot.slides.currentState = SubsystemConstants.SlideStates.COLLECT;
+                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
             }
             else if (driverStation.getSlideLow()) {
                 robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
@@ -45,7 +45,7 @@ public class Drive extends EKLinear {
             }
 
             //housing
-            robot.housing.right = driverStation.clampRight(); //
+            robot.housing.right = driverStation.clampRight();
             robot.housing.left = driverStation.clampLeft();
             robot.housing.dump = driverStation.dump();
 

@@ -18,7 +18,7 @@ public class PIDController {
     }
 
     public double update(double error) {
-        p = kP * -1 * error;
+        p = kP * 1 * error;
         i += kI * error * (timer.seconds());
         if(i > maxI) {
             i = maxI;

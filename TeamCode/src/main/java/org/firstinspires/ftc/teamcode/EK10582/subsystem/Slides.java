@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.PIDController;
 
 public class Slides extends Subsystem {
     public double joystickInput; // joystick input
-    PIDController slidesPID = new PIDController(0, 0, 0);
+    PIDController slidesPID = new PIDController(0.4, 0, 0);
 
     public SubsystemConstants.SlideStates currentState = SubsystemConstants.SlideStates.FREE;
 
@@ -32,8 +32,9 @@ public class Slides extends Subsystem {
 
     @Override
     public void printToTelemetry(Telemetry telemetry) {
-        telemetry.addData("joystickInput", joystickInput);
+        telemetry.addData("slidePower", joystickInput);
         telemetry.addData("currentState", currentState);
+        telemetry.addData("targetPosition", currentState.position);
         telemetry.addData("currentPosition", getSlidesPosition());
     }
 
@@ -43,6 +44,8 @@ public class Slides extends Subsystem {
             double speed = slidesPID.update(error);
             speed = (Math.abs(speed) > 0.8) ? 0.8 * (speed / Math.abs(speed)) : speed;
             setSlidesPower(speed);
+        } else {
+            currentState = SubsystemConstants.SlideStates.FREE;
         }
     }
 

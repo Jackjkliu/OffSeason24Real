@@ -23,10 +23,10 @@ public class SubsystemConstants {
     public static double targetAngle = 0;
 
     //Slides
-    public static int SLIDES_TICKS_TO_INCHES = 1234;
-    public static double slidesTolerance = 5;
+    public static double SLIDES_TICKS_TO_INCHES = 0.010722;
+    public static double slidesTolerance = 0.3;
     public enum SlideStates {
-        FREE(0), BOTTOM(0), LOW(500), COLLECT(100);
+        FREE(0), BOTTOM(0), LOW(2.47), COLLECT(1.265);
 
         public final double position;
 

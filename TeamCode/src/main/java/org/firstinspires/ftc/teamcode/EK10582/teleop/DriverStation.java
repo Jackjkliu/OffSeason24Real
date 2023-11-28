@@ -20,15 +20,15 @@ public class DriverStation {
 
     //-----------------------first controller------------------------------
  
-    public double moveFrontAndBack() {
+    public double getYVel() {
         return -filterJoystick(gamepad1.left_stick_y);
     }
 
-    public double moveLeftAndRight() {
+    public double getXVel() {
         return filterJoystick(gamepad1.left_stick_x);
     }
 
-    public double rotate() {
+    public double getRotVel() {
         return filterJoystick(gamepad1.right_stick_x);
     }
 
@@ -47,7 +47,6 @@ public class DriverStation {
         out = gamepad1.y && !lateLeft;
         lateLeft = gamepad1.y;
         return out;
-//        return gamepad1.y;
     }
 
     boolean lateA = false;
@@ -60,7 +59,9 @@ public class DriverStation {
 
     //-----------------------second controller-----------------------------
 
-    public double getSlidePower(){ return filterJoystick(gamepad2.left_stick_y); }
+    public double getSlidePower(){
+        return -filterJoystick(gamepad2.left_stick_y);
+    }
 
     public double intakeOut(){
         return filterJoystick(gamepad2.left_trigger);
