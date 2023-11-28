@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.EK10582.test;
+package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -9,15 +9,15 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePositionsRed;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="trajectoryTest")
+@Autonomous(name="TopBlueRR")
 @Config
-public class trajTest extends AutonBase {
+public class TopBlueRR extends AutonBase {
 
+    //TODO: middle is pretty much done. do left and right for team prop
     @Override
     public void runOpMode() {
 
@@ -25,7 +25,7 @@ public class trajTest extends AutonBase {
 
         waitForStart();
 
-        SpikePipeline.SpikePositionsBlue pos = SpikePipeline.spikePositionB;
+        cameraPipeline.SpikePositionsBlue pos = cameraPipeline.spikePositionB;
 
         //close opencv and open apriltags
         robot.openCV.stop();
@@ -81,7 +81,7 @@ public class trajTest extends AutonBase {
         robot.roadRunner.followTrajectorySequence(turnLeft);
 //                sleep(1000);
 
-                //get apriltag values
+        //get apriltag values
         robot.aprilTags.update(true);
         distFromAprilTagX = robot.aprilTags.tagX;
         distFromAprilTagForward = robot.aprilTags.tagDistance;
@@ -105,7 +105,7 @@ public class trajTest extends AutonBase {
 //
         Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
                 .forward(4)
-                        .build();
+                .build();
 
         Trajectory park = robot.roadRunner.trajectoryBuilder(away.end())
                 .strafeRight(24)

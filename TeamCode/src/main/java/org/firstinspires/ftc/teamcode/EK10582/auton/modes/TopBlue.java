@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
@@ -9,7 +10,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePositionsBlue;
 
 @Autonomous(name="TopBlue")
-@Config
+@Disabled
 public class TopBlue extends AutonBase {
 
     @Override
