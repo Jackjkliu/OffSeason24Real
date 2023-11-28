@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.cameraPipeline.SpikePositionsRed;
 
 @Autonomous(name="BottomRed")
-@Config
+@Disabled
 public class BottomRed extends AutonBase {
 
     @Override
