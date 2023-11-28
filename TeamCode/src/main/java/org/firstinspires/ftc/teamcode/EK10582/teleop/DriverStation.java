@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @Config
@@ -18,6 +17,8 @@ public class DriverStation {
         this.gamepad1 = gamepad1;
         this.gamepad2 = gamepad2;
     }
+
+    //-----------------------first controller------------------------------
  
     public double getYVel() {
         return -filterJoystick(gamepad1.left_stick_y);
@@ -30,24 +31,85 @@ public class DriverStation {
     public double getRotVel() {
         return filterJoystick(gamepad1.right_stick_x);
     }
-    public double getLT1(){
-        return filterJoystick(gamepad1.left_trigger);
+
+    //------put clampLeft, clampRight on controller 2, maybe dpad, buttons?? idk-------------
+    boolean lateRight = false;
+    public boolean clampRight(){
+        boolean out;
+        out = gamepad1.x && !lateRight;
+        lateRight = gamepad1.x;
+        return out;
     }
-    public double getLT2(){
+
+    boolean lateLeft = false;
+    public boolean clampLeft(){
+        boolean out;
+        out = gamepad1.y && !lateLeft;
+        lateLeft = gamepad1.y;
+        return out;
+    }
+
+    boolean lateA = false;
+    public boolean slowMode(){
+        boolean out;
+        out = gamepad1.a && !lateA;
+        lateA = gamepad1.a;
+        return out;
+    }
+
+    //-----------------------second controller-----------------------------
+
+    public double getSlidePower(){
+        return -filterJoystick(gamepad2.left_stick_y);
+    }
+
+    public double intakeOut(){
         return filterJoystick(gamepad2.left_trigger);
     }
 
-    public double getRT1(){
-        return filterJoystick(gamepad1.right_trigger);
-    }
-    public double getRT2(){
+    public double intakeIn(){
         return filterJoystick(gamepad2.right_trigger);
     }
 
-    public double getSlidePower(){return filterJoystick(gamepad2.left_stick_y);}
+    public boolean raiseIntakeArm() {
+        return gamepad2.dpad_up;
+    }
 
-    public boolean getDPadL(){return gamepad2.dpad_left;}
-    public boolean getDPadR(){return gamepad2.dpad_right;}
+    public boolean lowerIntakeArm() {
+        return gamepad2.dpad_down;
+    }
+
+    boolean lateX2 = false;
+    public boolean getSlideCollect() {
+        boolean out;
+        out = gamepad2.x && !lateX2;
+        lateX2 = gamepad2.x;
+        return out;
+    }
+
+    boolean lateY2 = false;
+    public boolean getSlideFree() {
+        boolean out;
+        out = gamepad2.y && !lateY2;
+        lateY2 = gamepad2.y;
+        return out;
+    }
+
+    boolean lateB2 = false;
+    public boolean getSlideLow() {
+        boolean out;
+        out = gamepad2.b && !lateB2;
+        lateB2 = gamepad2.b;
+        return out;
+    }
+
+    boolean lateA2 = false;
+    public boolean dump() {
+        boolean out;
+        out = gamepad2.a && !lateA2;
+        lateA2 = gamepad2.a;
+        return out;
+    }
 
     public double filterJoystick(double input) {
         //implements both deadzone and scaled drive
@@ -60,77 +122,6 @@ public class DriverStation {
         }
     }
 
-    // example of button for subsystem
-
-    public boolean raiseIntakeArm() {
-        return gamepad2.dpad_up;
-    }
-
-    public boolean lowerIntakeArm() {
-        return gamepad2.dpad_down;
-    }
-
-    boolean lateX2 = false;
-    public boolean getSlideToCollectionPos() {
-        boolean out;
-        out = gamepad2.x && !lateX2;
-        lateX2 = gamepad2.x;
-        return out;
-    }
-
-    boolean lateY2 = false;
-    public boolean cancelSlideAction() {
-        boolean out;
-        out = gamepad2.y && !lateY2;
-        lateY2 = gamepad2.y;
-        return out;
-    }
-
-//    boolean lateRight = false;
-//    public boolean clampRight(){
-//        boolean out;
-//        out = gamepad2.x && !lateRight;
-//        lateRight = gamepad2.x;
-//        return out;
-////        return gamepad1.x;
-//    }
-//
-//    boolean lateLeft = false;
-//    public boolean clampLeft(){
-//        boolean out;
-//        out = gamepad2.y && !lateLeft;
-//        lateLeft = gamepad2.y;
-//        return out;
-////        return gamepad1.y;
-//    }
-
-    boolean lateDump = false;
-    public boolean dump(){
-        boolean out;
-        out = gamepad2.b && !lateDump;
-        lateDump = gamepad2.b;
-        return out;
-    }
-
-    boolean latea = false;
-    public boolean slowmode(){
-        boolean out;
-        out = gamepad1.a && !latea;
-        latea = gamepad1.a;
-        return out;
-    }
-
-//    boolean lateA = false;
-//    public boolean getCollection() {
-//        boolean out;
-//        out = gamepad1.a && !lateA;
-//        lateA = gamepad1.a;
-//        return out;
-//    }
-
     //in teleop: DriverStation.getCollection() would return whether or not button a was just pressed & also update a
     //associates button press combinations with the functions that they want to accomplish rather than clouding up teleop
-
-
-
 }

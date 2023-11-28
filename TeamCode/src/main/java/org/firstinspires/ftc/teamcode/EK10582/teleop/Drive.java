@@ -4,8 +4,7 @@ package org.firstinspires.ftc.teamcode.EK10582.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.Slides.SlidesMoveTo;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 
 @TeleOp(name="New Drive")
 public class Drive extends EKLinear {
@@ -14,39 +13,36 @@ public class Drive extends EKLinear {
     public void runOpMode(){
         waitForStart();
         while(opModeIsActive()) {
-            /*
-            Controls:
-            dpad_up is raise arm
-            dpad_down is lower arm
-            LT is spin
-             */
-/*
+
             //drive
             robot.mecanumDrive.lx = driverStation.getXVel();
             robot.mecanumDrive.ly = driverStation.getYVel();
             robot.mecanumDrive.rx = driverStation.getRotVel();
-            robot.mecanumDrive.slowMode = driverStation.slowmode();
+            robot.mecanumDrive.slowMode = driverStation.slowMode();
 
             //intake
             robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
             robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
-            robot.intake.intakeSpeed = driverStation.getLT2(); //left trigger
-            robot.intake.intakeBack = driverStation.getRT2(); //right trigger
+            robot.intake.intakeSpeed = driverStation.intakeOut(); //left trigger
+            robot.intake.intakeBack = driverStation.intakeIn(); //right trigger
 
             //slides
-            robot.slides.slideControl = driverStation.getSlidePower();
-            if(driverStation.getSlideToCollectionPos()) {
-                robot.addAction(new SlidesMoveTo(-109));
+            robot.slides.joystickInput = driverStation.getSlidePower();
+            if (driverStation.getSlideCollect()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
             }
-            if(driverStation.cancelSlideAction()) {
-                robot.slides.freeControl = true;
+            else if (driverStation.getSlideLow()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
+            }
+            else if (driverStation.getSlideFree()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.FREE;
             }
 
             //housing
-            //robot.housing.right = driverStation.clampRight(); //
-            //robot.housing.left = driverStation.clampLeft();
+//            robot.housing.right = driverStation.clampRight();
+//            robot.housing.left = driverStation.clampLeft();
             robot.housing.dump = driverStation.dump();
-*/
+
             robot.update();
 
         }

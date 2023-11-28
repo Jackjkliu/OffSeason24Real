@@ -12,7 +12,7 @@ public class MotorTester extends EKLinear {
         waitForStart();
         DcMotor motor = hardwareMap.get(DcMotor.class, "leftFront");
         while(opModeIsActive()) {
-            motor.setPower((driverStation.getLT1() - driverStation.getRT1()) * 0.8);
+//            motor.setPower((driverStation.getLT1() - driverStation.getRT1()) * 0.8);
         }
     }
 }

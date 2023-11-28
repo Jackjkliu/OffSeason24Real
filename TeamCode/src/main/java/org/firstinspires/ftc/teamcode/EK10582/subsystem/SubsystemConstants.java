@@ -23,8 +23,17 @@ public class SubsystemConstants {
     public static double targetAngle = 0;
 
     //Slides
-    public static final int SLIDEMAX = 800;
-    public static final int[] slidepos = {0,200, 400};
-    public static double speed = 0.8;
+    public static double SLIDES_TICKS_TO_INCHES = 0.010722;
+    public static double slidesTolerance = 0.3;
+    public enum SlideStates {
+        FREE(0), BOTTOM(0), LOW(2.47), COLLECT(1.265);
+
+        public final double position;
+
+        SlideStates(double position) {
+            this.position = position;
+        }
+    }
+
 
 }

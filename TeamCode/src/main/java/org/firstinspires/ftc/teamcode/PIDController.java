@@ -18,7 +18,7 @@ public class PIDController {
     }
 
     public double update(double error) {
-        p = kP * -1 * error;
+        p = kP * 1 * error;
         i += kI * error * (timer.seconds());
         if(i > maxI) {
             i = maxI;
@@ -28,9 +28,8 @@ public class PIDController {
         d = kD * (error - previousError) / (timer.seconds());
 
         double bias = p + i + d;
-
+        previousError = error;
         timer.reset();
-
         return bias;
     }
 }
