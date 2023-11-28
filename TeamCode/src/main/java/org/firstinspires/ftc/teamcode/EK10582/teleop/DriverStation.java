@@ -43,7 +43,7 @@ public class DriverStation {
         return filterJoystick(gamepad2.right_trigger);
     }
 
-    public double getSlidePower(){return filterJoystick(gamepad2.left_stick_y);}
+    public double getSlidePower(){return -filterJoystick(gamepad2.left_stick_y);}
 
     boolean lateX2 = false;
     public boolean getSlideCollect() {

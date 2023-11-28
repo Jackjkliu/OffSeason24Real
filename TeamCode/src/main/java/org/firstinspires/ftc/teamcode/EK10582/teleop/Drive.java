@@ -35,7 +35,7 @@ public class Drive extends EKLinear {
             //slides
             robot.slides.joystickInput = driverStation.getSlidePower();
             if (driverStation.getSlideCollect()) {
-                robot.slides.currentState = SubsystemConstants.SlideStates.COLLECT;
+                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
             }
 //            else if (driverStation.getSlideCollect())
 
