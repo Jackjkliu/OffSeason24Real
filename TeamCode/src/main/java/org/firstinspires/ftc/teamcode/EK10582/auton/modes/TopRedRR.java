@@ -115,7 +115,7 @@ public class TopRedRR extends AutonBase {
 
             case RIGHT:
                 Trajectory pushPixelR = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
-                        .strafeTo(new Vector2d(-9,-28))
+                        .strafeTo(new Vector2d(15,28))
                         .build();
                 Trajectory forwardR = robot.roadRunner.trajectoryBuilder(pushPixelR.end())
                         .strafeRight(3)
@@ -124,10 +124,10 @@ public class TopRedRR extends AutonBase {
                         .forward(10)
                         .build();
                 TrajectorySequence turnRightR = robot.roadRunner.trajectorySequenceBuilder(toBoardR.end())
-                        .turn(Math.toRadians(-92))
+                        .turn(Math.toRadians(-93))
                         .build();
-                TrajectorySequence turnLeftR = robot.roadRunner.trajectorySequenceBuilder(turnRightR.end())
-                        .turn(Math.toRadians(92))
+                TrajectorySequence turnRightR2 = robot.roadRunner.trajectorySequenceBuilder(turnRightR.end())
+                        .turn(Math.toRadians(-93))
                         .build();
                 robot.roadRunner.followTrajectory(pushPixelR);
                 sleep(200);
@@ -151,21 +151,21 @@ public class TopRedRR extends AutonBase {
 
 
                 sleep(1000);
-                robot.roadRunner.followTrajectorySequence(turnLeftR);
+                robot.roadRunner.followTrajectorySequence(turnRightR2);
 
 
-                Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(turnRightR.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, -28 - distFromAprilTagX + 2))
+                Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(turnRightR2.end())
+                        .strafeTo(new Vector2d(20 + distFromAprilTagForward + 2, 28 - distFromAprilTagX - 2))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTagR);
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
-                        .back(4)
+                        .forward(4)
                         .build();
 
                 Trajectory parkR = robot.roadRunner.trajectoryBuilder(awayR.end())
-                        .strafeRight(16)
+                        .strafeLeft(16)
                         .build();
 
                 sleep(3000);
@@ -189,10 +189,10 @@ public class TopRedRR extends AutonBase {
                         .build();
 
                 TrajectorySequence turnLeft = robot.roadRunner.trajectorySequenceBuilder(toBoard.end())
-                        .turn(Math.toRadians(92))
+                        .turn(Math.toRadians(95))
                         .build();
                 TrajectorySequence turnRight = robot.roadRunner.trajectorySequenceBuilder(turnLeft.end())
-                        .turn(Math.toRadians(-92))
+                        .turn(Math.toRadians(-95))
                         .build();
 
 
@@ -217,12 +217,12 @@ public class TopRedRR extends AutonBase {
                 telemetry.update();
 
 
-                sleep(500);
+                sleep(5000);
                 robot.roadRunner.followTrajectorySequence(turnRight);
 
 
                 Trajectory alignAprilTag = robot.roadRunner.trajectoryBuilder(turnRight.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 6))
+                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 5, 28 + distFromAprilTagX - 4))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
 //
@@ -235,7 +235,7 @@ public class TopRedRR extends AutonBase {
                         .build();
 
                 Trajectory park = robot.roadRunner.trajectoryBuilder(away.end())
-                        .strafeRight(24)
+                        .strafeRight(36)
                         .build();
 
                 sleep(3000);
