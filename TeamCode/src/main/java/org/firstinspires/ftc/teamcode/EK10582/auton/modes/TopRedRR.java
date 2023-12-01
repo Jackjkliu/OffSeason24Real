@@ -124,10 +124,10 @@ public class TopRedRR extends AutonBase {
                         .forward(10)
                         .build();
                 TrajectorySequence turnRightR = robot.roadRunner.trajectorySequenceBuilder(toBoardR.end())
-                        .turn(Math.toRadians(-93))
+                        .turn(Math.toRadians(-95))
                         .build();
                 TrajectorySequence turnRightR2 = robot.roadRunner.trajectorySequenceBuilder(turnRightR.end())
-                        .turn(Math.toRadians(-93))
+                        .turn(Math.toRadians(-95))
                         .build();
                 robot.roadRunner.followTrajectory(pushPixelR);
                 sleep(200);
@@ -150,12 +150,12 @@ public class TopRedRR extends AutonBase {
                 telemetry.update();
 
 
-                sleep(1000);
+                sleep(5000);
                 robot.roadRunner.followTrajectorySequence(turnRightR2);
 
 
                 Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(turnRightR2.end())
-                        .strafeTo(new Vector2d(20 + distFromAprilTagForward + 2, 28 - distFromAprilTagX - 2))
+                        .strafeTo(new Vector2d(20 + distFromAprilTagForward + 5, 28 - distFromAprilTagX - 4))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTagR);
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
