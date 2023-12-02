@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySe
 
 @Autonomous(name="BottomRedRR")
 @Config
-public class BottomRedRR extends AutonBase {
+public class BottomBlueRR extends AutonBase {
 
     //TODO: middle is pretty much done. do left and right for team prop
     @Override
@@ -34,36 +34,36 @@ public class BottomRedRR extends AutonBase {
         telemetry.update();
 
         switch (pos) {
-            case RIGHT:
+            case LEFT:
                 Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
-                        .strafeTo(new Vector2d(9,28))
+                        .strafeTo(new Vector2d(-9,28))
                         .build();
-                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .strafeRight(3)
+                Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
+                        .strafeRight(9)
                         .build();
 
                 robot.roadRunner.followTrajectory(pushPixelL);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeLeft);
+                robot.roadRunner.followTrajectory(strafeRight);
                 sleep(200);
                 break;
 
-            case LEFT:
+            case RIGHT:
                 Trajectory forward = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
                         .strafeLeft(20)
                         .build();
-                Trajectory strafeLeftL = robot.roadRunner.trajectoryBuilder(forward.end())
-                        .back(-17)
+                Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(forward.end())
+                        .forward(17)
                         .build();
-                Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(strafeLeftL.end())
-                        .strafeRight(17)
+                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(strafeRightR.end())
+                        .strafeRight(5)
                         .build();
 
                 robot.roadRunner.followTrajectory(forward);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeLeftL);
+                robot.roadRunner.followTrajectory(strafeRightR);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeRight);
+                robot.roadRunner.followTrajectory(strafeLeft);
                 sleep(200);
                 break;
 
