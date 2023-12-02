@@ -12,6 +12,8 @@ public class Drive extends EKLinear {
     @Override
     public void runOpMode(){
         waitForStart();
+
+
         while(opModeIsActive()) {
 
             //drive

@@ -28,12 +28,12 @@ public class AprilTags extends Subsystem {
     public double tagX;
     public double tagDistance;
 
+    private boolean runTelemetry;
 
     // Decimation: 1 means low rate high range, 3 means low range high rate
     // Note: Decimation can be changed on-the-fly to adapt during a match.
     private int decimation;
     public boolean aprilTagsEnabled = true;
-    //TODO: set this to true when opencv closes
 
     //makes a list called currentDetections
     private List<AprilTagDetection> currentDetections;
@@ -89,6 +89,11 @@ public class AprilTags extends Subsystem {
     @Override
     public void update(boolean auton){
 
+        if(!auton){
+            runTelemetry = false;
+            return;
+        }
+        runTelemetry = true;
         currentDetections = aprilTag.getDetections();
         // Step through the list of detections and display info for each one.
         for (AprilTagDetection detection : currentDetections) {
@@ -110,14 +115,19 @@ public class AprilTags extends Subsystem {
     }
     @Override
     public void stop() {
-        // Save more CPU resources when camera is no longer needed.
-        visionPortal.close();
+//        if(!aprilTagsEnabled){
+//            return;
+//        }
+//        // Save more CPU resources when camera is no longer needed.
+//        visionPortal.close();
     }
 
 
     @Override
     public void printToTelemetry(Telemetry telemetry) {
-
+        if(!runTelemetry){
+            return;
+        }
         telemetry.addData("# AprilTags Detected", currentDetections.size());
         telemetry.addData("Apriltag " + targetAprilTag + "'s x value:", tagX);
         telemetry.addData("Apriltag " + targetAprilTag + "'s distance: ", tagDistance);

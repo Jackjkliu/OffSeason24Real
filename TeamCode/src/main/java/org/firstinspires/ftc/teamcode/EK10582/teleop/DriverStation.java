@@ -95,19 +95,19 @@ public class DriverStation {
         return out;
     }
 
-    boolean lateB2 = false;
-    public boolean getSlideLow() {
-        boolean out;
-        out = gamepad2.b && !lateB2;
-        lateB2 = gamepad2.b;
-        return out;
-    }
-
     boolean lateA2 = false;
-    public boolean dump() {
+    public boolean getSlideLow() {
         boolean out;
         out = gamepad2.a && !lateA2;
         lateA2 = gamepad2.a;
+        return out;
+    }
+
+    boolean lateB2 = false;
+    public boolean dump() {
+        boolean out;
+        out = gamepad2.b && !lateB2;
+        lateB2 = gamepad2.b;
         return out;
     }
 

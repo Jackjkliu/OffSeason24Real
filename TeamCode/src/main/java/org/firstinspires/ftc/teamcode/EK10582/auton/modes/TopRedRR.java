@@ -17,7 +17,6 @@ import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySe
 @Config
 public class TopRedRR extends AutonBase {
 
-    //TODO: This is the same code as topBlue. Tune values accordingly so it works for topRed.
     @Override
     public void runOpMode() {
 
@@ -52,19 +51,21 @@ public class TopRedRR extends AutonBase {
 
 
         switch (pos) {
-//TODO: TUNE ENTIRE LEFT CASE
             case LEFT:
                 Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
                         .strafeTo(new Vector2d(0,26))
                         .build();
                 Trajectory backL = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .back(17)
+                        .back(8)
                         .build();
                 Trajectory Right1L = robot.roadRunner.trajectoryBuilder(backL.end())
                         .strafeRight(1)
                         .build();
                 TrajectorySequence toBoardL = robot.roadRunner.trajectorySequenceBuilder(Right1L.end())
-                        .lineToLinearHeading(new Pose2d(19, 25, Math.toRadians(-90)))
+                        .strafeTo(new Vector2d(19, 25))
+                        .build();
+                TrajectorySequence turn1 = robot.roadRunner.trajectorySequenceBuilder(toBoardL.end())
+                        .turn(Math.toRadians(-95))
                         .build();
 
                 robot.roadRunner.followTrajectory(pushPixelL);
@@ -75,6 +76,7 @@ public class TopRedRR extends AutonBase {
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(toBoardL);
                 sleep(200);
+                robot.roadRunner.followTrajectorySequence(turn1);
 
 
                 //get apriltag values
@@ -88,30 +90,31 @@ public class TopRedRR extends AutonBase {
                 telemetry.update();
 
 
-//                sleep(1000);
-//                TrajectorySequence turnToSlides = robot.roadRunner.trajectorySequenceBuilder(toBoardL.end())
-//                        .turn(Math.toRadians(-90))
-//                        .build();
-//
-//                Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(turnToSlides.end())
-//                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX - 2))
-//                        .build();
-//                robot.roadRunner.followTrajectorySequence(turnToSlides);
-//                robot.roadRunner.followTrajectory(alignAprilTagL);
-//                robot.dumper.setPosition(SubsystemConstants.dumperTop);
-//
-//                Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
-//                        .forward(4)
-//                        .build();
-//
-//                Trajectory parkL = robot.roadRunner.trajectoryBuilder(awayL.end())
-//                        .strafeLeft(16)
-//                        .build();
-//
-//                sleep(3000);
-//
-//                robot.roadRunner.followTrajectory(awayL);
-//                robot.roadRunner.followTrajectory(parkL);
+                sleep(2000);
+                TrajectorySequence turnToSlides = robot.roadRunner.trajectorySequenceBuilder(turn1.end())
+                        .turn(Math.toRadians(-95))
+                        .build();
+
+                Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(turnToSlides.end())
+                        .strafeTo(new Vector2d(20 + distFromAprilTagForward - 2, 28 - distFromAprilTagX - 4))
+                        .build();
+                robot.roadRunner.followTrajectorySequence(turnToSlides);
+                sleep(1000);
+                robot.roadRunner.followTrajectory(alignAprilTagL);
+                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+
+                Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
+                        .forward(4)
+                        .build();
+
+                Trajectory parkL = robot.roadRunner.trajectoryBuilder(awayL.end())
+                        .strafeLeft(32)
+                        .build();
+
+                sleep(3000);
+
+                robot.roadRunner.followTrajectory(awayL);
+                robot.roadRunner.followTrajectory(parkL);
                 break;
 
             case RIGHT:
@@ -184,7 +187,6 @@ public class TopRedRR extends AutonBase {
                         .strafeRight(4)
                         .build();
 
-                //TODO: consider linetolinearheading
                 Trajectory toBoard = robot.roadRunner.trajectoryBuilder(back.end())
                         //This gives you a starting position
                         .forward(20)
@@ -218,7 +220,6 @@ public class TopRedRR extends AutonBase {
                 telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
                 telemetry.update();
 
-
                 sleep(500);
                 robot.roadRunner.followTrajectorySequence(turnRight1);
 
@@ -227,9 +228,8 @@ public class TopRedRR extends AutonBase {
                         .strafeTo(new Vector2d(20 + distFromAprilTagForward - 0, 28 - distFromAprilTagX - 2))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
-//
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
-//
+
                 Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
                         .forward(4)
                         .build();

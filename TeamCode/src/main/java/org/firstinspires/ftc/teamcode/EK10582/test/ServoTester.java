@@ -4,16 +4,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
 @TeleOp(name="Servo Tester (intake arm port)")
-public class ServoTester extends LinearOpMode {
+public class ServoTester extends EKLinear {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        waitForStart();
         double servoPosition = 0.5;
         while(opModeIsActive()) {
-//            servoPosition += driverStation.getLT1() - driverStation.getRT1();
-//            robot.intakeArm.setPosition(servoPosition);
+
+            Robot.getInstance().pixelHolder.setPosition(0.47);
 
             telemetry.addData("Servo Position", servoPosition);
             telemetry.update();
