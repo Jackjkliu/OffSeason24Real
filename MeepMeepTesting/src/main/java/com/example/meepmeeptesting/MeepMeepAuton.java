@@ -9,24 +9,21 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
 public class MeepMeepAuton {
-    private static int teamPropPosition = (int) (2);//(Math.random() * 3); // for testing
 
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
         RoadRunnerBotEntity myBot = null;
 
-        switch (teamPropPosition) {
-            case 0:
                 myBot = new DefaultBotBuilder(meepMeep)
                         // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                         .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
-
+                        .setColorScheme(new ColorSchemeBlueDark())
                         .followTrajectorySequence(drive ->
-                                drive.trajectorySequenceBuilder(new Pose2d(-36, -60, 0))
-
-
+                                drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
+                                        .back(40)
+                                        .splineToLinearHeading(new Pose2d(64, 64, Math.toRadians(90)), Math.toRadians(0))
+                                        .splineToLinearHeading(new Pose2d(-64, -64, Math.toRadians(90)), Math.toRadians(0))
                         .build());
-        }
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)
@@ -35,7 +32,4 @@ public class MeepMeepAuton {
                 .start();
     }
 
-    public void setTeamPropPosition(int teamPropPosition) {
-        this.teamPropPosition = teamPropPosition;
-    }
 }

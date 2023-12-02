@@ -28,15 +28,15 @@ public class CameraTesting extends AutonBase {
 
         switch(pos){
             case RIGHT:
-                robot.aprilTags.targetAprilTag = 3;
+                robot.aprilTags.targetAprilTag = 6;
                 break;
 
             case LEFT:
-                robot.aprilTags.targetAprilTag = 1;
+                robot.aprilTags.targetAprilTag = 4;
                 break;
 
-            case MIDDLE:
-                robot.aprilTags.targetAprilTag = 2;
+            default:
+                robot.aprilTags.targetAprilTag = 5;
                 break;
         }
         robot.aprilTags.init(true);

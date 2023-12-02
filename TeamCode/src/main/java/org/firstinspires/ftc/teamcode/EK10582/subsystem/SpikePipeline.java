@@ -20,7 +20,7 @@ public class SpikePipeline extends OpenCvPipeline {
     public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
     double[] targetBlueRGB = {12, 135, 176};
-    double[] targetRedRGB = {201, 64, 81};
+    double[] targetRedRGB = {212, 62, 46};
     double[] replacementColor = {0, 255, 0, 1};
 
     double percentError = 0.6;
@@ -54,7 +54,7 @@ public class SpikePipeline extends OpenCvPipeline {
                         output.put(j,k, replacementColor); //if color is target color, change color
                         countersBlue[i]++;
                     }
-                    if(compareColor(targetRedRGB, currentColor,0.2)){
+                    if(compareColor(targetRedRGB, currentColor,0.3)){
                         output.put(j,k, replacementColor); //if color is target color, change color
                         countersRed[i]++;
                     }

@@ -13,11 +13,10 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="BottomRedRR")
+@Autonomous(name="BottomBlueRR")
 @Config
 public class BottomBlueRR extends AutonBase {
 
-    //TODO: middle is pretty much done. do left and right for team prop
     @Override
     public void runOpMode() {
 

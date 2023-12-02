@@ -24,7 +24,7 @@ public class TopRedRR extends AutonBase {
 
         waitForStart();
 
-        SpikePipeline.SpikePositionsBlue pos = SpikePipeline.spikePositionB;
+        SpikePipeline.SpikePositionsRed pos = SpikePipeline.spikePositionR;
 
         //close opencv and open apriltags
         robot.openCV.stop();
@@ -34,15 +34,15 @@ public class TopRedRR extends AutonBase {
 
         switch (pos) {
             case RIGHT:
-                robot.aprilTags.targetAprilTag = 3;
+                robot.aprilTags.targetAprilTag = 6;
                 break;
 
             case LEFT:
-                robot.aprilTags.targetAprilTag = 1;
+                robot.aprilTags.targetAprilTag = 4;
                 break;
 
             default: //case middle
-                robot.aprilTags.targetAprilTag = 2;
+                robot.aprilTags.targetAprilTag = 5;
                 break;
         }
 
@@ -84,6 +84,11 @@ public class TopRedRR extends AutonBase {
                 distFromAprilTagX = robot.aprilTags.tagX;
                 distFromAprilTagForward = robot.aprilTags.tagDistance;
 
+                if(distFromAprilTagForward == -1){
+                    distFromAprilTagForward = 27;
+                    distFromAprilTagX = 0;
+                }
+
                 telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
                 telemetry.addData("tagx ", robot.aprilTags.tagX);
                 telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
@@ -112,6 +117,8 @@ public class TopRedRR extends AutonBase {
                         .build();
 
                 sleep(3000);
+
+                robot.dumper.setPosition(0.5);
 
                 robot.roadRunner.followTrajectory(awayL);
                 robot.roadRunner.followTrajectory(parkL);
@@ -148,6 +155,11 @@ public class TopRedRR extends AutonBase {
                 distFromAprilTagX = robot.aprilTags.tagX;
                 distFromAprilTagForward = robot.aprilTags.tagDistance;
 
+                if(distFromAprilTagForward == -1){
+                    distFromAprilTagForward = 32;
+                    distFromAprilTagX = -15;
+                }
+
                 telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
                 telemetry.addData("tagx ", robot.aprilTags.tagX);
                 telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
@@ -173,6 +185,8 @@ public class TopRedRR extends AutonBase {
                         .build();
 
                 sleep(3000);
+
+                robot.dumper.setPosition(0.5);
                 robot.roadRunner.followTrajectory(awayR);
                 robot.roadRunner.followTrajectory(parkR);
                 break;
@@ -215,6 +229,11 @@ public class TopRedRR extends AutonBase {
                 distFromAprilTagX = robot.aprilTags.tagX;
                 distFromAprilTagForward = robot.aprilTags.tagDistance;
 
+                if(distFromAprilTagForward == -1){
+                    distFromAprilTagForward = 27;
+                    distFromAprilTagX = 0;
+                }
+
                 telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
                 telemetry.addData("tagx ", robot.aprilTags.tagX);
                 telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
@@ -239,6 +258,9 @@ public class TopRedRR extends AutonBase {
                         .build();
 
                 sleep(3000);
+
+                robot.dumper.setPosition(0.5);
+
                 robot.roadRunner.followTrajectory(away);
                 robot.roadRunner.followTrajectory(park);
                 break;

@@ -49,8 +49,6 @@ public class TopBlueRR extends AutonBase {
 
         robot.aprilTags.init(true);
 
-        robot.pixelHolder.setPosition(SubsystemConstants.pixelHolderLeft);
-
         sleep(1000);
 
 
@@ -60,7 +58,7 @@ public class TopBlueRR extends AutonBase {
                         .strafeTo(new Vector2d(-9,28))
                         .build();
                 Trajectory backL = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .strafeRight(3)
+                        .strafeRight(5)
                         .build();
                 Trajectory toBoardL = robot.roadRunner.trajectoryBuilder(backL.end())
                                 .back(10)
@@ -97,7 +95,7 @@ public class TopBlueRR extends AutonBase {
 
 
                 Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(turnRightL.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX - 2))
+                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward, 28 + distFromAprilTagX - 2))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTagL);
 
@@ -114,8 +112,9 @@ public class TopBlueRR extends AutonBase {
                         .build();
 
                 sleep(3000);
-//                robot.pixelHolder.setPosition(SubsystemConstants.pixelHolderRight);
-//                sleep(1000);
+
+                robot.dumper.setPosition(0.5);
+
                 robot.roadRunner.followTrajectory(awayL);
                 robot.roadRunner.followTrajectory(parkL);
                 break;
@@ -125,7 +124,6 @@ public class TopBlueRR extends AutonBase {
                         .strafeLeft(24) //was 26
                         .build();
                 Trajectory forward = robot.roadRunner.trajectoryBuilder(strafeLeft.end())
-//                        .forward(17)
                         .strafeTo(new Vector2d(17,27))
                         .build();
                 Trajectory backR = robot.roadRunner.trajectoryBuilder(forward.end())
@@ -159,7 +157,7 @@ public class TopBlueRR extends AutonBase {
 
 
 
-                sleep(1000);
+                sleep(500);
 
                 //get apriltag values
                 robot.aprilTags.update(true);
@@ -174,9 +172,12 @@ public class TopBlueRR extends AutonBase {
 
                 sleep(2000);
                 robot.roadRunner.followTrajectorySequence(turnRightR);
+
                 Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(turnRightR.end())
                         .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 5))
                         .build();
+
+
                 robot.roadRunner.followTrajectory(alignAprilTagR);
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
@@ -191,8 +192,9 @@ public class TopBlueRR extends AutonBase {
                         .build();
 
                 sleep(3000);
-//                robot.pixelHolder.setPosition(SubsystemConstants.pixelHolderRight);
-//                sleep(1000);
+
+                robot.dumper.setPosition(0.5);
+
                 robot.roadRunner.followTrajectory(awayR);
                 robot.roadRunner.followTrajectory(parkR);
                 break;
@@ -221,12 +223,12 @@ public class TopBlueRR extends AutonBase {
 
 
                 robot.roadRunner.followTrajectory(pushPixel);
-//                sleep(1000);
+                sleep(200);
 
                 robot.roadRunner.followTrajectory(back);
-//                sleep(1000);
+                sleep(200);
                 robot.roadRunner.followTrajectory(toBoard);
-//                sleep(1000);
+                sleep(200);
                 robot.roadRunner.followTrajectorySequence(turnLeft);
                 sleep(1000);
 
@@ -246,7 +248,7 @@ public class TopBlueRR extends AutonBase {
 
 
                 Trajectory alignAprilTag = robot.roadRunner.trajectoryBuilder(turnRight.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 6))
+                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 3))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
 
@@ -261,8 +263,9 @@ public class TopBlueRR extends AutonBase {
                         .build();
 
                 sleep(3000);
-//                robot.pixelHolder.setPosition(SubsystemConstants.pixelHolderRight);
-//                sleep(1000);
+
+                robot.dumper.setPosition(0.5);
+
                 robot.roadRunner.followTrajectory(away);
                 robot.roadRunner.followTrajectory(park);
                 break;
