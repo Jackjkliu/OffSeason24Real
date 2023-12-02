@@ -52,30 +52,28 @@ public class TopRedRR extends AutonBase {
 
 
         switch (pos) {
-
+//TODO: TUNE ENTIRE LEFT CASE
             case LEFT:
                 Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
-                        .strafeTo(new Vector2d(-9,28))
+                        .strafeTo(new Vector2d(0,26))
                         .build();
                 Trajectory backL = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .strafeRight(3)
+                        .back(17)
                         .build();
-                Trajectory toBoardL = robot.roadRunner.trajectoryBuilder(backL.end())
-                        .back(10)
+                Trajectory Right1L = robot.roadRunner.trajectoryBuilder(backL.end())
+                        .strafeRight(1)
                         .build();
-                TrajectorySequence turnLeftL = robot.roadRunner.trajectorySequenceBuilder(toBoardL.end())
-                        .turn(Math.toRadians(92))
+                TrajectorySequence toBoardL = robot.roadRunner.trajectorySequenceBuilder(Right1L.end())
+                        .lineToLinearHeading(new Pose2d(19, 25, Math.toRadians(-90)))
                         .build();
-                TrajectorySequence turnRightL = robot.roadRunner.trajectorySequenceBuilder(turnLeftL.end())
-                        .turn(Math.toRadians(-92))
-                        .build();
+
                 robot.roadRunner.followTrajectory(pushPixelL);
                 sleep(200);
                 robot.roadRunner.followTrajectory(backL);
                 sleep(200);
-                robot.roadRunner.followTrajectory(toBoardL);
+                robot.roadRunner.followTrajectory(Right1L);
                 sleep(200);
-                robot.roadRunner.followTrajectorySequence(turnLeftL);
+                robot.roadRunner.followTrajectorySequence(toBoardL);
                 sleep(200);
 
 
@@ -90,68 +88,57 @@ public class TopRedRR extends AutonBase {
                 telemetry.update();
 
 
-                sleep(1000);
-                robot.roadRunner.followTrajectorySequence(turnRightL);
-
-
-                Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(turnRightL.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX - 2))
-                        .build();
-                robot.roadRunner.followTrajectory(alignAprilTagL);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
-
-                Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
-                        .forward(4)
-                        .build();
-
-                Trajectory parkL = robot.roadRunner.trajectoryBuilder(awayL.end())
-                        .strafeRight(16)
-                        .build();
-
-                sleep(3000);
-                robot.roadRunner.followTrajectory(awayL);
-                robot.roadRunner.followTrajectory(parkL);
+//                sleep(1000);
+//                TrajectorySequence turnToSlides = robot.roadRunner.trajectorySequenceBuilder(toBoardL.end())
+//                        .turn(Math.toRadians(-90))
+//                        .build();
+//
+//                Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(turnToSlides.end())
+//                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX - 2))
+//                        .build();
+//                robot.roadRunner.followTrajectorySequence(turnToSlides);
+//                robot.roadRunner.followTrajectory(alignAprilTagL);
+//                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+//
+//                Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
+//                        .forward(4)
+//                        .build();
+//
+//                Trajectory parkL = robot.roadRunner.trajectoryBuilder(awayL.end())
+//                        .strafeLeft(16)
+//                        .build();
+//
+//                sleep(3000);
+//
+//                robot.roadRunner.followTrajectory(awayL);
+//                robot.roadRunner.followTrajectory(parkL);
                 break;
 
             case RIGHT:
-                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
-                        .strafeLeft(26)
+                Trajectory pushPixelR = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
+                        .strafeTo(new Vector2d(15,28))
                         .build();
-                Trajectory forward = robot.roadRunner.trajectoryBuilder(strafeLeft.end())
-                        .forward(17)
+                Trajectory forwardR = robot.roadRunner.trajectoryBuilder(pushPixelR.end())
+                        .strafeRight(3)
                         .build();
-                Trajectory backR = robot.roadRunner.trajectoryBuilder(forward.end())
-                        .strafeRight(1)
+                Trajectory toBoardR = robot.roadRunner.trajectoryBuilder(forwardR.end())
+                        .forward(10)
                         .build();
-                Trajectory toBoardR = robot.roadRunner.trajectoryBuilder(backR.end())
-                        .back(36)
+                TrajectorySequence turnRightR = robot.roadRunner.trajectorySequenceBuilder(toBoardR.end())
+                        .turn(Math.toRadians(-95))
                         .build();
-                Trajectory strafeLeft2 = robot.roadRunner.trajectoryBuilder(toBoardR.end())
-                        .strafeLeft(4)
+                TrajectorySequence turnRightR2 = robot.roadRunner.trajectorySequenceBuilder(turnRightR.end())
+                        .turn(Math.toRadians(-95))
                         .build();
-                TrajectorySequence turnLeftR = robot.roadRunner.trajectorySequenceBuilder(strafeLeft2.end())
-                        .turn(Math.toRadians(92))
-                        .build();
-
-                TrajectorySequence turnRightR = robot.roadRunner.trajectorySequenceBuilder(turnLeftR.end())
-                        .turn(Math.toRadians(-92))
-                        .build();
-                robot.roadRunner.followTrajectory(strafeLeft);
+                robot.roadRunner.followTrajectory(pushPixelR);
                 sleep(200);
-                robot.roadRunner.followTrajectory(forward);
-                sleep(200);
-                robot.roadRunner.followTrajectory(backR);
+                robot.roadRunner.followTrajectory(forwardR);
                 sleep(200);
                 robot.roadRunner.followTrajectory(toBoardR);
                 sleep(200);
+                robot.roadRunner.followTrajectorySequence(turnRightR);
+                sleep(200);
 
-                robot.roadRunner.followTrajectory(strafeLeft2);
-
-                robot.roadRunner.followTrajectorySequence(turnLeftR);
-
-
-
-                sleep(1000);
 
                 //get apriltag values
                 robot.aprilTags.update(true);
@@ -164,22 +151,22 @@ public class TopRedRR extends AutonBase {
                 telemetry.update();
 
 
-                sleep(2000);
-                robot.roadRunner.followTrajectorySequence(turnRightR);
-                Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(turnRightR.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 5))
+                sleep(5000);
+                robot.roadRunner.followTrajectorySequence(turnRightR2);
+
+
+                Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(turnRightR2.end())
+                        .strafeTo(new Vector2d(20 + distFromAprilTagForward + 5, 28 - distFromAprilTagX - 4))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTagR);
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
-
-
 
                 Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
                         .forward(4)
                         .build();
 
                 Trajectory parkR = robot.roadRunner.trajectoryBuilder(awayR.end())
-                        .strafeRight(28)
+                        .strafeLeft(16)
                         .build();
 
                 sleep(3000);
@@ -188,7 +175,6 @@ public class TopRedRR extends AutonBase {
                 break;
 
             default: //case middle
-
                 //declare trajectories
                 Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
                         .strafeLeft(32)
@@ -197,16 +183,18 @@ public class TopRedRR extends AutonBase {
                 Trajectory back = robot.roadRunner.trajectoryBuilder(pushPixel.end())
                         .strafeRight(4)
                         .build();
+
+                //TODO: consider linetolinearheading
                 Trajectory toBoard = robot.roadRunner.trajectoryBuilder(back.end())
                         //This gives you a starting position
-                        .back(20)
+                        .forward(20)
                         .build();
 
-                TrajectorySequence turnLeft = robot.roadRunner.trajectorySequenceBuilder(toBoard.end())
-                        .turn(Math.toRadians(92))
+                TrajectorySequence turnRight = robot.roadRunner.trajectorySequenceBuilder(toBoard.end())
+                        .turn(Math.toRadians(-95))
                         .build();
-                TrajectorySequence turnRight = robot.roadRunner.trajectorySequenceBuilder(turnLeft.end())
-                        .turn(Math.toRadians(-92))
+                TrajectorySequence turnRight1 = robot.roadRunner.trajectorySequenceBuilder(turnRight.end())
+                        .turn(Math.toRadians(-90))
                         .build();
 
 
@@ -217,7 +205,7 @@ public class TopRedRR extends AutonBase {
 //                sleep(1000);
                 robot.roadRunner.followTrajectory(toBoard);
 //                sleep(1000);
-                robot.roadRunner.followTrajectorySequence(turnLeft);
+                robot.roadRunner.followTrajectorySequence(turnRight);
                 sleep(1000);
 
                 //get apriltag values
@@ -232,16 +220,14 @@ public class TopRedRR extends AutonBase {
 
 
                 sleep(500);
-                robot.roadRunner.followTrajectorySequence(turnRight);
+                robot.roadRunner.followTrajectorySequence(turnRight1);
 
 
-                Trajectory alignAprilTag = robot.roadRunner.trajectoryBuilder(turnRight.end())
-                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 6))
+                Trajectory alignAprilTag = robot.roadRunner.trajectoryBuilder(turnRight1.end())
+                        .strafeTo(new Vector2d(20 + distFromAprilTagForward - 0, 28 - distFromAprilTagX - 2))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
 //
-//        //TODO: dispense pixel
-
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
 //
                 Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
@@ -249,7 +235,7 @@ public class TopRedRR extends AutonBase {
                         .build();
 
                 Trajectory park = robot.roadRunner.trajectoryBuilder(away.end())
-                        .strafeRight(24)
+                        .strafeLeft(24)
                         .build();
 
                 sleep(3000);
@@ -258,9 +244,6 @@ public class TopRedRR extends AutonBase {
                 break;
 
             //end case middle
-
-
-
         }
 
 
