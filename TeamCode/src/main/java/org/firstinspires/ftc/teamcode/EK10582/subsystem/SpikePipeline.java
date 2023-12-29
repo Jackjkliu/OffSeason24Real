@@ -20,10 +20,13 @@ public class SpikePipeline extends OpenCvPipeline {
     public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
     double[] targetBlueRGB = {12, 135, 176};
-    double[] targetRedRGB = {212, 62, 46};
+    double[] targetRedRGB = {156,30,33};
     double[] replacementColor = {0, 255, 0, 1};
 
-    double percentError = 0.6;
+    double percentErrorRed = 0.4;
+    double percentErrorBlue = 0.6;
+
+
     public static int maxBlue = 0;
     public static int maxRed = 0;
 
@@ -50,11 +53,11 @@ public class SpikePipeline extends OpenCvPipeline {
             for(int j = 0; j < height; j++){ //height (all rows)
                 for(int k = (int) (width * i / 3); k < (width * (i + 1) / 3); k++){ //width (column)
                     double[] currentColor = output.get(j,k); //color of each pixel
-                    if(compareColor(targetBlueRGB, currentColor, 0.6)){
+                    if(compareColor(targetBlueRGB, currentColor, percentErrorBlue)){
                         output.put(j,k, replacementColor); //if color is target color, change color
                         countersBlue[i]++;
                     }
-                    if(compareColor(targetRedRGB, currentColor,0.3)){
+                    if(compareColor(targetRedRGB, currentColor,percentErrorRed)){
                         output.put(j,k, replacementColor); //if color is target color, change color
                         countersRed[i]++;
                     }
@@ -72,11 +75,11 @@ public class SpikePipeline extends OpenCvPipeline {
 
         switch(maxBlue){
             case 0: spikePositionB = SpikePositionsBlue.LEFT;
-            break;
+                break;
             case 1: spikePositionB = SpikePositionsBlue.MIDDLE;
-            break;
+                break;
             case 2: spikePositionB = SpikePositionsBlue.RIGHT;
-            break;
+                break;
         }
 
         switch(maxRed){

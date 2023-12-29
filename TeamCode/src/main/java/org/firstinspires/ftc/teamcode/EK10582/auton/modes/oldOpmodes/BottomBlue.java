@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
+package org.firstinspires.ftc.teamcode.EK10582.auton.modes.oldOpmodes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
