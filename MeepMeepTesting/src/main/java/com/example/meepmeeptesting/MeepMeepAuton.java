@@ -19,11 +19,29 @@ public class MeepMeepAuton {
                         .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                         .setColorScheme(new ColorSchemeBlueDark())
                         .followTrajectorySequence(drive ->
-                                drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
-                                        .back(40)
-                                        .splineToLinearHeading(new Pose2d(64, 64, Math.toRadians(90)), Math.toRadians(0))
-                                        .splineToLinearHeading(new Pose2d(-64, -64, Math.toRadians(90)), Math.toRadians(0))
-                        .build());
+                                drive.trajectorySequenceBuilder(new Pose2d(-36, -60, Math.toRadians(-90)))
+                                        //straight
+                                        .back(25)
+                                        .forward(10)
+                                        .turn(Math.toRadians(90))
+                                        .splineToConstantHeading(new Vector2d(-60,-24), Math.toRadians(180))
+                                        .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
+                                        .splineToConstantHeading(new Vector2d(40,-36), Math.toRadians(0))
+                                        //left
+                                        /*.lineToLinearHeading(new Pose2d(-35,32, Math.toRadians(180)))
+                                        .back(4)
+                                        .forward(4)
+                                        .splineToConstantHeading(new Vector2d(-60,24), Math.toRadians(180))
+                                        .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
+                                        .splineToConstantHeading(new Vector2d(40,36), Math.toRadians(0))*/
+                                        //right
+                                       /* .lineToLinearHeading(new Pose2d(-35,32,Math.toRadians(0)))
+                                        .back(4)
+                                        .forward(4)
+                                        .splineToConstantHeading(new Vector2d(-60,12), Math.toRadians(180))
+                                        .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
+                                        .splineToConstantHeading(new Vector2d(40,36), Math.toRadians(0))*/
+                                        .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
                 .setDarkMode(true)

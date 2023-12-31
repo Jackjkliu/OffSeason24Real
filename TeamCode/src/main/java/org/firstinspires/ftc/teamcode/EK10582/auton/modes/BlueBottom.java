@@ -21,7 +21,7 @@ public class BlueBottom extends AutonBase {
     public void runOpMode() {
 
         double distFromAprilTagX, distFromAprilTagForward;
-        Pose2d startPos = new Pose2d(-36,60, Math.toRadians(0));
+        Pose2d startPos = new Pose2d(-36,-60, Math.toRadians(-90));
 
         waitForStart();
 
@@ -38,54 +38,64 @@ public class BlueBottom extends AutonBase {
         switch (pos) {
             case LEFT:
                 Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(startPos)
-                        .strafeTo(new Vector2d(-9,28))
+                        .lineToLinearHeading(new Pose2d(-35,-32, Math.toRadians(180)))
+                        .back(4)
+                        .forward(4)
+                        .splineToConstantHeading(new Vector2d(-60,-24), Math.toRadians(180))
                         .build();
-                Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .strafeRight(9)
+                TrajectorySequence splinetoBoardL = robot.roadRunner.trajectorySequenceBuilder(pushPixelL.end())
+                        .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
+                        .splineToConstantHeading(new Vector2d(40,-36), Math.toRadians(0))
                         .build();
-
                 robot.roadRunner.followTrajectory(pushPixelL);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeRight);
+                robot.roadRunner.followTrajectorySequence(splinetoBoardL);
                 sleep(200);
                 break;
 
             case RIGHT:
-                Trajectory forward = robot.roadRunner.trajectoryBuilder(startPos)
-                        .strafeLeft(20)
+                Trajectory pushPixelR = robot.roadRunner.trajectoryBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(-35,-32,Math.toRadians(0)))
+                        .back(4)
+                        .forward(4)
+                        .splineToConstantHeading(new Vector2d(-60,-12), Math.toRadians(180))
                         .build();
-                Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(forward.end())
-                        .forward(17)
-                        .build();
-                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(strafeRightR.end())
-                        .strafeRight(5)
+                TrajectorySequence splinetoBoardR = robot.roadRunner.trajectorySequenceBuilder(pushPixelR.end())
+                        .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
+                        .splineToConstantHeading(new Vector2d(40,-36), Math.toRadians(0))
                         .build();
 
-                robot.roadRunner.followTrajectory(forward);
+                robot.roadRunner.followTrajectory(pushPixelR);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeRightR);
-                sleep(200);
-                robot.roadRunner.followTrajectory(strafeLeft);
+                robot.roadRunner.followTrajectorySequence(splinetoBoardR);
                 sleep(200);
                 break;
 
             default: //case middle
 
                 //declare trajectories
-                Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(startPos)
-                        .strafeLeft(26)
+                Trajectory strafeBack = robot.roadRunner.trajectoryBuilder(startPos)
+                        .back(25)
+                        .forward(10)
+                        .build();
+                TrajectorySequence turnLeft = robot.roadRunner.trajectorySequenceBuilder(strafeBack.end())
+                        .turn(Math.toRadians(90))
+                        .build();
+                TrajectorySequence splinetoStack = robot.roadRunner.trajectorySequenceBuilder(turnLeft.end())
+                        .splineToConstantHeading(new Vector2d(-60,-24), Math.toRadians(180))
+                        .build();
+                TrajectorySequence splinetoBoard = robot.roadRunner.trajectorySequenceBuilder(splinetoStack.end())
+                        .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
+                        .splineToConstantHeading(new Vector2d(40,-36), Math.toRadians(0))
                         .build();
 
-                Trajectory back = robot.roadRunner.trajectoryBuilder(pushPixel.end())
-                        .strafeRight(6)
-                        .build();
-
-
-                robot.roadRunner.followTrajectory(pushPixel);
+                robot.roadRunner.followTrajectory(strafeBack);
                 sleep(200);
-
-                robot.roadRunner.followTrajectory(back);
+                robot.roadRunner.followTrajectorySequence(turnLeft);
                 sleep(200);
+                robot.roadRunner.followTrajectorySequence(splinetoStack);
+                sleep(200);
+                robot.roadRunner.followTrajectorySequence(splinetoBoard);
 
                 break;
 
