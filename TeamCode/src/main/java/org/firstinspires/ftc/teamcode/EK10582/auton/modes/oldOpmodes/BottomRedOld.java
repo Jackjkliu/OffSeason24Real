@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.EK10582.auton.modes.oldOpmodes;
 
-import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
@@ -11,7 +10,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePosit
 
 @Autonomous(name="BottomRed")
 @Disabled
-public class BottomRed extends AutonBase {
+public class BottomRedOld extends AutonBase {
 
     @Override
     public void runOpMode() {

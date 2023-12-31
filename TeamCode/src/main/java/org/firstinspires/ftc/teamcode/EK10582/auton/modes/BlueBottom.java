@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.EK10582.auton.modes.oldOpmodes;
+package org.firstinspires.ftc.teamcode.EK10582.auton.modes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -13,9 +13,9 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="BottomBlueRR")
+@Autonomous(name="BottomBlue")
 @Config
-public class BottomBlueRR extends AutonBase {
+public class BlueBottom extends AutonBase {
 
     @Override
     public void runOpMode() {
@@ -37,7 +37,7 @@ public class BottomBlueRR extends AutonBase {
 
         switch (pos) {
             case LEFT:
-                Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
+                Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(startPos)
                         .strafeTo(new Vector2d(-9,28))
                         .build();
                 Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
@@ -51,7 +51,7 @@ public class BottomBlueRR extends AutonBase {
                 break;
 
             case RIGHT:
-                Trajectory forward = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
+                Trajectory forward = robot.roadRunner.trajectoryBuilder(startPos)
                         .strafeLeft(20)
                         .build();
                 Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(forward.end())
@@ -72,7 +72,7 @@ public class BottomBlueRR extends AutonBase {
             default: //case middle
 
                 //declare trajectories
-                Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
+                Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(startPos)
                         .strafeLeft(26)
                         .build();
 

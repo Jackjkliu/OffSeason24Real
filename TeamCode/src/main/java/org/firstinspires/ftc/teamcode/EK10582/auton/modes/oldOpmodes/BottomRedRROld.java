@@ -7,21 +7,17 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
-import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
-import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
-import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="BottomBlueRR")
+@Autonomous(name="BottomRedRR")
 @Config
-public class BottomBlueRR extends AutonBase {
+public class BottomRedRROld extends AutonBase {
 
+    //TODO: middle is pretty much done. do left and right for team prop
     @Override
     public void runOpMode() {
 
         double distFromAprilTagX, distFromAprilTagForward;
-        Pose2d startPos = new Pose2d(-36,60, Math.toRadians(0));
 
         waitForStart();
 
@@ -33,39 +29,37 @@ public class BottomBlueRR extends AutonBase {
         telemetry.addData("pos: ", pos);
         telemetry.update();
 
-        robot.roadRunner.setPoseEstimate(startPos);
-
         switch (pos) {
-            case LEFT:
+            case RIGHT:
                 Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
-                        .strafeTo(new Vector2d(-9,28))
+                        .strafeTo(new Vector2d(9,28))
                         .build();
-                Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .strafeRight(9)
+                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
+                        .strafeRight(3)
                         .build();
 
                 robot.roadRunner.followTrajectory(pushPixelL);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeRight);
+                robot.roadRunner.followTrajectory(strafeLeft);
                 sleep(200);
                 break;
 
-            case RIGHT:
+            case LEFT:
                 Trajectory forward = robot.roadRunner.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0)))
                         .strafeLeft(20)
                         .build();
-                Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(forward.end())
-                        .forward(17)
+                Trajectory strafeLeftL = robot.roadRunner.trajectoryBuilder(forward.end())
+                        .back(-17)
                         .build();
-                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(strafeRightR.end())
-                        .strafeRight(5)
+                Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(strafeLeftL.end())
+                        .strafeRight(17)
                         .build();
 
                 robot.roadRunner.followTrajectory(forward);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeRightR);
+                robot.roadRunner.followTrajectory(strafeLeftL);
                 sleep(200);
-                robot.roadRunner.followTrajectory(strafeLeft);
+                robot.roadRunner.followTrajectory(strafeRight);
                 sleep(200);
                 break;
 
