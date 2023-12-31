@@ -51,6 +51,43 @@ public class BlueBottom extends AutonBase {
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(splinetoBoardL);
                 sleep(200);
+                robot.aprilTags.update(true);
+                distFromAprilTagX = robot.aprilTags.tagX;
+                distFromAprilTagForward = robot.aprilTags.tagDistance;
+
+                telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
+                telemetry.addData("tagx ", robot.aprilTags.tagX);
+                telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
+                telemetry.update();
+
+
+                sleep(1000);
+                robot.roadRunner.followTrajectorySequence(splinetoBoardL);
+
+
+                Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(splinetoBoardL.end())
+                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward, 28 + distFromAprilTagX - 2))
+                        .build();
+                robot.roadRunner.followTrajectory(alignAprilTagL);
+
+
+                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+
+
+                Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
+                        .forward(4)
+                        .build();
+
+                Trajectory parkL = robot.roadRunner.trajectoryBuilder(awayL.end())
+                        .strafeRight(16)
+                        .build();
+
+                sleep(3000);
+
+                robot.dumper.setPosition(0.5);
+
+                robot.roadRunner.followTrajectory(awayL);
+                robot.roadRunner.followTrajectory(parkL);
                 break;
 
             case RIGHT:
@@ -69,6 +106,43 @@ public class BlueBottom extends AutonBase {
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(splinetoBoardR);
                 sleep(200);
+                robot.aprilTags.update(true);
+                distFromAprilTagX = robot.aprilTags.tagX;
+                distFromAprilTagForward = robot.aprilTags.tagDistance;
+
+                telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
+                telemetry.addData("tagx ", robot.aprilTags.tagX);
+                telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
+                telemetry.update();
+
+
+                sleep(2000);
+                robot.roadRunner.followTrajectorySequence(splinetoBoardR);
+
+                Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(splinetoBoardR.end())
+                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 5))
+                        .build();
+
+
+                robot.roadRunner.followTrajectory(alignAprilTagR);
+                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+
+
+
+                Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
+                        .forward(4)
+                        .build();
+
+                Trajectory parkR = robot.roadRunner.trajectoryBuilder(awayR.end())
+                        .strafeRight(28)
+                        .build();
+
+                sleep(3000);
+
+                robot.dumper.setPosition(0.5);
+
+                robot.roadRunner.followTrajectory(awayR);
+                robot.roadRunner.followTrajectory(parkR);
                 break;
 
             default: //case middle
@@ -96,6 +170,41 @@ public class BlueBottom extends AutonBase {
                 robot.roadRunner.followTrajectorySequence(splinetoStack);
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(splinetoBoard);
+                robot.aprilTags.update(true);
+                distFromAprilTagX = robot.aprilTags.tagX;
+                distFromAprilTagForward = robot.aprilTags.tagDistance;
+
+                telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
+                telemetry.addData("tagx ", robot.aprilTags.tagX);
+                telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
+                telemetry.update();
+
+
+                sleep(500);
+                robot.roadRunner.followTrajectorySequence(splinetoBoard);
+
+
+                Trajectory alignAprilTag = robot.roadRunner.trajectoryBuilder(splinetoBoard.end())
+                        .strafeTo(new Vector2d(-20 - distFromAprilTagForward + 2, 28 + distFromAprilTagX + 3))
+                        .build();
+                robot.roadRunner.followTrajectory(alignAprilTag);
+
+                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+
+                Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
+                        .forward(4)
+                        .build();
+
+                Trajectory park = robot.roadRunner.trajectoryBuilder(away.end())
+                        .strafeRight(24)
+                        .build();
+
+                sleep(3000);
+
+                robot.dumper.setPosition(0.5);
+
+                robot.roadRunner.followTrajectory(away);
+                robot.roadRunner.followTrajectory(park);
 
                 break;
 
