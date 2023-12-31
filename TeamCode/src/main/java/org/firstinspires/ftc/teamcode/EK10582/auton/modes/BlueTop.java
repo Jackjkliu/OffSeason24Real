@@ -38,10 +38,10 @@ public class BlueTop extends AutonBase {
         switch (pos) {
             case LEFT:
                 Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(startPos)
-                        .strafeTo(new Vector2d(-9,28))
+                        .lineToLinearHeading(new Pose2d(12,36, Math.toRadians(180)))
                         .build();
                 Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .strafeRight(9)
+                        .back(33)
                         .build();
 
                 robot.roadRunner.followTrajectory(pushPixelL);
@@ -52,20 +52,15 @@ public class BlueTop extends AutonBase {
 
             case RIGHT:
                 Trajectory forward = robot.roadRunner.trajectoryBuilder(startPos)
-                        .strafeLeft(20)
+                        .lineToLinearHeading(new Pose2d(12,36,Math.toRadians(180)))
                         .build();
                 Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(forward.end())
-                        .forward(17)
-                        .build();
-                Trajectory strafeLeft = robot.roadRunner.trajectoryBuilder(strafeRightR.end())
-                        .strafeRight(5)
+                        .lineToLinearHeading(new Pose2d(45, 36, Math.toRadians(-180)))
                         .build();
 
                 robot.roadRunner.followTrajectory(forward);
                 sleep(200);
                 robot.roadRunner.followTrajectory(strafeRightR);
-                sleep(200);
-                robot.roadRunner.followTrajectory(strafeLeft);
                 sleep(200);
                 break;
 
@@ -73,11 +68,11 @@ public class BlueTop extends AutonBase {
 
                 //declare trajectories
                 Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(startPos)
-                        .strafeLeft(26)
+                        .back(24)
                         .build();
 
                 Trajectory back = robot.roadRunner.trajectoryBuilder(pushPixel.end())
-                        .strafeRight(6)
+                        .lineToLinearHeading(new Pose2d(45, 36, Math.toRadians(-180)))
                         .build();
 
 
