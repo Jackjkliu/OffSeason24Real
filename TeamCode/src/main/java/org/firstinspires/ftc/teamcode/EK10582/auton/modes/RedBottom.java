@@ -37,21 +37,27 @@ public class RedBottom extends AutonBase {
 
         switch (pos) {
             case LEFT:
-                Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(startPos)
+                Trajectory pushPixelLineupL = robot.roadRunner.trajectoryBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(-35,32, Math.toRadians(180)))
-
+                        .build();
+                Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(pushPixelLineupL.end())
                         .back(4)
-
+                        .build();
+                TrajectorySequence pushPixelreturnL = robot.roadRunner.trajectorySequenceBuilder(pushPixelL.end())
                         .forward(4)
 
                         .splineToConstantHeading(new Vector2d(-60,24), Math.toRadians(180))
 
                         .build();
-                TrajectorySequence splinetoBoardL = robot.roadRunner.trajectorySequenceBuilder(pushPixelL.end())
+                TrajectorySequence splinetoBoardL = robot.roadRunner.trajectorySequenceBuilder(pushPixelreturnL.end())
                         .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
                         .splineToConstantHeading(new Vector2d(40,36), Math.toRadians(0))
                         .build();
+                robot.roadRunner.followTrajectory(pushPixelLineupL);
+                sleep(200);
                 robot.roadRunner.followTrajectory(pushPixelL);
+                sleep(200);
+                robot.roadRunner.followTrajectorySequence(pushPixelreturnL);
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(splinetoBoardL);
                 sleep(200);
@@ -168,9 +174,11 @@ public class RedBottom extends AutonBase {
                 //declare trajectories
                 Trajectory strafeBack = robot.roadRunner.trajectoryBuilder(startPos)
                 .back(25)
+                        .build();
+                Trajectory strafeForward = robot.roadRunner.trajectoryBuilder(strafeBack.end())
                     .forward(10)
                         .build();
-                TrajectorySequence turnLeft = robot.roadRunner.trajectorySequenceBuilder(strafeBack.end())
+                TrajectorySequence turnLeft = robot.roadRunner.trajectorySequenceBuilder(strafeForward.end())
                     .turn(Math.toRadians(90))
                         .build();
                 TrajectorySequence splinetoStack = robot.roadRunner.trajectorySequenceBuilder(turnLeft.end())
@@ -182,6 +190,8 @@ public class RedBottom extends AutonBase {
                         .build();
 
                 robot.roadRunner.followTrajectory(strafeBack);
+                sleep(200);
+                robot.roadRunner.followTrajectory(strafeForward);
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(turnLeft);
                 sleep(200);
