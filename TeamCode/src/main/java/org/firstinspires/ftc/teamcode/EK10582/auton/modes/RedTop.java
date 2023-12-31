@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="RedBottom")
+@Autonomous(name="RedTop")
 @Config
 public class RedTop extends AutonBase {
 

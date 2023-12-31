@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 
-@Autonomous(name="BottomBlue")
+@Autonomous(name="BlueBottom")
 @Config
 public class BlueBottom extends AutonBase {
 
