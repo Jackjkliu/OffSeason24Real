@@ -12,12 +12,16 @@ public class ServoTester extends EKLinear {
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart();
-        double servoPosition = 0.5;
+
+        double targetPos = 0.5;
         while(opModeIsActive()) {
 
-            Robot.getInstance().pixelHolder.setPosition(0.47);
 
-            telemetry.addData("Servo Position", servoPosition);
+            targetPos += gamepad1.right_stick_y * 0.0001;
+            Robot.getInstance().pixelHolder.setPosition(targetPos);
+
+
+            telemetry.addData("Servo Position", targetPos);
             telemetry.update();
             //robot.update();
         }
