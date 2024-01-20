@@ -51,6 +51,7 @@ public class BlueBottom extends AutonBase {
                         .splineToConstantHeading(new Vector2d(0,0), Math.toRadians(0))
                         .splineToConstantHeading(new Vector2d(40,-36), Math.toRadians(0))
                         .build();
+
                 robot.roadRunner.followTrajectory(pushPixelLineupL);
                 sleep(200);
                 robot.roadRunner.followTrajectory(pushPixelL);
@@ -59,10 +60,12 @@ public class BlueBottom extends AutonBase {
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(splinetoBoardL);
                 sleep(200);
+
+
+                //check for positioning and update the apriltags distances
                 robot.aprilTags.update(true);
                 distFromAprilTagX = robot.aprilTags.tagX;
                 distFromAprilTagForward = robot.aprilTags.tagDistance;
-
                 telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
                 telemetry.addData("tagx ", robot.aprilTags.tagX);
                 telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
@@ -99,6 +102,8 @@ public class BlueBottom extends AutonBase {
                 break;
 
             case RIGHT:
+
+
                 Trajectory pushPixelLineupR = robot.roadRunner.trajectoryBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(-35,-32,Math.toRadians(0)))
                         .build();
@@ -122,10 +127,11 @@ public class BlueBottom extends AutonBase {
                 sleep(200);
                 robot.roadRunner.followTrajectorySequence(splinetoBoardR);
                 sleep(200);
+
+                //update april tags
                 robot.aprilTags.update(true);
                 distFromAprilTagX = robot.aprilTags.tagX;
                 distFromAprilTagForward = robot.aprilTags.tagDistance;
-
                 telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
                 telemetry.addData("tagx ", robot.aprilTags.tagX);
                 telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
@@ -133,6 +139,8 @@ public class BlueBottom extends AutonBase {
 
 
                 sleep(2000);
+
+                //go to the board
                 robot.roadRunner.followTrajectorySequence(splinetoBoardR);
 
                 Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(splinetoBoardR.end())
@@ -142,8 +150,6 @@ public class BlueBottom extends AutonBase {
 
                 robot.roadRunner.followTrajectory(alignAprilTagR);
                 robot.dumper.setPosition(SubsystemConstants.dumperTop);
-
-
 
                 Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
                         .forward(4)
