@@ -23,18 +23,18 @@ public class Drive extends EKLinear {
             robot.mecanumDrive.slowMode = driverStation.slowMode();
 
             //intake
-            robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
-            robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
+//            robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
+//            robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
             robot.intake.intakeSpeed = driverStation.intakeOut(); //left trigger
             robot.intake.intakeBack = driverStation.intakeIn(); //right trigger
 
             //slides
             robot.slides.joystickInput = driverStation.getSlidePower();
-            if (driverStation.getSlideCollect()) {
+            if (driverStation.getSlideLow()) {
                 robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
             }
-            else if (driverStation.getSlideLow()) {
-                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
+            else if (driverStation.getSlidePreset()) {
+                robot.slides.currentState = SubsystemConstants.SlideStates.PRESET;
             }
             else if (driverStation.getSlideFree()) {
                 robot.slides.currentState = SubsystemConstants.SlideStates.FREE;
@@ -43,7 +43,16 @@ public class Drive extends EKLinear {
             //housing
 //            robot.housing.right = driverStation.clampRight();
 //            robot.housing.left = driverStation.clampLeft();
-            robot.housing.dump = driverStation.dump();
+//            robot.housing.dump = driverStation.dump();
+            if (driverStation.raiseDumperOver()) {
+                robot.housing.currentState = SubsystemConstants.DumperStates.HIGH;
+            }
+            else if (driverStation.lowerDumperUnder()) {
+                robot.housing.currentState = SubsystemConstants.DumperStates.LOW;
+            }
+            else if (driverStation.resetDumper()) {
+                robot.housing.currentState = SubsystemConstants.DumperStates.PRESET;
+            }
 
             robot.update();
 
