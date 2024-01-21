@@ -71,19 +71,23 @@ public class DriverStation {
         return filterJoystick(gamepad2.right_trigger);
     }
 
-    public boolean raiseIntakeArm() {
+    public boolean raiseDumperOver() {
         return gamepad2.dpad_up;
     }
-
-    public boolean lowerIntakeArm() {
+b
+    public boolean lowerDumperUnder() {
         return gamepad2.dpad_down;
     }
 
-    boolean lateX2 = false;
-    public boolean getSlideCollect() {
+    public boolean resetDumper() {
+        return gamepad2.dpad_right;
+    }
+
+    boolean lateA2 = false;
+    public boolean shiftStopperRod() {
         boolean out;
-        out = gamepad2.x && !lateX2;
-        lateX2 = gamepad2.x;
+        out = gamepad2.a && !lateA2;
+        lateA2 = gamepad2.a;
         return out;
     }
 
@@ -95,16 +99,16 @@ public class DriverStation {
         return out;
     }
 
-    boolean lateA2 = false;
+    boolean lateX2 = false;
     public boolean getSlideLow() {
         boolean out;
-        out = gamepad2.a && !lateA2;
-        lateA2 = gamepad2.a;
+        out = gamepad2.x && !lateX2;
+        lateX2 = gamepad2.x;
         return out;
     }
 
     boolean lateB2 = false;
-    public boolean dump() {
+    public boolean getSlidePreset() {
         boolean out;
         out = gamepad2.b && !lateB2;
         lateB2 = gamepad2.b;

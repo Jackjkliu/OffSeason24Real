@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
 public class PIDController {
-    public static double kP, kI, kD;
+    public double kP, kI, kD;
     public static double maxI = 0.25;
     double previousError;
     double p, i, d;

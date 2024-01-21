@@ -12,8 +12,8 @@ public class SubsystemConstants {
     public static double pixelHolderMiddle = 0.55;
     public static double pixelHolderLeft = 0.52;
     public static double pixelHolderRight = 0.58;
-    public static double dumperTop = 1;
-    public static double dumperBottom = 0.39;
+//    public static double dumperTop = 1;
+//    public static double dumperBottom = 0.39;
 
     //Intake
     public static double intakeIncrement = 0.0015;
@@ -28,11 +28,21 @@ public class SubsystemConstants {
     public static double SLIDES_TICKS_TO_INCHES = 0.010722;
     public static double slidesTolerance = 0.3;
     public enum SlideStates {
-        FREE(0), BOTTOM(0), LOW(2.47), COLLECT(1.265);
+        FREE(0), LOW(2.47), PRESET(1.265);
 
         public final double position;
 
         SlideStates(double position) {
+            this.position = position;
+        }
+    }
+
+    public enum DumperStates {
+        HIGH(0), LOW(2.47), PRESET(1.265);
+
+        public final double position;
+
+        DumperStates(double position) {
             this.position = position;
         }
     }
