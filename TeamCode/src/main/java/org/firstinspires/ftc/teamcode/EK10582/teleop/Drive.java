@@ -23,8 +23,6 @@ public class Drive extends EKLinear {
             robot.mecanumDrive.slowMode = driverStation.slowMode();
 
             //intake
-//            robot.intake.servoUp = driverStation.raiseIntakeArm(); //dpad up
-//            robot.intake.servoDown = driverStation.lowerIntakeArm(); //dpad down
             robot.intake.intakeSpeed = driverStation.intakeOut(); //left trigger
             robot.intake.intakeBack = driverStation.intakeIn(); //right trigger
 
@@ -41,17 +39,25 @@ public class Drive extends EKLinear {
             }
 
             //housing
-//            robot.housing.right = driverStation.clampRight();
-//            robot.housing.left = driverStation.clampLeft();
-//            robot.housing.dump = driverStation.dump();
             if (driverStation.raiseDumperOver()) {
-                robot.housing.currentState = SubsystemConstants.DumperStates.HIGH;
+                robot.housing.dumperState = SubsystemConstants.DumperStates.HIGH;
             }
             else if (driverStation.lowerDumperUnder()) {
-                robot.housing.currentState = SubsystemConstants.DumperStates.LOW;
+                robot.housing.dumperState = SubsystemConstants.DumperStates.LOW;
             }
             else if (driverStation.resetDumper()) {
-                robot.housing.currentState = SubsystemConstants.DumperStates.PRESET;
+                robot.housing.dumperState = SubsystemConstants.DumperStates.PRESET;
+            }
+
+            if (driverStation.movePixelHolder()) {
+                switch(robot.housing.pixelHolderState) {
+                    case LEFT:
+                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.MIDDLE;
+                    case RIGHT:
+                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.LEFT;
+                    case MIDDLE:
+                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.RIGHT;
+                }
             }
 
             robot.update();

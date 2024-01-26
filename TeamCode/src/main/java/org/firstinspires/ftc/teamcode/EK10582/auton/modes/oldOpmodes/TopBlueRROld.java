@@ -98,7 +98,7 @@ public class TopBlueRROld extends AutonBase {
                 robot.roadRunner.followTrajectory(alignAprilTagL);
 
 
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
 
                 Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
@@ -177,7 +177,7 @@ public class TopBlueRROld extends AutonBase {
 
 
                 robot.roadRunner.followTrajectory(alignAprilTagR);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
 
 
@@ -250,7 +250,7 @@ public class TopBlueRROld extends AutonBase {
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
 
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
                         .forward(4)

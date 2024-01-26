@@ -82,7 +82,7 @@ public class BlueBottom extends AutonBase {
                 robot.roadRunner.followTrajectory(alignAprilTagL);
 
 
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
 
                 Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
@@ -149,7 +149,7 @@ public class BlueBottom extends AutonBase {
 
 
                 robot.roadRunner.followTrajectory(alignAprilTagR);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
                         .forward(4)
@@ -215,7 +215,7 @@ public class BlueBottom extends AutonBase {
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
 
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
                         .forward(4)

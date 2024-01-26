@@ -74,7 +74,7 @@ public class DriverStation {
     public boolean raiseDumperOver() {
         return gamepad2.dpad_up;
     }
-b
+
     public boolean lowerDumperUnder() {
         return gamepad2.dpad_down;
     }
@@ -84,7 +84,7 @@ b
     }
 
     boolean lateA2 = false;
-    public boolean shiftStopperRod() {
+    public boolean movePixelHolder() {
         boolean out;
         out = gamepad2.a && !lateA2;
         lateA2 = gamepad2.a;

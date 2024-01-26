@@ -5,7 +5,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Housing extends Subsystem {
 
 
-    public SubsystemConstants.DumperStates currentState = SubsystemConstants.DumperStates.PRESET;
+    public SubsystemConstants.DumperStates dumperState = SubsystemConstants.DumperStates.PRESET;
+    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.MIDDLE;
 //    boolean leftLate, rightLate, isDump
 
     private double increment = SubsystemConstants.housingIncrement;
@@ -38,28 +39,8 @@ public class Housing extends Subsystem {
             return;
         }
 
-//        Robot.getInstance().pixelHolder.setPosition(0.585);
-        setDumperPosition(currentState.position);
-//
-//        if(isDump) {
-//            dumperTarget = SubsystemConstants.dumperTop; //dumped position
-//        } else {
-//            dumperTarget = SubsystemConstants.dumperBottom; //reset and ready position
-//        }
-//
-//        Robot.getInstance().dumper.setPosition(dumperTarget);
-
-    }
-
-    private void setDumperPosition(double targetPosition) {
-        double error = targetPosition - getSlidesPosition();
-        if (error >= SubsystemConstants.slidesTolerance) {
-            double speed = slidesPID.update(error);
-            speed = (Math.abs(speed) > 0.8) ? 0.8 * (speed / Math.abs(speed)) : speed;
-            setSlidesPower(speed);
-        } else {
-            currentState = SubsystemConstants.SlideStates.FREE;
-        }
+        Robot.getInstance().dumper.setPosition(dumperState.position);
+        Robot.getInstance().pixelHolder.setPosition(pixelHolderState.position);
     }
 
     @Override
@@ -71,8 +52,8 @@ public class Housing extends Subsystem {
     public void printToTelemetry(Telemetry telemetry) {
         telemetry.addData("ClawPos: ", Robot.getInstance().pixelHolder.getPosition());
         telemetry.addData("Dumper: ", Robot.getInstance().dumper.getPosition());
-        telemetry.addData("Dumper Position: ", isDump);
-        telemetry.addData("Dumper button: ", dump);
+        //telemetry.addData("Dumper Position: ", isDump);
+        //telemetry.addData("Dumper button: ", dump);
     }
     
 }

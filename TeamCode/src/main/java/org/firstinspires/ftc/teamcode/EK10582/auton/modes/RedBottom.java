@@ -87,7 +87,7 @@ public class RedBottom extends AutonBase {
                 robot.roadRunner.followTrajectorySequence(turnToSlides);
                 sleep(1000);
                 robot.roadRunner.followTrajectory(alignAprilTagL);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
                         .forward(4)
@@ -152,7 +152,7 @@ public class RedBottom extends AutonBase {
                         .strafeTo(new Vector2d(20 + distFromAprilTagForward + 5, 28 - distFromAprilTagX - 4))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTagR);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
                         .forward(4)
@@ -220,7 +220,7 @@ public class RedBottom extends AutonBase {
                         .strafeTo(new Vector2d(20 + distFromAprilTagForward - 0, 28 - distFromAprilTagX - 2))
                         .build();
                 robot.roadRunner.followTrajectory(alignAprilTag);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
+                //robot.dumper.setPosition(SubsystemConstants.dumperTop);
 
                 Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
                         .forward(4)

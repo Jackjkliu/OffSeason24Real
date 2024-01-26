@@ -9,9 +9,7 @@ public class SubsystemConstants {
     //Housing
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
-    public static double pixelHolderMiddle = 0.55;
-    public static double pixelHolderLeft = 0.52;
-    public static double pixelHolderRight = 0.58;
+
 //    public static double dumperTop = 1;
 //    public static double dumperBottom = 0.39;
 
@@ -43,6 +41,16 @@ public class SubsystemConstants {
         public final double position;
 
         DumperStates(double position) {
+            this.position = position;
+        }
+    }
+
+    public enum PixelHolderStates {
+        MIDDLE(0.55), LEFT(0.52), RIGHT(0.58)
+
+        public final double position;
+
+        PixelHolderStates(double position) {
             this.position = position;
         }
     }
