@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
 class JoystickConstants {
@@ -61,6 +62,38 @@ public class DriverStation {
 
     public double getSlidePower(){
         return -filterJoystick(gamepad2.left_stick_y);
+    }
+
+    public double getHangingPower() { return gamepad2.right_stick_y; }
+
+    ElapsedTime droneButtonDown = new ElapsedTime();
+    boolean droneButtonLate = false;
+    boolean droneRelease = false;
+    boolean droneReleaseLate = false;
+    public boolean getDroneDown() {
+        if(gamepad2.left_stick_button && !droneButtonLate) {
+            droneButtonDown.reset();
+        }
+        if(!gamepad2.left_stick_button) {
+            droneButtonDown.reset();
+        }
+        droneButtonLate = gamepad2.left_stick_button;
+        if(droneButtonDown.milliseconds() > 2000) {
+            droneRelease = true;
+        } else {
+            droneRelease = false;
+        }
+        boolean out = droneRelease && !droneReleaseLate;
+        droneReleaseLate = droneRelease;
+        return out;
+    }
+
+    boolean isLateRStick = false;
+    public boolean getHangingServo() {
+        boolean out;
+        out = gamepad2.right_stick_button && !isLateRStick;
+        isLateRStick = gamepad2.right_stick_button;
+        return out;
     }
 
     public double intakeOut(){

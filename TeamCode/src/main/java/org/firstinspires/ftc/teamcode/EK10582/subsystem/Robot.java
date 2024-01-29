@@ -45,16 +45,19 @@ public class Robot {
     public SampleMecanumDrive roadRunner;
 
     //declare hardware here
-    public DcMotorEx leftFront, leftBack, rightFront, rightBack, intakeSpin, odo;
+    public DcMotorEx leftFront, leftBack, rightFront, rightBack;
 
     public DcMotorEx slide1;
     public DcMotorEx slide2;
+    public DcMotorEx intakeSpin;
+    public DcMotorEx hangingMotor;
 
     public BHI260IMU imu;
-    public Servo intakeArm;
 
     public Servo pixelHolder;
     public Servo dumper;
+    public Servo drone;
+    public Servo hangingServo;
 
     public WebcamName camera;
 
@@ -68,14 +71,16 @@ public class Robot {
     public Slides slides = new Slides();
     public Housing housing = new Housing();
     public OpenCV openCV = new OpenCV();
+    public Hanging hanging = new Hanging();
+    public DroneLauncher droneLauncher = new DroneLauncher();
 
     //Add all subsystems to a list to be initiated and updated through
     //private List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, aprilTags, slides, housing, openCV);
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing, aprilTags);
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing, hanging, droneLauncher, aprilTags);
 
     //add all subsystems that need to go through telemetry
 //    private List<Subsystem> telemetrySubsystems = Arrays.asList();
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, slides, housing, openCV, aprilTags);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing, hanging, droneLauncher, aprilTags);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
@@ -113,14 +118,14 @@ public class Robot {
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //
-        intakeArm = hardwareMap.get(Servo.class, "intakeArm");
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
 
         dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
+        drone = hardwareMap.get(Servo.class, "drone");
         intakeSpin = hardwareMap.get(DcMotorEx.class, "intakeSpin");
-        odo = hardwareMap.get(DcMotorEx.class, "odo");
-
+        hangingMotor = hardwareMap.get(DcMotorEx.class, "hanging");
+        hangingServo = hardwareMap.get(Servo.class, "hangingServo");
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);

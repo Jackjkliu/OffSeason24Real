@@ -6,7 +6,7 @@ public class Housing extends Subsystem {
 
 
     public SubsystemConstants.DumperStates dumperState = SubsystemConstants.DumperStates.PRESET;
-    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.MIDDLE;
+    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.RIGHT;
 //    boolean leftLate, rightLate, isDump
 
     private double increment = SubsystemConstants.housingIncrement;

@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
+import com.acmerobotics.dashboard.config.Config;
+
+@Config
 public class SubsystemConstants {
     //AprilTags
     public static int targetAprilTag = 1;
@@ -36,7 +39,7 @@ public class SubsystemConstants {
     }
 
     public enum DumperStates {
-        HIGH(0), LOW(2.47), PRESET(1.265);
+        HIGH(1), LOW(0.22), PRESET(0.14);
 
         public final double position;
 
@@ -46,7 +49,7 @@ public class SubsystemConstants {
     }
 
     public enum PixelHolderStates {
-        MIDDLE(0.55), LEFT(0.52), RIGHT(0.58)
+        MIDDLE(0.55), LEFT(0.48), RIGHT(0.58);
 
         public final double position;
 
@@ -55,5 +58,23 @@ public class SubsystemConstants {
         }
     }
 
+    public enum DroneStates {
+        CLOSED(0.5), RELEASE(1);
 
+        public final double position;
+
+        DroneStates(double position) {
+            this.position = position;
+        }
+    }
+
+    public enum HangingStates {
+        UP(0.5), DOWN(1);
+
+        public final double position;
+
+        HangingStates(double position) {
+            this.position = position;
+        }
+    }
 }

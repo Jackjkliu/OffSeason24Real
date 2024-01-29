@@ -52,12 +52,31 @@ public class Drive extends EKLinear {
             if (driverStation.movePixelHolder()) {
                 switch(robot.housing.pixelHolderState) {
                     case LEFT:
-                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.MIDDLE;
+                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.RIGHT;
+                        break;
                     case RIGHT:
                         robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.LEFT;
-                    case MIDDLE:
-                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.RIGHT;
+                        break;
                 }
+            }
+
+            //hanging
+            robot.hanging.hangingPower = driverStation.getHangingPower() * 0.8;
+            if(driverStation.getHangingServo()) {
+                if(robot.hanging.currentState == SubsystemConstants.HangingStates.DOWN) {
+                    robot.hanging.currentState = SubsystemConstants.HangingStates.UP;
+                } else {
+                    robot.hanging.currentState = SubsystemConstants.HangingStates.DOWN;
+                }
+            }
+
+            //drone
+            //telemetry.addData("droneButton", driverStation.getDroneDown());
+            if(driverStation.getDroneDown()) {
+                if(robot.droneLauncher.currentState == SubsystemConstants.DroneStates.CLOSED)
+                    robot.droneLauncher.currentState = SubsystemConstants.DroneStates.RELEASE;
+                else
+                    robot.droneLauncher.currentState = SubsystemConstants.DroneStates.CLOSED;
             }
 
             robot.update();
