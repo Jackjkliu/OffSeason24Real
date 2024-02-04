@@ -134,4 +134,7 @@ public class AprilTags extends Subsystem {
     }
 
 
+    public void relocalize() {
+        //Robot.getInstance().roadRunner.setPoseEstimate()
+    }
 }

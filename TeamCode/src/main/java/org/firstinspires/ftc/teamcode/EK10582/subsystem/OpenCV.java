@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
