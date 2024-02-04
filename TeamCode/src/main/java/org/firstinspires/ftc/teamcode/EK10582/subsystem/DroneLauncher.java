@@ -1,16 +1,17 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants.DroneStates;
 
 public class DroneLauncher extends Subsystem{
 
-    public SubsystemConstants.DroneStates currentState = SubsystemConstants.DroneStates.CLOSED;
-    private SubsystemConstants.DroneStates lastState = SubsystemConstants.DroneStates.CLOSED;
+    public DroneStates currentState = DroneStates.CLOSED;
+    private DroneStates lastState = DroneStates.CLOSED;
 
     @Override
     public void init(boolean auton) {
-        currentState = SubsystemConstants.DroneStates.CLOSED;
-        Robot.getInstance().drone.setPosition(SubsystemConstants.DroneStates.CLOSED.position);
+        currentState = DroneStates.CLOSED;
+        Robot.getInstance().drone.setPosition(DroneStates.CLOSED.position);
     }
 
     @Override

@@ -115,11 +115,6 @@ public class AprilTags extends Subsystem {
     }
     @Override
     public void stop() {
-//        if(!aprilTagsEnabled){
-//            return;
-//        }
-//        // Save more CPU resources when camera is no longer needed.
-//        visionPortal.close();
     }
 
 
