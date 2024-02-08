@@ -9,7 +9,7 @@ import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
-public class BlueBottomMeepMeep {
+public class RedBottomMeepMeep {
 
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
@@ -20,7 +20,7 @@ public class BlueBottomMeepMeep {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .setColorScheme(new ColorSchemeBlueDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-36,60, Math.toRadians(-90)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-36,-60, Math.toRadians(-90)))
                                 .lineToLinearHeading(new Pose2d(-35,-32, Math.toRadians(180)))
                                 .back(4)
                                 .forward(4)
