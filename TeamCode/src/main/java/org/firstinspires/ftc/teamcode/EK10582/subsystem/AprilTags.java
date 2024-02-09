@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -28,6 +29,8 @@ public class AprilTags extends Subsystem {
     public double tagX;
     public double tagDistance;
 
+    public double yaw;
+
     private boolean runTelemetry;
 
     // Decimation: 1 means low rate high range, 3 means low range high rate
@@ -51,6 +54,7 @@ public class AprilTags extends Subsystem {
         decimation = SubsystemConstants.decimation;
         // Create the AprilTag processor.
         aprilTag = new AprilTagProcessor.Builder()
+                .setLensIntrinsics( 1312.9, 1312.9, 810.624, 453.727)
 
                 // The following default settings are available to un-comment and edit as needed.
                 .setDrawAxes(true)
@@ -101,6 +105,8 @@ public class AprilTags extends Subsystem {
                 seeTag = true;
                 tagX= (double)Math.round(detection.ftcPose.x * 100)/100;
                 tagDistance = ((double)Math.round(detection.ftcPose.y * 100)/100 ) / 1.102 - 0.4223;
+                yaw = (double)Math.round(Math.toDegrees(detection.ftcPose.yaw) * 100)/100;
+
             }
             //amount of detections in detections array
             if(currentDetections.size() == 0){
@@ -126,7 +132,26 @@ public class AprilTags extends Subsystem {
         telemetry.addData("# AprilTags Detected", currentDetections.size());
         telemetry.addData("Apriltag " + targetAprilTag + "'s x value:", tagX);
         telemetry.addData("Apriltag " + targetAprilTag + "'s distance: ", tagDistance);
+        telemetry.addData("Apriltag " + targetAprilTag + "'s yaw angle: ", yaw);
     }
 
+
+    public Pose2d relocalize() {
+        int targetX = 61;
+        int targetY = 42;
+
+        if(seeTag){
+            switch (targetAprilTag){
+                case 2: targetY = 36; break;
+                case 3: targetY = 30; break;
+                case 4: targetY = -30; break;
+                case 5: targetY = -36; break;
+                case 6: targetY = -42; break;
+            }
+        }
+        Pose2d pose = new Pose2d(targetX-tagDistance, targetY - tagX,yaw);
+        return pose;
+//        Robot.getInstance().roadRunner.setPoseEstimate(pose);
+    }
 
 }
