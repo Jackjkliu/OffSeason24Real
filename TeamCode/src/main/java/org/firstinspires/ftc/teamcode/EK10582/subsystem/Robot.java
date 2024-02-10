@@ -115,7 +115,7 @@ public class Robot {
         slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
