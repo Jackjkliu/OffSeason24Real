@@ -51,11 +51,11 @@ public class Drive extends EKLinear {
 
             if (driverStation.movePixelHolder()) {
                 switch(robot.housing.pixelHolderState) {
-                    case LEFT:
-                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.RIGHT;
+                    case UP:
+                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
                         break;
-                    case RIGHT:
-                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.LEFT;
+                    case DOWN:
+                        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
                         break;
                 }
             }

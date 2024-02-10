@@ -14,19 +14,19 @@ public class Dump extends Action {
     @Override
     public void start() {
         timer.reset();
-        Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.MIDDLE;
+        //Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.MIDDLE;
     }
 
     @Override
     public void update() {
         if(timer.milliseconds() >= SubsystemConstants.timingsForDump[2]) {
-            Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.RIGHT;
+            Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
         }
         else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[1]) {
             Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.LOW;
         }
         else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[0]) {
-            Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.LEFT;
+            Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
         }
     }
 

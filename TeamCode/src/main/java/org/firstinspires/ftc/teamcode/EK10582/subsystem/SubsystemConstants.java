@@ -14,8 +14,6 @@ public class SubsystemConstants {
     public static double housingIncrement = 0.001;
     public static int[] timingsForDump = {100, 200};
 
-//    public static double dumperTop = 1;
-//    public static double dumperBottom = 0.39;
 
     //Intake
     public static double intakeIncrement = 0.0015;
@@ -40,7 +38,7 @@ public class SubsystemConstants {
     }
 
     public enum DumperStates {
-        HIGH(1), LOW(0.22), PRESET(0.14);
+        HIGH(1), LOW(0.22), PRESET(0.145);
 
         public final double position;
 
@@ -50,7 +48,7 @@ public class SubsystemConstants {
     }
 
     public enum PixelHolderStates {
-        MIDDLE(0.55), LEFT(0.48), RIGHT(0.58);
+        MIDDLE(0.55), DOWN(0.48), UP(0.58);
 
         public final double position;
 
