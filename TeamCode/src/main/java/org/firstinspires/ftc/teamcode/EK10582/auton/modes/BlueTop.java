@@ -21,7 +21,7 @@ public class BlueTop extends AutonBase {
     public void runOpMode() {
 
         double distFromAprilTagX, distFromAprilTagForward;
-        Pose2d startPos = new Pose2d(12,60, Math.toRadians(0));
+        Pose2d startPos = new Pose2d(12,60, Math.toRadians(90));
 
         waitForStart();
 
@@ -35,62 +35,74 @@ public class BlueTop extends AutonBase {
 
         robot.roadRunner.setPoseEstimate(startPos);
 
+        TrajectorySequence traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
+        TrajectorySequence traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
+        TrajectorySequence traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
+        TrajectorySequence traj_park = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
         switch (pos) {
             case LEFT:
-                Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(12,36, Math.toRadians(180)))
+                traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(37,36, Math.toRadians(0)))
+                        .back(4)
+                        .forward(4)
                         .build();
-                Trajectory strafeRight = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .back(33)
+                traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
+                        .lineToLinearHeading(new Pose2d(42,36, Math.toRadians(180)))
                         .build();
-
-                robot.roadRunner.followTrajectory(pushPixelL);
-                sleep(200);
-                robot.roadRunner.followTrajectory(strafeRight);
-                sleep(200);
+                traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
+                        .back(7)
+                        .build();
+                traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
+                        .lineToLinearHeading(new Pose2d(38,58, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(60,58, Math.toRadians(180)))
+                        .build();
                 break;
-
             case RIGHT:
-                Trajectory forward = robot.roadRunner.trajectoryBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(12,36,Math.toRadians(180)))
+                traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(16,48, Math.toRadians(90)))
+                        .lineToLinearHeading(new Pose2d(0,34, Math.toRadians(90)))
+                        .forward(6)
                         .build();
-                Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(forward.end())
-                        .lineToLinearHeading(new Pose2d(45, 36, Math.toRadians(-180)))
+                traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
+                        .lineToLinearHeading(new Pose2d(42,36, Math.toRadians(180)))
                         .build();
-
-                robot.roadRunner.followTrajectory(forward);
-                sleep(200);
-                robot.roadRunner.followTrajectory(strafeRightR);
-                sleep(200);
+                traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
+                        .back(7)
+                        .build();
+                traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
+                        .lineToLinearHeading(new Pose2d(38,58, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(60,58, Math.toRadians(180)))
+                        .build();
                 break;
 
-            default: //case middle
-
-                //declare trajectories
-                Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(startPos)
-                        .back(24)
+            case MIDDLE:
+                traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(12,38, Math.toRadians(90)))
+                        .back(4)
+                        .forward(4)
                         .build();
-
-                Trajectory back = robot.roadRunner.trajectoryBuilder(pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(45, 36, Math.toRadians(-180)))
+                traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
+                        .lineToLinearHeading(new Pose2d(42,36, Math.toRadians(180)))
                         .build();
-
-
-                robot.roadRunner.followTrajectory(pushPixel);
-                sleep(200);
-
-                robot.roadRunner.followTrajectory(back);
-                sleep(200);
-
+                traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
+                        .back(7)
+                        .build();
+                traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
+                        .lineToLinearHeading(new Pose2d(38,58, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(60,58, Math.toRadians(180)))
+                        .build();
                 break;
-
-            //end case middle
-
-
-
         }
 
-
+        robot.roadRunner.followTrajectorySequence(traj_pushPixel);
+        sleep(1000);
+        robot.roadRunner.followTrajectorySequence(traj_toBackboard);
+        sleep(1000);
+        robot.aprilTags.relocalize();
+        robot.roadRunner.followTrajectorySequence(traj_placePixel);
+        //runAction(new DepositHousing());
+        sleep(1000);
+        robot.roadRunner.followTrajectorySequence(traj_park);
 
     }
 }
