@@ -15,10 +15,11 @@ public class CameraTesting extends AutonBase {
     public void runOpMode() {
 //        robot.openCV.stop();
         robot.aprilTags.targetAprilTag = 2;
-        robot.aprilTags.init(true);
+
         sleep(1000);
 
         waitForStart();
+        robot.aprilTags.init(true);
 
 //        SpikePositionsBlue pos = SpikePipeline.spikePositionB;
 //

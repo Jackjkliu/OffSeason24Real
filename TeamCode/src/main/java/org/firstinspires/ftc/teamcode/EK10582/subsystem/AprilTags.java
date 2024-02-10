@@ -54,7 +54,7 @@ public class AprilTags extends Subsystem {
         decimation = SubsystemConstants.decimation;
         // Create the AprilTag processor.
         aprilTag = new AprilTagProcessor.Builder()
-                .setLensIntrinsics( 1312.9, 1312.9, 810.624, 453.727)
+//                .setLensIntrinsics( 1312.9, 1312.9, 810.624, 453.727)
 
                 // The following default settings are available to un-comment and edit as needed.
                 .setDrawAxes(true)
@@ -105,7 +105,7 @@ public class AprilTags extends Subsystem {
                 seeTag = true;
                 tagX= (double)Math.round(detection.ftcPose.x * 100)/100;
                 tagDistance = ((double)Math.round(detection.ftcPose.y * 100)/100 ) / 1.102 - 0.4223;
-                yaw = (double)Math.round(Math.toDegrees(detection.ftcPose.yaw) * 100)/100;
+                yaw = (double)Math.round(detection.ftcPose.yaw * 100)/100;
 
             }
             //amount of detections in detections array
@@ -149,7 +149,7 @@ public class AprilTags extends Subsystem {
                 case 6: targetY = -42; break;
             }
         }
-        Pose2d pose = new Pose2d(targetX-tagDistance, targetY - tagX,yaw);
+        Pose2d pose = new Pose2d(targetX-tagDistance, targetY - tagX, yaw);
         return pose;
 //        Robot.getInstance().roadRunner.setPoseEstimate(pose);
     }
