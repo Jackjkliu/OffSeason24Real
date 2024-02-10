@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.Housing.Dump;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
@@ -30,17 +31,24 @@ public class BlueTop extends AutonBase {
         //close opencv and open apriltags
         robot.openCV.stop();
 
+
+
         telemetry.addData("pos: ", pos);
         telemetry.update();
 
+        robot.aprilTags.init(true);
+
+        sleep(1000);
+
         robot.roadRunner.setPoseEstimate(startPos);
 
-        TrajectorySequence traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
-        TrajectorySequence traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
-        TrajectorySequence traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
-        TrajectorySequence traj_park = robot.roadRunner.trajectorySequenceBuilder(startPos).build();
+        TrajectorySequence traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_park = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
         switch (pos) {
             case LEFT:
+                robot.aprilTags.targetAprilTag = 1;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(37,36, Math.toRadians(0)))
                         .back(4)
@@ -58,9 +66,10 @@ public class BlueTop extends AutonBase {
                         .build();
                 break;
             case RIGHT:
+                robot.aprilTags.targetAprilTag = 3;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(16,48, Math.toRadians(90)))
-                        .lineToLinearHeading(new Pose2d(0,34, Math.toRadians(90)))
+                        .lineToLinearHeading(new Pose2d(2,34, Math.toRadians(90)))
                         .forward(6)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
@@ -76,6 +85,7 @@ public class BlueTop extends AutonBase {
                 break;
 
             case MIDDLE:
+                robot.aprilTags.targetAprilTag = 2;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(12,38, Math.toRadians(90)))
                         .back(4)
@@ -96,13 +106,22 @@ public class BlueTop extends AutonBase {
 
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
         sleep(1000);
+
+
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
         sleep(1000);
+
+
         robot.aprilTags.relocalize();
+
+
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
-        //runAction(new DepositHousing());
         sleep(1000);
-        robot.roadRunner.followTrajectorySequence(traj_park);
+
+//        runAction(new Dump());
+//        sleep(1000);
+//
+//        robot.roadRunner.followTrajectorySequence(traj_park);
 
     }
 }

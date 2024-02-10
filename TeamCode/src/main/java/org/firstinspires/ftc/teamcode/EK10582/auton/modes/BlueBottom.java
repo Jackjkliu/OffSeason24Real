@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.Housing.Dump;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
@@ -75,9 +76,9 @@ public class BlueBottom extends AutonBase {
         sleep(1000);
         robot.aprilTags.relocalize();
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
-        //runAction(new DepositHousing());
-        sleep(1000);
-        robot.roadRunner.followTrajectorySequence(traj_park);
+//        runAction(new Dump());
+//        sleep(1000);
+//        robot.roadRunner.followTrajectorySequence(traj_park);
 
     }
 }

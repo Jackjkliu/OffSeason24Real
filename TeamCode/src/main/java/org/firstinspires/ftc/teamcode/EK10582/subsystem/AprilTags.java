@@ -149,7 +149,7 @@ public class AprilTags extends Subsystem {
                 case 6: targetY = -42; break;
             }
         }
-        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, yaw);
+        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, 180 + yaw);
         
         Robot.getInstance().roadRunner.setPoseEstimate(pose);
     }
