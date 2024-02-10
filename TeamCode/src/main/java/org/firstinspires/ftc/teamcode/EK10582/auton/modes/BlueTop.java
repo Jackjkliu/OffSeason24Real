@@ -21,7 +21,7 @@ public class BlueTop extends AutonBase {
     public void runOpMode() {
 
         double distFromAprilTagX, distFromAprilTagForward;
-        Pose2d startPos = new Pose2d(36,60, Math.toRadians(90));
+        Pose2d startPos = new Pose2d(12,60, Math.toRadians(90));
 
         waitForStart();
 
