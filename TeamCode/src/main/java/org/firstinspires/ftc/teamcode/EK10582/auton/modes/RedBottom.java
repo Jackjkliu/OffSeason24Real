@@ -106,7 +106,7 @@ public class RedBottom extends AutonBase {
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
         sleep(1000);
         robot.aprilTags.relocalize();
-        robot.roadRunner.followTrajectorySequence(traj_placePixel);
+//        robot.roadRunner.followTrajectorySequence(traj_placePixel);
 //        runAction(new Dump());
 //        sleep(1000);
 //        robot.roadRunner.followTrajectorySequence(traj_park);
