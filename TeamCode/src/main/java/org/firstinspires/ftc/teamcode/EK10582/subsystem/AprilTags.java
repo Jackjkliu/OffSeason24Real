@@ -136,7 +136,7 @@ public class AprilTags extends Subsystem {
     }
 
 
-    public Pose2d relocalize() {
+    public void relocalize() {
         int targetX = 61;
         int targetY = 42;
 
@@ -149,10 +149,9 @@ public class AprilTags extends Subsystem {
                 case 6: targetY = -42; break;
             }
         }
-        Pose2d pose = new Pose2d(targetX-tagDistance, targetY - tagX, yaw);
-        return pose;
+        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, yaw);
         
-//        Robot.getInstance().roadRunner.setPoseEstimate(pose);
+        Robot.getInstance().roadRunner.setPoseEstimate(pose);
     }
 
 }

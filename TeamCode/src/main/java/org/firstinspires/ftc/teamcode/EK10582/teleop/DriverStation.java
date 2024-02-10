@@ -71,14 +71,15 @@ public class DriverStation {
     boolean droneRelease = false;
     boolean droneReleaseLate = false;
     public boolean getDroneDown() {
-        if(gamepad2.left_stick_button && !droneButtonLate) {
+        if(gamepad1.y && !droneButtonLate) {
             droneButtonDown.reset();
         }
-        if(!gamepad2.left_stick_button) {
+        if(!gamepad1.y) {
             droneButtonDown.reset();
         }
-        droneButtonLate = gamepad2.left_stick_button;
-        if(droneButtonDown.milliseconds() > 2000) {
+        droneButtonLate = gamepad1.y;
+
+        if(droneButtonDown.milliseconds() > 1000) {
             droneRelease = true;
         } else {
             droneRelease = false;
@@ -131,22 +132,22 @@ public class DriverStation {
         lateY2 = gamepad2.y;
         return out;
     }
-
-    boolean lateX2 = false;
-    public boolean getSlideLow() {
-        boolean out;
-        out = gamepad2.x && !lateX2;
-        lateX2 = gamepad2.x;
-        return out;
-    }
-
-    boolean lateB2 = false;
-    public boolean getSlidePreset() {
-        boolean out;
-        out = gamepad2.b && !lateB2;
-        lateB2 = gamepad2.b;
-        return out;
-    }
+//
+//    boolean lateX2 = false;
+//    public boolean getSlideLow() {
+//        boolean out;
+//        out = gamepad2.x && !lateX2;
+//        lateX2 = gamepad2.x;
+//        return out;
+//    }
+//
+//    boolean lateB2 = false;
+//    public boolean getSlidePreset() {
+//        boolean out;
+//        out = gamepad2.b && !lateB2;
+//        lateB2 = gamepad2.b;
+//        return out;
+//    }
 
     public double filterJoystick(double input) {
         //implements both deadzone and scaled drive

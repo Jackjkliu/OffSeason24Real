@@ -52,9 +52,9 @@ public class CameraTesting extends AutonBase {
             telemetry.addData("tagx ", robot.aprilTags.tagX);
             telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
 
-            telemetry.addData("X COORD: ", robot.aprilTags.relocalize().getX());
-            telemetry.addData("Y COORD: ", robot.aprilTags.relocalize().getY());
-            telemetry.addData("YAW:     ", + robot.aprilTags.relocalize().getHeading());
+//            telemetry.addData("X COORD: ", robot.aprilTags.relocalize().getX());
+//            telemetry.addData("Y COORD: ", robot.aprilTags.relocalize().getY());
+//            telemetry.addData("YAW:     ", + robot.aprilTags.relocalize().getHeading());
 
             telemetry.update();
         }

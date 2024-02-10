@@ -38,7 +38,7 @@ public class SubsystemConstants {
     }
 
     public enum DumperStates {
-        HIGH(1), LOW(0.22), PRESET(0.145);
+        HIGH(0.95), LOW(0.25), PRESET(0.125);
 
         public final double position;
 
@@ -58,7 +58,7 @@ public class SubsystemConstants {
     }
 
     public enum DroneStates {
-        CLOSED(0.5), RELEASE(1);
+        CLOSED(0.45), RELEASE(0.9);
 
         public final double position;
 

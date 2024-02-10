@@ -27,16 +27,16 @@ public class Drive extends EKLinear {
             robot.intake.intakeBack = driverStation.intakeIn(); //right trigger
 
             //slides
-            robot.slides.joystickInput = driverStation.getSlidePower();
-            if (driverStation.getSlideLow()) {
-                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
-            }
-            else if (driverStation.getSlidePreset()) {
-                robot.slides.currentState = SubsystemConstants.SlideStates.PRESET;
-            }
-            else if (driverStation.getSlideFree()) {
-                robot.slides.currentState = SubsystemConstants.SlideStates.FREE;
-            }
+//            robot.slides.joystickInput = driverStation.getSlidePower();
+//            if (driverStation.getSlideLow()) {
+//                robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
+//            }
+//            else if (driverStation.getSlidePreset()) {
+//                robot.slides.currentState = SubsystemConstants.SlideStates.PRESET;
+//            }
+//            else if (driverStation.getSlideFree()) {
+//                robot.slides.currentState = SubsystemConstants.SlideStates.FREE;
+//            }
 
             //housing
             if (driverStation.raiseDumperOver()) {
