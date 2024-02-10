@@ -6,10 +6,12 @@ public class Housing extends Subsystem {
 
 
     public SubsystemConstants.DumperStates dumperState = SubsystemConstants.DumperStates.PRESET;
-    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
+    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
 
     @Override
     public void init(boolean auton) {
+        dumperState = SubsystemConstants.DumperStates.PRESET;
+        pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
     }
 
 
@@ -30,8 +32,8 @@ public class Housing extends Subsystem {
 
     @Override
     public void printToTelemetry(Telemetry telemetry) {
-        telemetry.addData("ClawPos: ", Robot.getInstance().pixelHolder.getPosition());
-        telemetry.addData("Dumper: ", Robot.getInstance().dumper.getPosition());
+        telemetry.addData("ClawPos: ", pixelHolderState);
+        telemetry.addData("Dumper: ", dumperState);
     }
     
 }

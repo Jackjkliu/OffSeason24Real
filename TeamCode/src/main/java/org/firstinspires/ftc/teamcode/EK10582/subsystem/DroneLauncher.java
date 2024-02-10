@@ -16,10 +16,7 @@ public class DroneLauncher extends Subsystem{
 
     @Override
     public void update(boolean auton) {
-        if(currentState != lastState) {
-            Robot.getInstance().drone.setPosition(currentState.position);
-        }
-        lastState = currentState;
+        Robot.getInstance().drone.setPosition(currentState.position);
     }
 
     @Override

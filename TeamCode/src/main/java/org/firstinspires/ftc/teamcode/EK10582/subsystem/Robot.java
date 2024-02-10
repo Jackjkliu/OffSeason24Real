@@ -109,7 +109,7 @@ public class Robot {
         slide2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         slide1.setTargetPosition(0);
         slide2.setTargetPosition(0);
-        slide1.setDirection(DcMotorSimple.Direction.REVERSE);
+        slide2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         slide1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         slide2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

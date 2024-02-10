@@ -48,6 +48,9 @@ public class Drive extends EKLinear {
             else if (driverStation.resetDumper()) {
                 robot.housing.dumperState = SubsystemConstants.DumperStates.PRESET;
             }
+            else if (driverStation.aboveRampDumper()) {
+                robot.housing.dumperState = SubsystemConstants.DumperStates.ABOVERAMP;
+            }
 
             if (driverStation.movePixelHolder()) {
                 switch(robot.housing.pixelHolderState) {
