@@ -108,7 +108,6 @@ public class BlueTop extends AutonBase {
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
         sleep(1000);
 
-
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
         sleep(1000);
 
@@ -119,7 +118,6 @@ public class BlueTop extends AutonBase {
 
 //        runAction(new Dump());
 //        sleep(1000);
-//
 //        robot.roadRunner.followTrajectorySequence(traj_park);
 
     }
