@@ -117,6 +117,10 @@ public class DriverStation {
         return gamepad2.dpad_right;
     }
 
+    public boolean aboveRampDumper() {
+        return gamepad2.dpad_left;
+    }
+
     boolean lateA2 = false;
     public boolean movePixelHolder() {
         boolean out;

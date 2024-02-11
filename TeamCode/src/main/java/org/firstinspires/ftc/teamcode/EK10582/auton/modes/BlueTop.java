@@ -74,14 +74,15 @@ public class BlueTop extends AutonBase {
                         .forward(6)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,36, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(46,36, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         .lineToLinearHeading(new Pose2d(49,36, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .lineToLinearHeading(new Pose2d(38,58, Math.toRadians(180)))
-                        .lineToLinearHeading(new Pose2d(60,58, Math.toRadians(180)))
+                        .strafeRight(20)
+//                        .lineToLinearHeading(new Pose2d(38,58, Math.toRadians(180)))
+//                        .lineToLinearHeading(new Pose2d(60,58, Math.toRadians(180)))
                         .build();
                 break;
 
@@ -113,12 +114,15 @@ public class BlueTop extends AutonBase {
 
         robot.aprilTags.relocalize();
 
+
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
         sleep(1000);
 
-//        runAction(new Dump());
-//        sleep(1000);
-//        robot.roadRunner.followTrajectorySequence(traj_park);
+        runAction(new Dump());
+        sleep(1000);
+
+        robot.roadRunner.followTrajectorySequence(traj_park);
+
 
     }
 }
