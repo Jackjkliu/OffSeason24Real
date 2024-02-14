@@ -140,15 +140,14 @@ public class AprilTags extends Subsystem {
         int targetX = 61;
         int targetY = 42;
 
-        if(seeTag){
-            switch (targetAprilTag){
-                case 2: targetY = 36; break;
-                case 3: targetY = 30; break;
-                case 4: targetY = -30; break;
-                case 5: targetY = -36; break;
-                case 6: targetY = -42; break;
-            }
+        switch (targetAprilTag){
+            case 2: targetY = 36; break;
+            case 3: targetY = 30; break;
+            case 4: targetY = -30; break;
+            case 5: targetY = -36; break;
+            case 6: targetY = -42; break;
         }
+
         Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, Math.toRadians(180+yaw));
         return pose;
 //        Robot.getInstance().roadRunner.setPoseEstimate(pose);

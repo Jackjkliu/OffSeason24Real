@@ -12,7 +12,7 @@ public class SubsystemConstants {
     //Housing
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
-    public static int[] timingsForDump = {1000, 2000, 3000};
+    public static int[] timingsForDump = {800, 2000, 3000};
 
     //Intake
     public static double intakeIncrement = 0.0015;
