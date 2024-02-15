@@ -148,7 +148,7 @@ public class AprilTags extends Subsystem {
             case 6: targetY = -42; break;
         }
 
-        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, Math.toRadians(180+yaw));
+        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, Robot.getInstance().roadRunner.getPoseEstimate().getHeading());
         return pose;
 //        Robot.getInstance().roadRunner.setPoseEstimate(pose);
     }

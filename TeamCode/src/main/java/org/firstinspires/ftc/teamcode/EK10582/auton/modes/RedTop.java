@@ -49,14 +49,14 @@ public class RedTop extends AutonBase {
             case RIGHT:
                 robot.aprilTags.targetAprilTag = 3;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(23,-32, Math.toRadians(-90)))
-                        .forward(6)
+                        .lineToLinearHeading(new Pose2d(21,-32, Math.toRadians(-90)))
+                        .forward(10)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,-40, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,-34, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(53,-40, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54,-40, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
@@ -66,37 +66,37 @@ public class RedTop extends AutonBase {
             case LEFT:
                 robot.aprilTags.targetAprilTag = 1;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(17,-48, Math.toRadians(-90)))
-                        .lineToLinearHeading(new Pose2d(4,-34, Math.toRadians(-90)))
-                        .forward(6)
+                        .lineToLinearHeading(new Pose2d(14,-46, Math.toRadians(-90)))
+                        .lineToLinearHeading(new Pose2d(-4,-32, Math.toRadians(-90)))
+                        .forward(7)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,-28, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(40,-30, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(53,-28, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54,-32, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
-                        .strafeLeft(38)
+                        .strafeLeft(32)
                         .build();
                 break;
 
             case MIDDLE:
                 robot.aprilTags.targetAprilTag = 2;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(14,-28, Math.toRadians(-90)))
-                        .forward(7)
+                        .lineToLinearHeading(new Pose2d(10,-28, Math.toRadians(-90)))
+                        .forward(9)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,-34, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,-28, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(53,-34, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54,-23, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
-                        .strafeLeft(20)
+                        .strafeLeft(24)
                         .build();
                 break;
         }
