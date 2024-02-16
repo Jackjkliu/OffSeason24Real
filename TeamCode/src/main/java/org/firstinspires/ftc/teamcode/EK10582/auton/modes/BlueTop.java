@@ -113,12 +113,12 @@ public class BlueTop extends AutonBase {
         sleep(1000);
 
         robot.aprilTags.update(true);
-        robot.aprilTags.relocalize();
+        robot.aprilTags.relocalize(false);
 
         telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + " : ", robot.aprilTags.seeTag);
-        telemetry.addData("Y: ", robot.aprilTags.relocalize().getY());
-        telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
-        telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
+        telemetry.addData("Y: ", robot.aprilTags.relocalize(false).getY());
+        telemetry.addData("X: ", robot.aprilTags.relocalize(false).getX());
+        telemetry.addData("Yaw: ", robot.aprilTags.relocalize(false).getHeading());
         telemetry.update();
         sleep(3000);
 

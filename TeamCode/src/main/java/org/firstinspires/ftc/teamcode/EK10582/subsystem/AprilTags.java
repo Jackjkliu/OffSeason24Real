@@ -136,19 +136,25 @@ public class AprilTags extends Subsystem {
     }
 
 
-    public Pose2d relocalize() {
+    public Pose2d relocalize(boolean red) {
         int targetX = 61;
-        int targetY = 42;
 
-        switch (targetAprilTag){
-            case 2: targetY = 36; break;
-            case 3: targetY = 30; break;
-            case 4: targetY = -30; break;
-            case 5: targetY = -36; break;
-            case 6: targetY = -42; break;
+        double multiplier = 1;
+        if(red){
+            multiplier = -0.8;
         }
 
-        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY - tagX, Robot.getInstance().roadRunner.getPoseEstimate().getHeading());
+        double targetY = 42 * multiplier;
+        switch (targetAprilTag){
+            case 2: targetY = 36 * multiplier; break;
+            case 3: targetY = 30 * multiplier; break;
+            case 4: targetY = -30 * multiplier; break;
+            case 5: targetY = -36 * multiplier; break;
+            case 6: targetY = -42 * multiplier; break;
+        }
+
+        Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY + tagX, Math.toRadians(180));
+        if(!seeTag) pose = Robot.getInstance().roadRunner.getPoseEstimate();
         return pose;
 //        Robot.getInstance().roadRunner.setPoseEstimate(pose);
     }

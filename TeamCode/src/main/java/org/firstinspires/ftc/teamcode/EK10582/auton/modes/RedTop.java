@@ -71,14 +71,14 @@ public class RedTop extends AutonBase {
                         .forward(7)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(40,-30, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,-30, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54,-32, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(50,-32, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
-                        .strafeLeft(32)
+                        .strafeLeft(26)
                         .build();
                 break;
 
@@ -106,15 +106,23 @@ public class RedTop extends AutonBase {
 
 
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
-        sleep(1000);
 
+
+        sleep(1000);
         robot.aprilTags.update(true);
-        robot.aprilTags.relocalize();
+
+
+
 
         telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + " : ", robot.aprilTags.seeTag);
-        telemetry.addData("Y: ", robot.aprilTags.relocalize().getY());
-        telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
-        telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
+        telemetry.addData("Y: ", robot.aprilTags.relocalize(true).getY());
+        telemetry.addData("X: ", robot.aprilTags.relocalize(true).getX());
+        telemetry.addData("Yaw: ", robot.aprilTags.relocalize(true).getHeading());
+        telemetry.update();
+        sleep(3000);
+
+        robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize(true));
+        telemetry.addData("currentY: ", robot.roadRunner.getPoseEstimate().getY());
         telemetry.update();
         sleep(3000);
 
