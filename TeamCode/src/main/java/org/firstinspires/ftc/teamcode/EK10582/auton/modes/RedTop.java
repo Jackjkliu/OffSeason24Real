@@ -63,12 +63,12 @@ public class RedTop extends AutonBase {
                         .strafeLeft(16)
                         .build();
                 break;
+
             case LEFT:
                 robot.aprilTags.targetAprilTag = 1;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(14,-46, Math.toRadians(-90)))
-                        .lineToLinearHeading(new Pose2d(-4,-32, Math.toRadians(-90)))
-                        .forward(7)
+                        .lineToLinearHeading(new Pose2d(12,-32, Math.toRadians(0)))
+                        .back(4)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,-30, Math.toRadians(180)))
@@ -97,6 +97,7 @@ public class RedTop extends AutonBase {
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
                         .strafeLeft(24)
+                        .back(3)
                         .build();
                 break;
         }
