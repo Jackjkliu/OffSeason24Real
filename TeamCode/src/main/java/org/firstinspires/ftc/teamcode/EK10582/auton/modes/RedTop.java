@@ -4,10 +4,10 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.Housing.Dump;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
@@ -22,11 +22,11 @@ public class RedTop extends AutonBase {
     public void runOpMode() {
 
         double distFromAprilTagX, distFromAprilTagForward;
-        Pose2d startPos = new Pose2d(12,-60, Math.toRadians(0));
+        Pose2d startPos = new Pose2d(12,-60, Math.toRadians(-90));
 
         waitForStart();
 
-        SpikePipeline.SpikePositionsBlue pos = SpikePipeline.spikePositionB;
+        SpikePipeline.SpikePositionsRed pos = SpikePipeline.spikePositionR;
 
         //close opencv and open apriltags
         robot.openCV.stop();
@@ -34,199 +34,106 @@ public class RedTop extends AutonBase {
         telemetry.addData("pos: ", pos);
         telemetry.update();
 
-        robot.roadRunner.setPoseEstimate(startPos);
-
-        switch (pos) {
-            case RIGHT:
-                robot.aprilTags.targetAprilTag = 6;
-                break;
-
-            case LEFT:
-                robot.aprilTags.targetAprilTag = 4;
-                break;
-
-            default: //case middle
-                robot.aprilTags.targetAprilTag = 5;
-                break;
-        }
         robot.aprilTags.init(true);
+
         sleep(1000);
 
+        robot.roadRunner.setPoseEstimate(startPos);
+
+        TrajectorySequence traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_park = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        Pose2d afterRelocalize = new Pose2d();
         switch (pos) {
-            case LEFT:
-                Trajectory pushPixelL = robot.roadRunner.trajectoryBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(12,-36,Math.toRadians(0)))
-                        .build();
-                Trajectory toBoard = robot.roadRunner.trajectoryBuilder(pushPixelL.end())
-                        .lineToLinearHeading(new Pose2d(45, -36, Math.toRadians(-180)))
-                        .build();
-
-                robot.roadRunner.followTrajectory(pushPixelL);
-                sleep(200);
-                robot.roadRunner.followTrajectory(toBoard);
-                sleep(200);
-                robot.aprilTags.update(true);
-                distFromAprilTagX = robot.aprilTags.tagX;
-                distFromAprilTagForward = robot.aprilTags.tagDistance;
-
-                //failsafe
-                if(distFromAprilTagForward == -1){
-                    distFromAprilTagForward = 27;
-                    distFromAprilTagX = 0;
-                }
-
-                telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
-                telemetry.addData("tagx ", robot.aprilTags.tagX);
-                telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
-                telemetry.update();
-
-
-                sleep(2000);
-                TrajectorySequence turnToSlides = robot.roadRunner.trajectorySequenceBuilder(toBoard.end())
-                        .turn(Math.toRadians(-95))
-                        .build();
-
-                Trajectory alignAprilTagL = robot.roadRunner.trajectoryBuilder(turnToSlides.end())
-                        .strafeTo(new Vector2d(20 + distFromAprilTagForward - 2, 28 - distFromAprilTagX - 4))
-                        .build();
-                robot.roadRunner.followTrajectorySequence(turnToSlides);
-                sleep(1000);
-                robot.roadRunner.followTrajectory(alignAprilTagL);
-
-                //TODO: fix dumper position
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
-
-                Trajectory awayL = robot.roadRunner.trajectoryBuilder(alignAprilTagL.end())
-                        .forward(4)
-                        .build();
-
-                Trajectory parkL = robot.roadRunner.trajectoryBuilder(awayL.end())
-                        .strafeLeft(32)
-                        .build();
-
-                sleep(3000);
-
-                robot.dumper.setPosition(0.5);
-
-                robot.roadRunner.followTrajectory(awayL);
-                robot.roadRunner.followTrajectory(parkL);
-                break;
-
             case RIGHT:
-                Trajectory toSpike = robot.roadRunner.trajectoryBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(12,-36,Math.toRadians(180)))
+                robot.aprilTags.targetAprilTag = 3;
+                traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(21,-32, Math.toRadians(-90)))
+                        .forward(10)
                         .build();
-                Trajectory strafeRightR = robot.roadRunner.trajectoryBuilder(toSpike.end())
-                        .lineToLinearHeading(new Pose2d(45, -36, Math.toRadians(-180)))
+                traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
+                        .lineToLinearHeading(new Pose2d(36,-34, Math.toRadians(180)))
                         .build();
-
-                robot.roadRunner.followTrajectory(toSpike);
-                sleep(200);
-                robot.roadRunner.followTrajectory(strafeRightR);
-                sleep(200);
-                //get apriltag values
-                robot.aprilTags.update(true);
-                distFromAprilTagX = robot.aprilTags.tagX;
-                distFromAprilTagForward = robot.aprilTags.tagDistance;
-
-                if(distFromAprilTagForward == -1){
-                    distFromAprilTagForward = 32;
-                    distFromAprilTagX = -15;
-                }
-
-                telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
-                telemetry.addData("tagx ", robot.aprilTags.tagX);
-                telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
-                telemetry.update();
-
-
-                sleep(5000);
-                robot.roadRunner.followTrajectory(strafeRightR);
-
-
-                Trajectory alignAprilTagR = robot.roadRunner.trajectoryBuilder(strafeRightR.end())
-                        .strafeTo(new Vector2d(20 + distFromAprilTagForward + 5, 28 - distFromAprilTagX - 4))
+                traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
+                        .lineToLinearHeading(new Pose2d(54,-40, Math.toRadians(180)))
                         .build();
-                robot.roadRunner.followTrajectory(alignAprilTagR);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
-
-                Trajectory awayR = robot.roadRunner.trajectoryBuilder(alignAprilTagR.end())
-                        .forward(4)
-                        .build();
-
-                Trajectory parkR = robot.roadRunner.trajectoryBuilder(awayR.end())
+                traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
+                        .forward(3)
                         .strafeLeft(16)
                         .build();
-
-                sleep(3000);
-
-                robot.dumper.setPosition(0.5);
-                robot.roadRunner.followTrajectory(awayR);
-                robot.roadRunner.followTrajectory(parkR);
+                break;
+            case LEFT:
+                robot.aprilTags.targetAprilTag = 1;
+                traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(14,-46, Math.toRadians(-90)))
+                        .lineToLinearHeading(new Pose2d(-4,-32, Math.toRadians(-90)))
+                        .forward(7)
+                        .build();
+                traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
+                        .lineToLinearHeading(new Pose2d(36,-30, Math.toRadians(180)))
+                        .build();
+                traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
+                        .lineToLinearHeading(new Pose2d(50,-32, Math.toRadians(180)))
+                        .build();
+                traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
+                        .forward(3)
+                        .strafeLeft(26)
+                        .build();
                 break;
 
-            default: //case middle
-
-                //declare trajectories
-                Trajectory pushPixel = robot.roadRunner.trajectoryBuilder(startPos)
-                        .back(24)
+            case MIDDLE:
+                robot.aprilTags.targetAprilTag = 2;
+                traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
+                        .lineToLinearHeading(new Pose2d(10,-28, Math.toRadians(-90)))
+                        .forward(9)
                         .build();
-
-                Trajectory back = robot.roadRunner.trajectoryBuilder(pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(45, -36, Math.toRadians(-180)))
+                traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
+                        .lineToLinearHeading(new Pose2d(36,-28, Math.toRadians(180)))
                         .build();
-
-                robot.roadRunner.followTrajectory(pushPixel);
-                sleep(200);
-
-                robot.roadRunner.followTrajectory(back);
-                sleep(200);
-
-                robot.aprilTags.update(true);
-                distFromAprilTagX = robot.aprilTags.tagX;
-                distFromAprilTagForward = robot.aprilTags.tagDistance;
-
-                if(distFromAprilTagForward == -1){
-                    distFromAprilTagForward = 27;
-                    distFromAprilTagX = 0;
-                }
-
-                telemetry.addData("seetag for " + robot.aprilTags.targetAprilTag + ": ", robot.aprilTags.seeTag);
-                telemetry.addData("tagx ", robot.aprilTags.tagX);
-                telemetry.addData("tagdistance ", robot.aprilTags.tagDistance);
-                telemetry.update();
-
-                sleep(500);
-                robot.roadRunner.followTrajectory(back);
-
-
-                Trajectory alignAprilTag = robot.roadRunner.trajectoryBuilder(back.end())
-                        .strafeTo(new Vector2d(20 + distFromAprilTagForward - 0, 28 - distFromAprilTagX - 2))
+                traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
+                        .lineToLinearHeading(new Pose2d(54,-23, Math.toRadians(180)))
                         .build();
-                robot.roadRunner.followTrajectory(alignAprilTag);
-                robot.dumper.setPosition(SubsystemConstants.dumperTop);
-
-                Trajectory away = robot.roadRunner.trajectoryBuilder(alignAprilTag.end())
-                        .forward(4)
-                        .build();
-
-                Trajectory park = robot.roadRunner.trajectoryBuilder(away.end())
+                traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
+                        .forward(3)
                         .strafeLeft(24)
                         .build();
-
-                sleep(3000);
-
-                robot.dumper.setPosition(0.5);
-
-                robot.roadRunner.followTrajectory(away);
-                robot.roadRunner.followTrajectory(park);
                 break;
-
-            //end case middle
-
-
         }
 
+        robot.roadRunner.followTrajectorySequence(traj_pushPixel);
+        sleep(1000);
+
+
+        robot.roadRunner.followTrajectorySequence(traj_toBackboard);
+
+
+        sleep(1000);
+        robot.aprilTags.update(true);
+
+
+
+
+        telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + " : ", robot.aprilTags.seeTag);
+        telemetry.addData("Y: ", robot.aprilTags.relocalize(true).getY());
+        telemetry.addData("X: ", robot.aprilTags.relocalize(true).getX());
+        telemetry.addData("Yaw: ", robot.aprilTags.relocalize(true).getHeading());
+        telemetry.update();
+        sleep(3000);
+
+        robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize(true));
+        telemetry.addData("currentY: ", robot.roadRunner.getPoseEstimate().getY());
+        telemetry.update();
+        sleep(3000);
+
+
+        robot.roadRunner.followTrajectorySequence(traj_placePixel);
+        sleep(1000);
+
+        runAction(new Dump());
+        sleep(1000);
+
+        robot.roadRunner.followTrajectorySequence(traj_park);
 
 
     }

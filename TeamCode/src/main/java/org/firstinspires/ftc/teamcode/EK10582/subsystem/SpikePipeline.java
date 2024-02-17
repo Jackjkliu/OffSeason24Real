@@ -19,6 +19,7 @@ public class SpikePipeline extends OpenCvPipeline {
 
     public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
+
     double[] targetBlueRGB = {12, 135, 176};
     double[] targetRedRGB = {156,30,33};
     double[] replacementColor = {0, 255, 0, 1};
@@ -30,6 +31,8 @@ public class SpikePipeline extends OpenCvPipeline {
     public static int maxBlue = 0;
     public static int maxRed = 0;
 
+    Mat output = new Mat();
+
     @Override
     public Mat processFrame(Mat input) {
 
@@ -39,7 +42,7 @@ public class SpikePipeline extends OpenCvPipeline {
 
 
 
-        Mat output = input.clone();
+        output = input.clone();
 
 
         Rect line1 = new Rect(new Point(width / 3, 0),new Point(2 * width / 3, height));

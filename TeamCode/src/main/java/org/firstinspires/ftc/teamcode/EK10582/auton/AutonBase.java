@@ -13,7 +13,7 @@ public abstract class AutonBase extends EKLinear {
         action.start();
         while(!action.isComplete) {
             action.update();
-            //Robot.getInstance().update();
+            Robot.getInstance().update();
         }
         action.end();
     }

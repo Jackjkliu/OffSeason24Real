@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
 class JoystickConstants {
@@ -63,6 +64,39 @@ public class DriverStation {
         return -filterJoystick(gamepad2.left_stick_y);
     }
 
+    public double getHangingPower() { return gamepad2.right_stick_y; }
+
+    ElapsedTime droneButtonDown = new ElapsedTime();
+    boolean droneButtonLate = false;
+    boolean droneRelease = false;
+    boolean droneReleaseLate = false;
+    public boolean getDroneDown() {
+        if(gamepad1.y && !droneButtonLate) {
+            droneButtonDown.reset();
+        }
+        if(!gamepad1.y) {
+            droneButtonDown.reset();
+        }
+        droneButtonLate = gamepad1.y;
+
+        if(droneButtonDown.milliseconds() > 1000) {
+            droneRelease = true;
+        } else {
+            droneRelease = false;
+        }
+        boolean out = droneRelease && !droneReleaseLate;
+        droneReleaseLate = droneRelease;
+        return out;
+    }
+
+    boolean isLateRStick = false;
+    public boolean getHangingServo() {
+        boolean out;
+        out = gamepad2.right_stick_button && !isLateRStick;
+        isLateRStick = gamepad2.right_stick_button;
+        return out;
+    }
+
     public double intakeOut(){
         return filterJoystick(gamepad2.left_trigger);
     }
@@ -74,7 +108,7 @@ public class DriverStation {
     public boolean raiseDumperOver() {
         return gamepad2.dpad_up;
     }
-b
+
     public boolean lowerDumperUnder() {
         return gamepad2.dpad_down;
     }
@@ -83,8 +117,12 @@ b
         return gamepad2.dpad_right;
     }
 
+    public boolean aboveRampDumper() {
+        return gamepad2.dpad_left;
+    }
+
     boolean lateA2 = false;
-    public boolean shiftStopperRod() {
+    public boolean movePixelHolder() {
         boolean out;
         out = gamepad2.a && !lateA2;
         lateA2 = gamepad2.a;
@@ -98,22 +136,22 @@ b
         lateY2 = gamepad2.y;
         return out;
     }
-
-    boolean lateX2 = false;
-    public boolean getSlideLow() {
-        boolean out;
-        out = gamepad2.x && !lateX2;
-        lateX2 = gamepad2.x;
-        return out;
-    }
-
-    boolean lateB2 = false;
-    public boolean getSlidePreset() {
-        boolean out;
-        out = gamepad2.b && !lateB2;
-        lateB2 = gamepad2.b;
-        return out;
-    }
+//
+//    boolean lateX2 = false;
+//    public boolean getSlideLow() {
+//        boolean out;
+//        out = gamepad2.x && !lateX2;
+//        lateX2 = gamepad2.x;
+//        return out;
+//    }
+//
+//    boolean lateB2 = false;
+//    public boolean getSlidePreset() {
+//        boolean out;
+//        out = gamepad2.b && !lateB2;
+//        lateB2 = gamepad2.b;
+//        return out;
+//    }
 
     public double filterJoystick(double input) {
         //implements both deadzone and scaled drive

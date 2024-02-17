@@ -13,7 +13,7 @@ public class Slides extends Subsystem {
 
     @Override
     public void init(boolean auton) {
-
+        currentState = SubsystemConstants.SlideStates.FREE;
     }
 
     @Override

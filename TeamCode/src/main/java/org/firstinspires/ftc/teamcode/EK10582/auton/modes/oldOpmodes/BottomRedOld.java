@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMov
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePositionsRed;
 
-@Autonomous(name="BottomRed")
+@Autonomous(name="BottomRedOld")
 @Disabled
 public class BottomRedOld extends AutonBase {
 
