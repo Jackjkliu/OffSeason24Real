@@ -55,10 +55,10 @@ public class BlueTop extends AutonBase {
                         .forward(6)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,42, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(53,42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54,42, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
@@ -73,16 +73,14 @@ public class BlueTop extends AutonBase {
                         .forward(6)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,28, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(53,28, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54,30, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
                         .strafeRight(38)
-//                        .lineToLinearHeading(new Pose2d(38,58, Math.toRadians(180)))
-//                        .lineToLinearHeading(new Pose2d(60,58, Math.toRadians(180)))
                         .build();
                 break;
 
@@ -93,10 +91,10 @@ public class BlueTop extends AutonBase {
                         .forward(4)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(42,36, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,36, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(53,36, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54,36, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)

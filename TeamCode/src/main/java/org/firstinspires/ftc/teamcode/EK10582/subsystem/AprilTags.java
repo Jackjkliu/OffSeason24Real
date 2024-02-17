@@ -141,7 +141,7 @@ public class AprilTags extends Subsystem {
 
         double multiplier = 1;
         if(red){
-            multiplier = -0.8;
+            multiplier = 1;
         }
 
         double targetY = 42 * multiplier;
