@@ -18,9 +18,9 @@ public class BlueTopMeepMeep {
                 .setColorScheme(new ColorSchemeBlueDark())
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(12,60, Math.toRadians(90)))
-
-                                .lineToLinearHeading(new Pose2d(12,32, Math.toRadians(0)))
-                                .back(4)
+                                .lineToLinearHeading(new Pose2d(12,40, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(17,31, Math.toRadians(0)))
+                                .back(9)
                                 .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
                                 .lineToLinearHeading(new Pose2d(50,32, Math.toRadians(180)))
                                 .forward(3)
