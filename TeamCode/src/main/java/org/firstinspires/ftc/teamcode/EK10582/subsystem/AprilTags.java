@@ -136,21 +136,17 @@ public class AprilTags extends Subsystem {
     }
 
 
-    public Pose2d relocalize(boolean red) {
+    public Pose2d relocalize() {
         int targetX = 61;
 
-        double multiplier = 1;
-        if(red){
-            multiplier = 1;
-        }
 
-        double targetY = 42 * multiplier;
+        double targetY = 42;
         switch (targetAprilTag){
-            case 2: targetY = 36 * multiplier; break;
-            case 3: targetY = 30 * multiplier; break;
-            case 4: targetY = -30 * multiplier; break;
-            case 5: targetY = -36 * multiplier; break;
-            case 6: targetY = -42 * multiplier; break;
+            case 2: targetY = 36; break;
+            case 3: targetY = 30; break;
+            case 4: targetY = -30; break;
+            case 5: targetY = -36; break;
+            case 6: targetY = -42; break;
         }
 
         Pose2d pose = new Pose2d(targetX - tagDistance - 8, targetY + tagX, Math.toRadians(180));

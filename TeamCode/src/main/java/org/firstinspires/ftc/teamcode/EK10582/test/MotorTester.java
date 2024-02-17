@@ -10,9 +10,12 @@ public class MotorTester extends EKLinear {
     @Override
     public void runOpMode() {
         waitForStart();
-        DcMotor motor = hardwareMap.get(DcMotor.class, "leftFront");
+        DcMotor intake1 = hardwareMap.get(DcMotor.class, "intakeSpin");
         while(opModeIsActive()) {
-//            motor.setPower((driverStation.getLT1() - driverStation.getRT1()) * 0.8);
+            intake1.setPower(gamepad1.right_trigger*.5);
+            intake1.setPower(-gamepad1.left_trigger*.5);
+            telemetry.addData("intake speed: ", gamepad1.right_trigger);
+            telemetry.update();
         }
     }
 }

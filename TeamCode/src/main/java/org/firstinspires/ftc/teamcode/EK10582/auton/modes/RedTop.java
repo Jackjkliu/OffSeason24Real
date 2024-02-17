@@ -60,25 +60,24 @@ public class RedTop extends AutonBase {
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
-                        .strafeLeft(16)
+                        .strafeLeft(18)
                         .build();
                 break;
             case LEFT:
                 robot.aprilTags.targetAprilTag = 4;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(14,-46, Math.toRadians(-90)))
-                        .lineToLinearHeading(new Pose2d(-4,-32, Math.toRadians(-90)))
-                        .forward(7)
+                        .lineToLinearHeading(new Pose2d(12,-32, Math.toRadians(0)))
+                        .back(8)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(36,-30, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,-34, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         .lineToLinearHeading(new Pose2d(54,-30, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(3)
-                        .strafeLeft(26)
+                        .forward(6)
+                        .strafeLeft(28)
                         .build();
                 break;
 
@@ -108,31 +107,31 @@ public class RedTop extends AutonBase {
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
 
 
-        sleep(1000);
+        sleep(500);
         robot.aprilTags.update(true);
 
 
 
 
         telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + " : ", robot.aprilTags.seeTag);
-        telemetry.addData("Y: ", robot.aprilTags.relocalize(true).getY());
-        telemetry.addData("X: ", robot.aprilTags.relocalize(true).getX());
-        telemetry.addData("Yaw: ", robot.aprilTags.relocalize(true).getHeading());
+        telemetry.addData("Y: ", robot.aprilTags.relocalize().getY());
+        telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
+        telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
         telemetry.update();
-        sleep(3000);
+        sleep(1000);
 
-        robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize(true));
+        robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
 
         telemetry.addData("currentY: ", robot.roadRunner.getPoseEstimate().getY());
         telemetry.update();
-        sleep(3000);
+        sleep(1000);
 
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
-        sleep(1000);
+        sleep(500);
 
         runAction(new Dump());
-        sleep(1000);
+        sleep(500);
 
         robot.roadRunner.followTrajectorySequence(traj_park);
 

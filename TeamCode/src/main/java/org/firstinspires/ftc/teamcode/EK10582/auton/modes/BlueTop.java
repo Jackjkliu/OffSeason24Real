@@ -68,9 +68,8 @@ public class BlueTop extends AutonBase {
             case RIGHT:
                 robot.aprilTags.targetAprilTag = 3;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(17,48, Math.toRadians(90)))
-                        .lineToLinearHeading(new Pose2d(4,34, Math.toRadians(90)))
-                        .forward(6)
+                        .lineToLinearHeading(new Pose2d(12,32, Math.toRadians(0)))
+                        .back(4)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
@@ -79,7 +78,7 @@ public class BlueTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(54,30, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(3)
+                        .forward(5)
                         .strafeRight(38)
                         .build();
                 break;
@@ -111,14 +110,14 @@ public class BlueTop extends AutonBase {
         sleep(1000);
 
         robot.aprilTags.update(true);
-        robot.aprilTags.relocalize(false);
+        robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
 
         telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + " : ", robot.aprilTags.seeTag);
-        telemetry.addData("Y: ", robot.aprilTags.relocalize(false).getY());
-        telemetry.addData("X: ", robot.aprilTags.relocalize(false).getX());
-        telemetry.addData("Yaw: ", robot.aprilTags.relocalize(false).getHeading());
+        telemetry.addData("Y: ", robot.aprilTags.relocalize().getY());
+        telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
+        telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
         telemetry.update();
-        sleep(3000);
+        sleep(1000);
 
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);

@@ -17,17 +17,25 @@ public class BlueTopMeepMeep {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .setColorScheme(new ColorSchemeBlueDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(12,-60, Math.toRadians(-90)))
-                                .lineToLinearHeading(new Pose2d(14,-46, Math.toRadians(-90)))
-                                .lineToLinearHeading(new Pose2d(-4,-32, Math.toRadians(-90)))
-                                .forward(7)
+                        drive.trajectorySequenceBuilder(new Pose2d(12,60, Math.toRadians(90)))
 
-                                .lineToLinearHeading(new Pose2d(36,-30, Math.toRadians(180)))
-
-                                .lineToLinearHeading(new Pose2d(54,-32, Math.toRadians(180)))
-
+                                .lineToLinearHeading(new Pose2d(12,32, Math.toRadians(0)))
+                                .back(4)
+                                .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(50,32, Math.toRadians(180)))
                                 .forward(3)
                                 .strafeLeft(26)
+                                .back(3)
+//                                .lineToLinearHeading(new Pose2d(12,-32, Math.toRadians(0)))
+//                                .back(4)
+//
+//                                .lineToLinearHeading(new Pose2d(42,-34, Math.toRadians(180)))
+//
+//                                .back(7)
+//
+//                                .lineToLinearHeading(new Pose2d(38,-58, Math.toRadians(180)))
+//                                .lineToLinearHeading(new Pose2d(60,-58, Math.toRadians(180)))
+
 
                         //MIDDLE
 //                                .lineToLinearHeading(new Pose2d(12,38, Math.toRadians(90)))
