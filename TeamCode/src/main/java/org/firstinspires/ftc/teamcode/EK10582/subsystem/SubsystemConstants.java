@@ -12,7 +12,7 @@ public class SubsystemConstants {
     //Housing
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
-    public static int[] timingsForDump = {1200, 2400, 3400};
+    public static int[] timingsForDump = {900, 2400, 3400};
 
     //Intake
     public static double intakeIncrement = 0.0015;
@@ -57,7 +57,7 @@ public class SubsystemConstants {
     }
 
     public enum DroneStates {
-        CLOSED(0.43), RELEASE(0.9);
+        CLOSED(0.4), RELEASE(0.9);
 
         public final double position;
 

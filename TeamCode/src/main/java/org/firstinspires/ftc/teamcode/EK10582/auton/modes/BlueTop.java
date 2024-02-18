@@ -55,10 +55,10 @@ public class BlueTop extends AutonBase {
                         .forward(6)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(36,42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,43, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(52,42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,43, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(5)
@@ -70,7 +70,7 @@ public class BlueTop extends AutonBase {
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(12,40, Math.toRadians(90)))
                         .lineToLinearHeading(new Pose2d(17,31, Math.toRadians(0)))
-                        .back(9)
+                        .back(11)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
@@ -80,15 +80,15 @@ public class BlueTop extends AutonBase {
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(5)
-                        .strafeRight(38)
+                        .strafeRight(34)
                         .build();
                 break;
 
             case MIDDLE:
                 robot.aprilTags.targetAprilTag = 2;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(14,30, Math.toRadians(90)))
-                        .forward(4)
+                        .lineToLinearHeading(new Pose2d(14,28, Math.toRadians(90)))
+                        .forward(6)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,36, Math.toRadians(180)))

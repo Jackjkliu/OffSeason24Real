@@ -21,7 +21,6 @@ public class RedTop extends AutonBase {
     @Override
     public void runOpMode() {
 
-        double distFromAprilTagX, distFromAprilTagForward;
         Pose2d startPos = new Pose2d(12,-60, Math.toRadians(-90));
 
         waitForStart();
@@ -44,8 +43,7 @@ public class RedTop extends AutonBase {
         TrajectorySequence traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
         TrajectorySequence traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
         TrajectorySequence traj_park = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
-        Pose2d afterRelocalize = new Pose2d();
-        switch (pos) {
+         switch (pos) {
             case RIGHT:
                 robot.aprilTags.targetAprilTag = 6;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
