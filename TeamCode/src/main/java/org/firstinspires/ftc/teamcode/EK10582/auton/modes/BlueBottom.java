@@ -21,7 +21,8 @@ public class BlueBottom extends AutonBase {
     @Override
     public void runOpMode() {
 
-        Pose2d startPos = new Pose2d(-36,-60, Math.toRadians(90));
+        Pose2d startPos = new Pose2d(-36,60, Math.toRadians(90));
+
 
         waitForStart();
 
@@ -33,6 +34,10 @@ public class BlueBottom extends AutonBase {
         telemetry.addData("pos: ", pos);
         telemetry.update();
 
+        robot.aprilTags.init(true);
+
+        sleep(1000);
+
         robot.roadRunner.setPoseEstimate(startPos);
 
         TrajectorySequence traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
@@ -43,27 +48,24 @@ public class BlueBottom extends AutonBase {
             case LEFT:
                 robot.aprilTags.targetAprilTag = 1;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        //push pixel
-                        .lineTo(new Vector2d(-46,38))
+                        .lineToLinearHeading(new Pose2d(-36,32, Math.toRadians(180)))
+                        .back(6)
                         .forward(15)
-
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         //under truss
-                        .strafeRight(10)
-                        .lineToLinearHeading(new Pose2d(-36,8, Math.toRadians(0)))
-                        .lineToConstantHeading(new Vector2d(15,8))
-                        //toBackboard
-                        .splineToLinearHeading(new Pose2d(40,36,Math.toRadians(180)), Math.toRadians(0))
+                        .lineToLinearHeading(new Pose2d(-30,6, Math.toRadians(0)))
+                        .lineToLinearHeading(new Pose2d(10,6, Math.toRadians(0)))
 
+                        //toBoard
+                        .splineToLinearHeading(new Pose2d(36,30, Math.toRadians(-180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        //place pixel
-                        .lineToSplineHeading(new Pose2d(52, 42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52, 42, Math.toRadians(-180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
-                        .strafeLeft(32)
+                        .strafeLeft(28)
                         .build();
                 break;
 
@@ -80,46 +82,43 @@ public class BlueBottom extends AutonBase {
                         //under truss
                         .strafeRight(10)
                         .lineToLinearHeading(new Pose2d(-36,8, Math.toRadians(0)))
-                        .lineToConstantHeading(new Vector2d(15,8))
+                        .lineToConstantHeading(new Vector2d(10,8))
                         //toBackboard
-                        .splineToLinearHeading(new Pose2d(40,36,Math.toRadians(180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(40,30,Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         //place pixel
-                        .lineToSplineHeading(new Pose2d(52, 42, Math.toRadians(180)))
+                        .lineToSplineHeading(new Pose2d(52, 30, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(6)
-                        .strafeLeft(28)
+                        .strafeLeft(20)
                         .build();
                 break;
 
             case MIDDLE:
                 robot.aprilTags.targetAprilTag = 2;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        //push pixel
-                        .lineToLinearHeading(new Pose2d(-36,32, Math.toRadians(180)))
-                        .back(6)
-                        .forward(12)
+                        .back(32)
+                        .forward(14)
+
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-
                         //under truss
-                        .lineToLinearHeading(new Pose2d(-30,8, Math.toRadians(0)))
-                        .lineToLinearHeading(new Pose2d(10,8, Math.toRadians(0)))
+                        .splineToConstantHeading(new Vector2d(-54,16),Math.toRadians(-90))
+                        .splineToLinearHeading(new Pose2d(-30,8, Math.toRadians(90)),Math.toRadians(0))
+                        .turn(Math.toRadians(-90))
+                        .lineToConstantHeading(new Vector2d(10,8))
 
-                        //toBoard
-                        .splineToLinearHeading(new Pose2d(40,36,Math.toRadians(180)), Math.toRadians(0))
-
+                        //to board
+                        .splineToLinearHeading(new Pose2d(36,36, Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-
-                        //placePixel
-                        .lineToLinearHeading(new Pose2d(52, 35, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54, 36, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
-                        .strafeRight(24)
+                        .strafeLeft(24)
                         .build();
 
                 break;
@@ -132,14 +131,6 @@ public class BlueBottom extends AutonBase {
 
         sleep(500);
         robot.aprilTags.update(true);
-
-        telemetry.addData("Seetag for " + robot.aprilTags.targetAprilTag + " : ", robot.aprilTags.seeTag);
-        telemetry.addData("Y: ", robot.aprilTags.relocalize().getY());
-        telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
-        telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
-        telemetry.update();
-        sleep(500);
-
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
 
         sleep(500);
