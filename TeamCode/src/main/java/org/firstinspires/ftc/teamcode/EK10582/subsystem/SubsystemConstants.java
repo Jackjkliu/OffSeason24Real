@@ -38,7 +38,7 @@ public class SubsystemConstants {
     }
 
     public enum DumperStates {
-        HIGH(1), LOW(0.3), PRESET(0.14), ABOVERAMP(0.08);
+        HIGH(1), LOW(0.23), PRESET(0.07), ABOVERAMP(0);
 
         public final double position;
 
