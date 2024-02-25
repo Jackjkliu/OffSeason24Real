@@ -48,6 +48,7 @@ import java.util.Objects;
 
 @Config
 @Autonomous(group = "drive")
+@Disabled
 public class ManualFeedforwardTuner extends EKLinear {
     public static double DISTANCE = 60; // in
 

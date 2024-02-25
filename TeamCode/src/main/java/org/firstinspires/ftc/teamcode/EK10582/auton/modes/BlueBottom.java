@@ -81,7 +81,7 @@ public class BlueBottom extends AutonBase {
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         //under truss
                         .strafeRight(10)
-                        .lineToLinearHeading(new Pose2d(-36,8, Math.toRadians(0)))
+                        .lineToLinearHeading(new Pose2d(-35,8, Math.toRadians(0)))
                         .lineToConstantHeading(new Vector2d(10,8))
                         //toBackboard
                         .splineToLinearHeading(new Pose2d(40,30,Math.toRadians(180)), Math.toRadians(0))
@@ -125,21 +125,21 @@ public class BlueBottom extends AutonBase {
         }
 
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
-        sleep(500);
+        sleep(7000);
 
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
 
-        sleep(500);
+        sleep(2000);
         robot.aprilTags.update(true);
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
 
-        sleep(500);
+        sleep(100);
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
-        sleep(500);
+        sleep(100);
 
         runAction(new Dump());
-        sleep(500);
+        sleep(100);
 
         robot.roadRunner.followTrajectorySequence(traj_park);
     }

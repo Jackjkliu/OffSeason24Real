@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.EK10582.test;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePosit
 
 @Autonomous(name="Camera Testing")
 @Config
+@Disabled
 public class CameraTesting extends AutonBase {
 
     @Override

@@ -47,34 +47,34 @@ public class RedTop extends AutonBase {
             case RIGHT:
                 robot.aprilTags.targetAprilTag = 6;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(21,-32, Math.toRadians(-90)))
+                        .lineToLinearHeading(new Pose2d(19,-32, Math.toRadians(-90)))
                         .forward(10)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,-42, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54,-42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,-42, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(3)
+                        .forward(9)
                         .strafeLeft(18)
                         .build();
                 break;
             case LEFT:
                 robot.aprilTags.targetAprilTag = 4;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(12,-32, Math.toRadians(0)))
+                        .lineToLinearHeading(new Pose2d(13,-32, Math.toRadians(0)))
                         .back(8)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,-34, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54,-30, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,-30, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(6)
+                        .forward(9)
                         .strafeLeft(28)
                         .build();
                 break;
@@ -82,17 +82,17 @@ public class RedTop extends AutonBase {
             case MIDDLE:
                 robot.aprilTags.targetAprilTag = 5;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
-                        .lineToLinearHeading(new Pose2d(10,-28, Math.toRadians(-90)))
+                        .lineToLinearHeading(new Pose2d(10,-29, Math.toRadians(-90)))
                         .forward(9)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         .lineToLinearHeading(new Pose2d(36,-36, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54,-36, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,-36, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(3)
+                        .forward(9)
                         .strafeLeft(24)
                         .build();
                 break;

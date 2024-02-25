@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "drive")
+@Disabled
 public class StrafeTest extends EKLinear {
     public static double DISTANCE = 60; // in
 

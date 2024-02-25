@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.EK10582.auton.AutonBase;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.MecanumDrive.AngleMove;
@@ -16,6 +17,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySe
 
 @Autonomous(name="trajectoryTest")
 @Config
+@Disabled
 public class trajTest extends AutonBase {
 
     @Override

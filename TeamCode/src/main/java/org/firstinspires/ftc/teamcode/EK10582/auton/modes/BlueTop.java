@@ -61,8 +61,8 @@ public class BlueTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(52,43, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(5)
-                        .strafeRight(18)
+                        .forward(9)
+                        .strafeRight(12)
                         .build();
                 break;
             case RIGHT:
@@ -76,11 +76,11 @@ public class BlueTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54,30, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,29, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(5)
-                        .strafeRight(34)
+                        .forward(9)
+                        .strafeRight(26)
                         .build();
                 break;
 
@@ -94,21 +94,21 @@ public class BlueTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(36,36, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54,36, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,37, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(3)
-                        .strafeRight(24)
+                        .forward(9)
+                        .strafeRight(18)
                         .build();
                 break;
         }
 
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
-        sleep(1000);
+        sleep(100);
 
 
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
-        sleep(1000);
+        sleep(100);
 
         robot.aprilTags.update(true);
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
@@ -118,14 +118,14 @@ public class BlueTop extends AutonBase {
         telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
         telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
         telemetry.update();
-        sleep(1000);
+        sleep(100);
 
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
-        sleep(1000);
+        sleep(100);
 
         runAction(new Dump());
-        sleep(1000);
+        sleep(100);
 
         robot.roadRunner.followTrajectorySequence(traj_park);
 

@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
  * This is an example of a more complex path to really test the tuning.
  */
 @Autonomous(group = "drive")
+@Disabled
 public class SplineTest extends EKLinear {
     @Override
     public void runOpMode() throws InterruptedException {

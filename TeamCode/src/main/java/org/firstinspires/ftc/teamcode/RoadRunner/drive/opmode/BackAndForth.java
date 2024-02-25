@@ -27,6 +27,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
  * is recommended that you use the FollowerPIDTuner opmode for further fine tuning.
  */
 @Autonomous(group = "drive")
+@Disabled
 public class BackAndForth extends EKLinear {
 
     public static double DISTANCE = 50;

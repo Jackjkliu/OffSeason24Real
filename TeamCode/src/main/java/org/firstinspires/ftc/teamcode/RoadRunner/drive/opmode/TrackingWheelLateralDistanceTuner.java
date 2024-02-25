@@ -65,6 +65,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.StandardTrackingWheelLoca
  */
 @Config
 @TeleOp(group = "drive")
+@Disabled
 public class TrackingWheelLateralDistanceTuner extends EKLinear {
     public static int NUM_TURNS = 10;
 

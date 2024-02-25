@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySe
  */
 @Config
 @Autonomous(group = "drive")
+@Disabled
 public class FollowerPIDTuner extends EKLinear {
     public static double DISTANCE = 48; // in
 

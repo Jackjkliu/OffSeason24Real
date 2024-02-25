@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.EK10582.test;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 
 @TeleOp(name="Motor Tester")
+@Disabled
 public class MotorTester extends EKLinear {
     @Override
     public void runOpMode() {

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.EK10582.test;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
 @TeleOp (name = "IMU Test")
+@Disabled
 public class ImuTest extends EKLinear {
     @Override
     public void runOpMode() {

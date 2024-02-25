@@ -24,7 +24,7 @@ public class SpikePipeline extends OpenCvPipeline {
     double[] targetRedRGB = {156,30,33};
     double[] replacementColor = {0, 255, 0, 1};
 
-    double percentErrorRed = 0.4;
+    double percentErrorRed = 0.5;
     double percentErrorBlue = 0.6;
 
 
