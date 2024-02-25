@@ -21,7 +21,7 @@ public class SpikePipeline extends OpenCvPipeline {
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
 
     double[] targetBlueRGB = {12, 135, 176};
-    double[] targetRedRGB = {156,30,33};
+    double[] targetRedRGB = {161,39.5,55.5};
     double[] replacementColor = {0, 255, 0, 1};
 
     double percentErrorRed = 0.5;
