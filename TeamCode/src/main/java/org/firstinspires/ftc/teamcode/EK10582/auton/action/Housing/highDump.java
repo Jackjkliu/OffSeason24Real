@@ -14,20 +14,22 @@ public class highDump extends Action {
     }
     @Override
     public void update() {
+        //structure: raise servo to halfway, switch servo pos, raise servo all the way
+
+
         //TODO: Write the actual method; this is the code for dump()
-//        if(timer.milliseconds() >= SubsystemConstants.timingsForDump[2]) {
-//            isComplete = true;
-//        }
-//        else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[1]) {
-//            Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
-//        }
-//        else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[0]) {
-//            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.LOW;
-//            Robot.getInstance().slides.joystickInput = 0;
-//        }
-//        else if (timer.milliseconds() >= 0) {
-//            Robot.getInstance().slides.joystickInput = 0.6;                                                                     ;
-//        }
+        if(timer.milliseconds() >= SubsystemConstants.timingsForHighDump[2]) {
+            isComplete = true;
+        }
+        else if(timer.milliseconds() >= SubsystemConstants.timingsForHighDump[1]) {
+            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.HIGH;
+        }
+        else if(timer.milliseconds() >= SubsystemConstants.timingsForHighDump[0]) {
+            Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
+        }
+        else if (timer.milliseconds() >= 0) {
+            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.MIDDUMP;                                                                     ;
+        }
     }
     @Override
     public void end() {
