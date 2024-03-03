@@ -13,6 +13,7 @@ public class SubsystemConstants {
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
     public static int[] timingsForDump = {1000, 2400, 3400};
+    public static int[] timingsForHighDump = {1000, 1200, 1400};
 
 
     //Intake
@@ -38,8 +39,8 @@ public class SubsystemConstants {
     }
 
     public enum DumperStates {
-        HIGH(1), LOW(0.23), PRESET(0.03), ABOVERAMP(0);
-
+        HIGH(1), LOW(0.23), PRESET(0.03), ABOVERAMP(0), MIDDUMP(0.6);
+        
         public final double position;
 
         DumperStates(double position) {
