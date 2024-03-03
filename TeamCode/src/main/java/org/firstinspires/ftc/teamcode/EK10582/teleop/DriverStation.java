@@ -61,7 +61,7 @@ public class DriverStation {
     //-----------------------second controller-----------------------------
 
     public double getSlidePower(){
-        return -filterJoystick(gamepad2.left_stick_y);
+        return filterJoystick(gamepad2.left_stick_y);
     }
 
     public double getHangingPower() { return gamepad2.right_stick_y; }

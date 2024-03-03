@@ -7,22 +7,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
-@TeleOp(name="Servo Tester (intake arm port)")
-public class ServoTester extends EKLinear {
+@TeleOp(name="Speak Tester")
+public class SpeakTester extends EKLinear {
 
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart();
-
-        double targetPos = 0.5;
+        boolean lateA = false;
         while(opModeIsActive()) {
-
-
-            targetPos += gamepad1.right_stick_y * 0.0001;
-            Robot.getInstance().pixelHolder.setPosition(targetPos);
-
-
-            telemetry.addData("Servo Position", targetPos);
+            if (gamepad1.a && !lateA) {
+                telemetry.speak("Wucru is the cutest");
+            }
+            lateA = gamepad1.a;
             telemetry.update();
             //robot.update();
         }
