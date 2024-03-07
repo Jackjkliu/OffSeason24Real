@@ -17,6 +17,12 @@ public class PIDController {
         this.kD = kD;
     }
 
+    public void setPID(double kP, double kI, double kD) {
+        this.kP = kP;
+        this.kI = kI;
+        this.kD = kD;
+    }
+
     public double update(double error) {
         p = kP * 1 * error;
         i += kI * error * (timer.seconds());

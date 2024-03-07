@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public abstract class EKLinear extends LinearOpMode {
 
     public Robot robot = Robot.getInstance();
-    public FtcDashboard dashboard;
     public Telemetry allTelemetry;
     public ElapsedTime matchTimer;
     public DriverStation driverStation;
@@ -23,8 +22,7 @@ public abstract class EKLinear extends LinearOpMode {
     @Override
     public void waitForStart() {
         //initing things
-        dashboard = FtcDashboard.getInstance();
-        allTelemetry = new MultipleTelemetry(dashboard.getTelemetry(), this.telemetry);
+        allTelemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), this.telemetry);
         matchTimer = new ElapsedTime();
         driverStation = new DriverStation(gamepad1, gamepad2);
         robot.init(hardwareMap, this);

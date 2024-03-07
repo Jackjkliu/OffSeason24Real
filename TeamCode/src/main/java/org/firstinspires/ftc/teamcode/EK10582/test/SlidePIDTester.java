@@ -16,7 +16,7 @@ public class SlidePIDTester extends EKLinear {
     public void runOpMode() throws InterruptedException {
         waitForStart();
 
-        robot.slides.currentState = SubsystemConstants.SlideStates.LOW;
+        robot.slides.currentState = SubsystemConstants.SlideStates.ADJUSTABLE;
         telemetry.addData("slides position", robot.slides.getSlidesPosition());
         telemetry.addData("slides max speed", robot.slides.getSlidesPosition() / time);
         telemetry.update();
