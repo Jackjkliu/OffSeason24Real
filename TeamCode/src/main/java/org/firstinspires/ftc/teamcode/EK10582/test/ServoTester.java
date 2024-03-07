@@ -19,7 +19,7 @@ public class ServoTester extends EKLinear {
 
 
             targetPos += gamepad1.right_stick_y * 0.0001;
-            Robot.getInstance().pixelHolder.setPosition(targetPos);
+            Robot.getInstance().dumper.setPosition(targetPos);
 
 
             telemetry.addData("Servo Position", targetPos);

@@ -27,9 +27,10 @@ public class SubsystemConstants {
 
     //Slides
     public static double SLIDES_TICKS_TO_INCHES = 0.010722;
-    public static double slidesTolerance = 0.3;
+    public static double MAX_SLIDE_SPEED = 10000;
+    public static double slidesTolerance = 50;
     public enum SlideStates {
-        FREE(0), LOW(2.47), PRESET(1.265);
+        FREE(0), LOW(1400), PRESET(1.265);
 
         public final double position;
 
@@ -39,8 +40,8 @@ public class SubsystemConstants {
     }
 
     public enum DumperStates {
-        HIGH(1), LOW(0.23), PRESET(0.03), ABOVERAMP(0), MIDDUMP(0.6);
-        
+        HIGH(0.90), LOW(0.212), PRESET(0.02), ABOVERAMP(0), MIDDUMP(0.6);
+
         public final double position;
 
         DumperStates(double position) {
@@ -49,7 +50,7 @@ public class SubsystemConstants {
     }
 
     public enum PixelHolderStates {
-        MIDDLE(0.55), DOWN(0.48), UP(0.58);
+        MIDDLE(0.7769), DOWN(0.73), UP(0.81);
 
         public final double position;
 
@@ -69,7 +70,7 @@ public class SubsystemConstants {
     }
 
     public enum HangingStates {
-        UP(0.5), DOWN(1);
+        UP(0.713), DOWN(0.362);
 
         public final double position;
 

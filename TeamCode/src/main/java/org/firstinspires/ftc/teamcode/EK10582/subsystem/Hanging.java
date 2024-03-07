@@ -7,7 +7,6 @@ public class Hanging extends Subsystem {
 
     public double hangingPower = 0;
     public HangingStates currentState = HangingStates.DOWN;
-    public HangingStates lastState = HangingStates.DOWN;
 
     @Override
     public void init(boolean auton) {
@@ -17,10 +16,7 @@ public class Hanging extends Subsystem {
     @Override
     public void update(boolean auton) {
         Robot.getInstance().hangingMotor.setPower(hangingPower);
-        if(currentState != lastState) {
-            Robot.getInstance().hangingServo.setPosition(currentState.position);
-        }
-        lastState = currentState;
+        Robot.getInstance().hangingServo.setPosition(currentState.position);
     }
 
     @Override

@@ -86,7 +86,7 @@ public class Robot {
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
 
-    private ElapsedTime cycleTimer = new ElapsedTime();
+    public ElapsedTime cycleTimer = new ElapsedTime();
 
     //sets values to declared but not instantiated values
     public void init(HardwareMap hardwareMap, LinearOpMode linearOpMode) {
