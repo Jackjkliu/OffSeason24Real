@@ -27,7 +27,7 @@ public class SubsystemConstants {
 
     //Slides
     public static double SLIDES_TICKS_TO_INCHES = 0.010722;
-    public static double MAX_SLIDE_HEIGHT = 2000;
+    public static double MAX_SLIDE_HEIGHT = 1632;
     public static double MAX_FEEDFORWARD = 0.2;
     public static double slidesTolerance = 50;
     public enum SlideStates {
