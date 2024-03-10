@@ -7,6 +7,7 @@ public class Hanging extends Subsystem {
 
     public double hangingPower = 0;
     public HangingStates currentState = HangingStates.DOWN;
+    public boolean isSetup = false;
 
     @Override
     public void init(boolean auton) {
@@ -15,7 +16,9 @@ public class Hanging extends Subsystem {
 
     @Override
     public void update(boolean auton) {
-        Robot.getInstance().hangingMotor.setPower(hangingPower);
+        if(!isSetup) {
+            Robot.getInstance().hangingMotor.setPower(hangingPower);
+        }
         Robot.getInstance().hangingServo.setPosition(currentState.position);
     }
 
@@ -26,6 +29,6 @@ public class Hanging extends Subsystem {
 
     @Override
     public void printToTelemetry(Telemetry telemetry) {
-
+        telemetry.addData("Hanging Power", hangingPower);
     }
 }

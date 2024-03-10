@@ -17,10 +17,6 @@ public class Housing extends Subsystem {
 
     @Override
     public void update(boolean auton) {
-        if (auton) {
-            return;
-        }
-
         Robot.getInstance().dumper.setPosition(dumperState.position);
         Robot.getInstance().pixelHolder.setPosition(pixelHolderState.position);
     }

@@ -14,19 +14,22 @@ public class Dump extends Action {
     }
     @Override
     public void update() {
-        if(timer.milliseconds() >= SubsystemConstants.timingsForDump[2]) {
+        if(timer.milliseconds() >= SubsystemConstants.timingsForDump[4]) {
+            Robot.getInstance().slides.currentState = SubsystemConstants.SlideStates.FREE;
             isComplete = true;
-        }
-        else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[1]) {
+        } else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[3]) {
+            Robot.getInstance().slides.currentState = SubsystemConstants.SlideStates.BOTTOM;
+        }  else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[2]) {
+            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.PRESET;
+        } else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[1]) {
             Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
-        }
-        else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[0]) {
+        } else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[0]) {
             Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.LOW;
-            Robot.getInstance().slides.joystickInput = 0;
+            Robot.getInstance().slides.currentState = SubsystemConstants.SlideStates.FREE;
+        } else if (timer.milliseconds() >= 0) {
+            Robot.getInstance().slides.currentState = SubsystemConstants.SlideStates.LOW;                                                                   ;
         }
-        else if (timer.milliseconds() >= 0) {
-            Robot.getInstance().slides.joystickInput = 0.6;                                                                     ;
-        }
+        Robot.getInstance().update();
     }
     @Override
     public void end() {

@@ -18,6 +18,7 @@ public abstract class EKLinear extends LinearOpMode {
     public Telemetry allTelemetry;
     public ElapsedTime matchTimer;
     public DriverStation driverStation;
+    public boolean isAuton = false;
 
     @Override
     public void waitForStart() {

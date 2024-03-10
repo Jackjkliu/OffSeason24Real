@@ -65,12 +65,12 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.StandardTrackingWheelLoca
  */
 @Config
 @TeleOp(group = "drive")
-@Disabled
 public class TrackingWheelLateralDistanceTuner extends EKLinear {
     public static int NUM_TURNS = 10;
 
     @Override
     public void runOpMode() throws InterruptedException {
+        waitForStart();
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         if (!(drive.getLocalizer() instanceof StandardTrackingWheelLocalizer)) {

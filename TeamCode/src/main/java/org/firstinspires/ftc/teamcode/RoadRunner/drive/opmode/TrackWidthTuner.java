@@ -27,7 +27,6 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
 public class TrackWidthTuner extends EKLinear {
     public static double ANGLE = 180; // deg
     public static int NUM_TRIALS = 5;

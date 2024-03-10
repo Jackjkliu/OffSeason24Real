@@ -64,7 +64,7 @@ public class DriverStation {
         return -filterJoystick(gamepad2.left_stick_y);
     }
 
-    public double getHangingPower() { return gamepad2.right_stick_y; }
+    public double getHangingPower() { return -gamepad2.right_stick_y; }
 
     ElapsedTime droneButtonDown = new ElapsedTime();
     boolean droneButtonLate = false;

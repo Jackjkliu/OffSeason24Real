@@ -8,11 +8,11 @@ import org.firstinspires.ftc.teamcode.PIDController;
 
 @Config
 public class Slides extends Subsystem {
-    public static double p = 0.003, i = 0, d = 0, f = 0;
+    public static double p = 0.0022, i = 0, d = 0.0001, f = 0.08;
     public static double adjustableTarget = 0;
 
     public double joystickInput; // joystick input
-    PIDController slidesPID = new PIDController(0.003, 0, 0);
+    PIDController slidesPID = new PIDController(0.002, 0, 0.0001);
 
     public SubsystemConstants.SlideStates currentState = SubsystemConstants.SlideStates.FREE;
     private double motorSpeed = 0;
@@ -62,11 +62,13 @@ public class Slides extends Subsystem {
     }
 
     //ADD IT TO SPEED AFTER TUNING
-    public void setSlidesPower(double speed) {
+    public void setSlidesPower(double input) {
         double ff = Math.pow(getSlidesPosition() / SubsystemConstants.MAX_SLIDE_HEIGHT, 6) * SubsystemConstants.MAX_FEEDFORWARD;
-        Robot.getInstance().slide1.setPower(speed + ff);
-        Robot.getInstance().slide2.setPower(speed + ff);
-        motorSpeed = speed;
+        double total = input + ff;
+        double power = (Math.abs(total) > 0.8) ? 0.8 * (total / Math.abs(total)) : total;
+        Robot.getInstance().slide1.setPower(power);
+        Robot.getInstance().slide2.setPower(power);
+        motorSpeed = power;
         this.ff = ff;
     }
 

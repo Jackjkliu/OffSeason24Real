@@ -12,7 +12,8 @@ public class SubsystemConstants {
     //Housing
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
-    public static int[] timingsForDump = {1000, 2400, 3400};
+    public static int[] timingsForDump = {1000, 2000, 3000, 3600, 4600};
+    public static int[] timingsForHangingSetup = {500, 3000};
     public static int[] timingsForHighDump = {1000, 1200, 1400};
 
 
@@ -31,7 +32,7 @@ public class SubsystemConstants {
     public static double MAX_FEEDFORWARD = 0.2;
     public static double slidesTolerance = 50;
     public enum SlideStates {
-        FREE(0), LOW(1400), PRESET(1.265), ADJUSTABLE(-5);
+        FREE(0), BOTTOM(0), LOW(1080), PRESET(1.265), ADJUSTABLE(-5);
 
         public final double position;
 
@@ -40,8 +41,9 @@ public class SubsystemConstants {
         }
     }
 
+
     public enum DumperStates {
-        HIGH(0.90), LOW(0.212), PRESET(0.02), ABOVERAMP(0), MIDDUMP(0.6);
+        HIGH(0.90), LOW(0.212), PRESET(0), ABOVERAMP(0), MIDDUMP(0.6);
 
         public final double position;
 
@@ -71,7 +73,7 @@ public class SubsystemConstants {
     }
 
     public enum HangingStates {
-        UP(0.713), DOWN(0.362);
+        UP(0.85), DOWN(0.53);
 
         public final double position;
 

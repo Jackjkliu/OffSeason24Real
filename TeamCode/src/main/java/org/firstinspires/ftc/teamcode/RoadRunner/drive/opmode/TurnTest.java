@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
 public class TurnTest extends EKLinear {
     public static double ANGLE = 90; // deg
 

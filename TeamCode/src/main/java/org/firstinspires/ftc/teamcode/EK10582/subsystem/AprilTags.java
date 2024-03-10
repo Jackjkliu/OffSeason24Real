@@ -130,6 +130,7 @@ public class AprilTags extends Subsystem {
             return;
         }
         telemetry.addData("# AprilTags Detected", currentDetections.size());
+        telemetry.addLine("Apriltag " + targetAprilTag + " detected: " + seeTag);
         telemetry.addData("Apriltag " + targetAprilTag + "'s x value:", tagX);
         telemetry.addData("Apriltag " + targetAprilTag + "'s distance: ", tagDistance);
         telemetry.addData("Apriltag " + targetAprilTag + "'s yaw angle: ", yaw);

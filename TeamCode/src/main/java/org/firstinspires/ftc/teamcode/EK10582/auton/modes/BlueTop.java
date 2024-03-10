@@ -20,26 +20,15 @@ public class BlueTop extends AutonBase {
 
     @Override
     public void runOpMode() {
-
-        double distFromAprilTagX, distFromAprilTagForward;
         Pose2d startPos = new Pose2d(12,60, Math.toRadians(90));
 
         waitForStart();
-
         SpikePipeline.SpikePositionsBlue pos = SpikePipeline.spikePositionB;
-
-        //close opencv and open apriltags
         robot.openCV.stop();
-
-
-
         telemetry.addData("pos: ", pos);
         telemetry.update();
-
         robot.aprilTags.init(true);
-
         sleep(1000);
-
         robot.roadRunner.setPoseEstimate(startPos);
 
         TrajectorySequence traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
@@ -70,13 +59,14 @@ public class BlueTop extends AutonBase {
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(12,40, Math.toRadians(90)))
                         .lineToLinearHeading(new Pose2d(17,31, Math.toRadians(0)))
-                        .back(11)
+                        .back(12)
+                        .forward(10)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
-                        .lineToLinearHeading(new Pose2d(36,30, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(36,33, Math.toRadians(180)))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(52,29, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52,33, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(9)
@@ -105,8 +95,6 @@ public class BlueTop extends AutonBase {
 
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
         sleep(100);
-
-
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
         sleep(100);
 
@@ -118,7 +106,7 @@ public class BlueTop extends AutonBase {
         telemetry.addData("X: ", robot.aprilTags.relocalize().getX());
         telemetry.addData("Yaw: ", robot.aprilTags.relocalize().getHeading());
         telemetry.update();
-        sleep(100);
+        sleep(2000);
 
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
@@ -128,7 +116,5 @@ public class BlueTop extends AutonBase {
         sleep(100);
 
         robot.roadRunner.followTrajectorySequence(traj_park);
-
-
     }
 }

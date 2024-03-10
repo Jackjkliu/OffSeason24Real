@@ -20,7 +20,7 @@ public class SpikePipeline extends OpenCvPipeline {
     public static SpikePositionsBlue spikePositionB = SpikePositionsBlue.NA;
     public static SpikePositionsRed spikePositionR = SpikePositionsRed.NA;
 
-    double[] targetBlueRGB = {12, 135, 176};
+    double[] targetBlueRGB = {28, 103, 173};
     double[] targetRedRGB = {161,39.5,55.5};
     double[] replacementColor = {0, 255, 0, 1};
 
@@ -68,6 +68,7 @@ public class SpikePipeline extends OpenCvPipeline {
             }
         }
 
+        maxRed = 0;
         maxBlue = 0;
         for (int i = 1; i < 3; i++) {
             if (countersBlue[i] > countersBlue[maxBlue])

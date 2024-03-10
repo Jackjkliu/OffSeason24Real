@@ -58,7 +58,7 @@ public class BlueBottom extends AutonBase {
                         .lineToLinearHeading(new Pose2d(10,6, Math.toRadians(0)))
 
                         //toBoard
-                        .splineToLinearHeading(new Pose2d(36,30, Math.toRadians(-180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(40,42, Math.toRadians(-180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         .lineToLinearHeading(new Pose2d(52, 42, Math.toRadians(-180)))
@@ -114,7 +114,7 @@ public class BlueBottom extends AutonBase {
                         .splineToLinearHeading(new Pose2d(36,36, Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54, 36, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(52, 36, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
@@ -125,12 +125,12 @@ public class BlueBottom extends AutonBase {
         }
 
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
-        sleep(7000);
+        sleep(2000);
 
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
 
         sleep(2000);
-        robot.aprilTags.update(true);
+        robot.update();
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
 
         sleep(100);

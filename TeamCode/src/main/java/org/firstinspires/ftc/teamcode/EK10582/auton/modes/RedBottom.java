@@ -58,11 +58,11 @@ public class RedBottom extends AutonBase {
                         .turn(Math.toRadians(90))
                         .lineToConstantHeading(new Vector2d(15,-6))
                         //toBackboard
-                        .splineToLinearHeading(new Pose2d(36,-33 ,Math.toRadians(180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(36,-28, Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         //place pixel
-                        .lineToSplineHeading(new Pose2d(52, -30, Math.toRadians(180)))
+                        .lineToSplineHeading(new Pose2d(54, -28, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(9)
@@ -84,10 +84,10 @@ public class RedBottom extends AutonBase {
                         .lineToLinearHeading(new Pose2d(10,-6, Math.toRadians(0)))
 
                         //toBoard
-                        .splineToLinearHeading(new Pose2d(30,-42, Math.toRadians(180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(30,-40, Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(52, -42, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54, -40, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(9)
@@ -110,10 +110,10 @@ public class RedBottom extends AutonBase {
                         .lineToConstantHeading(new Vector2d(18,-8))
 
                         //to board
-                        .splineToLinearHeading(new Pose2d(36,-36, Math.toRadians(180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(36,-34, Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
-                        .lineToLinearHeading(new Pose2d(54, -37, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(54, -34, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(9)

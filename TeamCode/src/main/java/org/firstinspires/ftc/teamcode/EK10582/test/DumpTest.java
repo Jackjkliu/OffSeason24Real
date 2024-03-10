@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.action.Housing.Dump;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 
 @TeleOp(name="Dump Tester")
-@Disabled
 public class DumpTest extends EKLinear {
 
     @Override

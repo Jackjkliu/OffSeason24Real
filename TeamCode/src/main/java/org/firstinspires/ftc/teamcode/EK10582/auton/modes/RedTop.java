@@ -57,7 +57,7 @@ public class RedTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(52,-42, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(9)
+                        .forward(4)
                         .strafeLeft(18)
                         .build();
                 break;
@@ -74,7 +74,7 @@ public class RedTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(52,-30, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(9)
+                        .forward(4)
                         .strafeLeft(28)
                         .build();
                 break;
@@ -92,7 +92,7 @@ public class RedTop extends AutonBase {
                         .lineToLinearHeading(new Pose2d(52,-36, Math.toRadians(180)))
                         .build();
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
-                        .forward(9)
+                        .forward(4)
                         .strafeLeft(24)
                         .build();
                 break;

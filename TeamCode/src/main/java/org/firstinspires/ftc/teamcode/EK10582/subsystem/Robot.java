@@ -80,7 +80,7 @@ public class Robot {
 
     //add all subsystems that need to go through telemetry
 //    private List<Subsystem> telemetrySubsystems = Arrays.asList();
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, openCV, slides, housing, hanging, droneLauncher, aprilTags);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(aprilTags, mecanumDrive, intake, openCV, slides, housing, hanging, droneLauncher);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
@@ -171,7 +171,7 @@ public class Robot {
     public void update() {
         //Update every single subsystem in the subsystems array initialized earlier
         for(Subsystem subsystem : subsystems) {
-            subsystem.update(false);
+            subsystem.update(linearOpMode.isAuton);
             if(linearOpMode.isStopRequested()){
                 return;
             }
