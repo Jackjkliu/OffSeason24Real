@@ -10,20 +10,19 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SpikePipeline.SpikePosit
 
 @Autonomous(name="Camera Testing")
 @Config
-@Disabled
 public class CameraTesting extends AutonBase {
 
     @Override
     public void runOpMode() {
 
-        robot.aprilTags.targetAprilTag = 2;
+        robot.aprilTags.targetAprilTag = 3;
 
         sleep(1000);
 
         waitForStart();
-//        robot.openCV.stop();
-        robot.aprilTags.init(true);
 
+        robot.openCV.stop();
+        robot.aprilTags.init(true);
 //        SpikePositionsBlue pos = SpikePipeline.spikePositionB;
 //
 //        //close opencv and open apriltags
@@ -44,7 +43,7 @@ public class CameraTesting extends AutonBase {
 //                break;
 //
 //            default:
-                robot.aprilTags.targetAprilTag = 2;
+//                robot.aprilTags.targetAprilTag = 2;
 //                break;
 //        }
 

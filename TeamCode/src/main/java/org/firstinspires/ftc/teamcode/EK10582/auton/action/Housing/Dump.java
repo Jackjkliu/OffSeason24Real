@@ -8,10 +8,17 @@ import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 
 public class Dump extends Action {
     ElapsedTime timer = new ElapsedTime();
+    SubsystemConstants.SlideStates slideState;
+
+    public Dump(SubsystemConstants.SlideStates slideState) {
+        this.slideState = slideState;
+    }
+
     @Override
     public void start() {
         timer.reset();
     }
+
     @Override
     public void update() {
         if(timer.milliseconds() >= SubsystemConstants.timingsForDump[4]) {

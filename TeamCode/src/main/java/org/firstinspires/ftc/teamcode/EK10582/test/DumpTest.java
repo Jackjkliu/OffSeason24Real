@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Housing.Dump;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
+import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 
 @TeleOp(name="Dump Tester")
 public class DumpTest extends EKLinear {
@@ -16,7 +17,7 @@ public class DumpTest extends EKLinear {
         boolean lateA = false;
         while(opModeIsActive()) {
             if(gamepad1.a && !lateA) {
-                robot.addAction(new Dump());
+                robot.addAction(new Dump(SubsystemConstants.SlideStates.MEDIUM));
             }
             lateA = gamepad1.a;
 

@@ -55,10 +55,10 @@ public class BlueBottom extends AutonBase {
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         //under truss
                         .lineToLinearHeading(new Pose2d(-30,6, Math.toRadians(0)))
-                        .lineToLinearHeading(new Pose2d(10,6, Math.toRadians(0)))
+                        .lineToLinearHeading(new Pose2d(30,6, Math.toRadians(0)))
 
                         //toBoard
-                        .splineToLinearHeading(new Pose2d(40,42, Math.toRadians(-180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(42,42, Math.toRadians(-180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         .lineToLinearHeading(new Pose2d(52, 42, Math.toRadians(-180)))
@@ -82,9 +82,9 @@ public class BlueBottom extends AutonBase {
                         //under truss
                         .strafeRight(10)
                         .lineToLinearHeading(new Pose2d(-35,8, Math.toRadians(0)))
-                        .lineToConstantHeading(new Vector2d(10,8))
+                        .lineToConstantHeading(new Vector2d(30,8))
                         //toBackboard
-                        .splineToLinearHeading(new Pose2d(40,30,Math.toRadians(180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(42,30,Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         //place pixel
@@ -108,10 +108,10 @@ public class BlueBottom extends AutonBase {
                         .splineToConstantHeading(new Vector2d(-54,16),Math.toRadians(-90))
                         .splineToLinearHeading(new Pose2d(-30,8, Math.toRadians(90)),Math.toRadians(0))
                         .turn(Math.toRadians(-90))
-                        .lineToConstantHeading(new Vector2d(10,8))
+                        .lineToConstantHeading(new Vector2d(30,8))
 
                         //to board
-                        .splineToLinearHeading(new Pose2d(36,36, Math.toRadians(180)), Math.toRadians(0))
+                        .splineToLinearHeading(new Pose2d(42,36, Math.toRadians(180)), Math.toRadians(0))
                         .build();
                 traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(traj_toBackboard.end())
                         .lineToLinearHeading(new Pose2d(52, 36, Math.toRadians(180)))
@@ -125,7 +125,7 @@ public class BlueBottom extends AutonBase {
         }
 
         robot.roadRunner.followTrajectorySequence(traj_pushPixel);
-        sleep(2000);
+        sleep(7000);
 
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
 
@@ -138,7 +138,7 @@ public class BlueBottom extends AutonBase {
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
         sleep(100);
 
-        runAction(new Dump());
+        runAction(new Dump(SubsystemConstants.SlideStates.MEDIUM));
         sleep(100);
 
         robot.roadRunner.followTrajectorySequence(traj_park);
