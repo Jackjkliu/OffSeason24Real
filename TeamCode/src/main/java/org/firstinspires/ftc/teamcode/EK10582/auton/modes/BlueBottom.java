@@ -44,6 +44,7 @@ public class BlueBottom extends AutonBase {
         TrajectorySequence traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
         TrajectorySequence traj_placePixel = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
         TrajectorySequence traj_park = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
+        TrajectorySequence traj_altPark = robot.roadRunner.trajectorySequenceBuilder(startPos).forward(1).build();
         switch (pos) {
             case LEFT:
                 robot.aprilTags.targetAprilTag = 1;
@@ -54,8 +55,8 @@ public class BlueBottom extends AutonBase {
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         //under truss
-                        .lineToLinearHeading(new Pose2d(-30,6, Math.toRadians(0)))
-                        .lineToLinearHeading(new Pose2d(30,6, Math.toRadians(0)))
+                        .lineToLinearHeading(new Pose2d(-30,6, Math.toRadians(180)))
+                        .lineToLinearHeading(new Pose2d(30,6, Math.toRadians(180)))
 
                         //toBoard
                         .splineToLinearHeading(new Pose2d(42,42, Math.toRadians(-180)), Math.toRadians(0))
@@ -66,6 +67,7 @@ public class BlueBottom extends AutonBase {
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
                         .strafeLeft(28)
+                        .back(11)
                         .build();
                 break;
 
@@ -74,15 +76,16 @@ public class BlueBottom extends AutonBase {
                 robot.aprilTags.targetAprilTag = 3;
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         //push pixel
-                        .lineTo(new Vector2d(-46,38))
+                        .lineTo(new Vector2d(-45,34))
                         .forward(15)
                         .build();
 
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
                         //under truss
                         .strafeRight(10)
-                        .lineToLinearHeading(new Pose2d(-35,8, Math.toRadians(0)))
-                        .lineToConstantHeading(new Vector2d(30,8))
+                        .lineTo(new Vector2d(-35,8))
+                        .lineTo(new Vector2d(30,8))
+
                         //toBackboard
                         .splineToLinearHeading(new Pose2d(42,30,Math.toRadians(180)), Math.toRadians(0))
                         .build();
@@ -93,6 +96,7 @@ public class BlueBottom extends AutonBase {
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(6)
                         .strafeLeft(20)
+                        .back(11)
                         .build();
                 break;
 
@@ -107,7 +111,6 @@ public class BlueBottom extends AutonBase {
                         //under truss
                         .splineToConstantHeading(new Vector2d(-54,16),Math.toRadians(-90))
                         .splineToLinearHeading(new Pose2d(-30,8, Math.toRadians(90)),Math.toRadians(0))
-                        .turn(Math.toRadians(-90))
                         .lineToConstantHeading(new Vector2d(30,8))
 
                         //to board
@@ -119,6 +122,7 @@ public class BlueBottom extends AutonBase {
                 traj_park = robot.roadRunner.trajectorySequenceBuilder(traj_placePixel.end())
                         .forward(3)
                         .strafeLeft(24)
+                        .back(11)
                         .build();
 
                 break;
@@ -128,12 +132,23 @@ public class BlueBottom extends AutonBase {
         sleep(7000);
 
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
+        sleep(50);
 
-        sleep(2000);
+        telemetry.addData("poseError", robot.roadRunner.getPoseError(traj_toBackboard.end()));
+        telemetry.update();
+        if(robot.roadRunner.getPoseError(traj_toBackboard.end()) > 3) {
+            traj_altPark = robot.roadRunner.trajectorySequenceBuilder(robot.roadRunner.getPoseEstimate())
+                    .lineToLinearHeading(new Pose2d(38, 16, Math.toRadians(180)))
+                    .lineTo(new Vector2d(56, 16))
+                    .build();
+            robot.roadRunner.followTrajectorySequence(traj_altPark);
+            sleep(50);
+            return;
+        }
+
         robot.update();
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
-
-        sleep(100);
+        sleep(1000);
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
         sleep(100);

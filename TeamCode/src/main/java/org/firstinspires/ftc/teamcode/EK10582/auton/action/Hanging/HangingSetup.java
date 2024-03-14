@@ -14,11 +14,11 @@ public class HangingSetup extends Action {
     }
     @Override
     public void update() {
-        if(timer.milliseconds() >= SubsystemConstants.timingsForDump[1]) {
+        if(timer.milliseconds() >= SubsystemConstants.timingsForHangingSetup[1]) {
             Robot.getInstance().hangingMotor.setPower(0);                                                               ;
             Robot.getInstance().hanging.isSetup = false;
             isComplete = true;
-        } else if(timer.milliseconds() >= SubsystemConstants.timingsForDump[0]) {
+        } else if(timer.milliseconds() >= SubsystemConstants.timingsForHangingSetup[0]) {
             Robot.getInstance().hanging.currentState = SubsystemConstants.HangingStates.UP;
         } else if (timer.milliseconds() >= 0) {
             Robot.getInstance().hanging.isSetup = true;
