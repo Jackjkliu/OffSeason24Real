@@ -41,7 +41,7 @@ public class Robot {
     HardwareMap hardwareMap;
 
     //declares a custom EK LinearOpMode named linearOpMode
-    EKLinear linearOpMode;
+    public EKLinear linearOpMode;
     public SampleMecanumDrive roadRunner;
 
     //declare hardware here
@@ -184,17 +184,16 @@ public class Robot {
             //if an action is finished, end said action and remove it from the list of things to do
             if(actions.get(i).isComplete) {
                 actions.get(i).end();
-                actions.remove(actions.get(i));
+                actions.remove(i);
                 i--;
             }
         }
-
         //telemetry
         linearOpMode.allTelemetry.addData("Match Time", linearOpMode.matchTimer.milliseconds());
         linearOpMode.allTelemetry.addData("Cycle Time", cycleTimer.milliseconds());
         cycleTimer.reset();
         for(Subsystem subsystem : telemetrySubsystems) {
-            linearOpMode.allTelemetry.addData("  --  ", (subsystem.getClass().getSimpleName() + "  --  "));
+            linearOpMode.allTelemetry.addLine("  --  " + subsystem.getClass().getSimpleName() + "  --  ");
             subsystem.printToTelemetry(linearOpMode.allTelemetry);
         }
         linearOpMode.allTelemetry.update();

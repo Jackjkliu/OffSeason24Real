@@ -36,8 +36,8 @@ public class Dump extends Action {
         } else if (timer.milliseconds() >= 0) {
             Robot.getInstance().slides.currentState = SubsystemConstants.SlideStates.LOW;                                                                   ;
         }
-        Robot.getInstance().update();
     }
+
     @Override
     public void end() {
 

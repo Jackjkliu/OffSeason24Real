@@ -13,7 +13,7 @@ public class SubsystemConstants {
     public static final double[] housingpos = {.4, .5, .6, .5, .6};
     public static double housingIncrement = 0.001;
     public static int[] timingsForDump = {1000, 1600, 2200, 2700, 3500};
-    public static int[] timingsForHangingSetup = {500, 3000};
+    public static int[] timingsForHangingSetup = {500, 1000};
     public static int[] timingsForHighDump = {1000, 1200, 1400};
 
 
