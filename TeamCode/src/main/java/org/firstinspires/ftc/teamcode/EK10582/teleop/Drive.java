@@ -40,17 +40,21 @@ public class Drive extends EKLinear {
 //            }
 
             //housing
+            if(driverStation.lowerDumperUnder()) {
+                robot.housing.autoDumper = true;
+            }
+
             if (driverStation.raiseDumperOver()) {
                 robot.housing.dumperState = SubsystemConstants.DumperStates.HIGH;
-            }
-            else if (driverStation.lowerDumperUnder()) {
-                robot.housing.dumperState = SubsystemConstants.DumperStates.LOW;
+                robot.housing.autoDumper = false;
             }
             else if (driverStation.resetDumper()) {
                 robot.housing.dumperState = SubsystemConstants.DumperStates.PRESET;
+                robot.housing.autoDumper = false;
             }
             else if (driverStation.aboveRampDumper()) {
                 robot.housing.dumperState = SubsystemConstants.DumperStates.ABOVERAMP;
+                robot.housing.autoDumper = false;
             }
 
             if (driverStation.movePixelHolder()) {

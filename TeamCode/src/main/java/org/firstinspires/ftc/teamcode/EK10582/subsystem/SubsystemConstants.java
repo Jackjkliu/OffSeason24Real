@@ -15,7 +15,9 @@ public class SubsystemConstants {
     public static int[] timingsForDump = {1000, 1600, 2200, 2700, 3500};
     public static int[] timingsForHangingSetup = {500, 1000};
     public static int[] timingsForHighDump = {1000, 1200, 1400};
-
+    public static double cB = 0.028;
+    public static double cH = -0.000062;
+    public static double cC = 0.14;
 
     //Intake
     public static double intakeIncrement = 0.0015;

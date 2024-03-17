@@ -50,11 +50,11 @@ public class DriverStation {
         return out;
     }
 
-    boolean lateA = false;
+    boolean lateRightBump = false;
     public boolean slowMode(){
         boolean out;
-        out = gamepad1.a && !lateA;
-        lateA = gamepad1.a;
+        out = gamepad1.right_bumper && !lateRightBump;
+        lateRightBump = gamepad1.right_bumper;
         return out;
     }
 

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.ImuOrientationOnRobot;
@@ -53,6 +54,7 @@ public class Robot {
     public DcMotorEx hangingMotor;
 
     public BHI260IMU imu;
+    public DistanceSensor backboardDistanceSensor;
 
     public Servo pixelHolder;
     public Servo dumper;
@@ -60,7 +62,6 @@ public class Robot {
     public Servo hangingServo;
 
     public WebcamName camera;
-
     public OpenCvWebcam webcam;
 
 
@@ -119,7 +120,7 @@ public class Robot {
 
 //
         camera = hardwareMap.get(WebcamName.class, "Webcam 1");
-
+        backboardDistanceSensor = hardwareMap.get(DistanceSensor.class, "backboardDistanceSensor");
         dumper = hardwareMap.get(Servo.class, "dumper");
         pixelHolder = hardwareMap.get(Servo.class, "pixelHolder");
         drone = hardwareMap.get(Servo.class, "drone");
