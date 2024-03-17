@@ -109,7 +109,7 @@ public class DriverStation {
         return gamepad2.dpad_up;
     }
 
-    public boolean lowerDumperUnder() {
+    public boolean autoDumperUnder() {
         return gamepad2.dpad_down;
     }
 
@@ -117,7 +117,7 @@ public class DriverStation {
         return gamepad2.dpad_right;
     }
 
-    public boolean aboveRampDumper() {
+    public boolean lowerDumperUnder() {
         return gamepad2.dpad_left;
     }
 

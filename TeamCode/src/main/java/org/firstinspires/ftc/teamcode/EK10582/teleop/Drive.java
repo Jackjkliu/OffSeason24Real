@@ -41,10 +41,9 @@ public class Drive extends EKLinear {
 //            }
 
             //housing
-            if(driverStation.lowerDumperUnder()) {
+            if(driverStation.autoDumperUnder()) {
                 robot.housing.autoDumper = true;
             }
-
             if (driverStation.raiseDumperOver()) {
                 robot.addAction(new highDump());
                 robot.housing.autoDumper = false;
@@ -53,8 +52,8 @@ public class Drive extends EKLinear {
                 robot.housing.dumperState = SubsystemConstants.DumperStates.PRESET;
                 robot.housing.autoDumper = false;
             }
-            else if (driverStation.aboveRampDumper()) {
-                robot.housing.dumperState = SubsystemConstants.DumperStates.ABOVERAMP;
+            else if (driverStation.lowerDumperUnder()) {
+                robot.housing.dumperState = SubsystemConstants.DumperStates.LOW;
                 robot.housing.autoDumper = false;
             }
 
