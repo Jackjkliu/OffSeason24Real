@@ -34,7 +34,7 @@ public class SubsystemConstants {
     public static double MAX_FEEDFORWARD = 0.2;
     public static double slidesTolerance = 50;
     public enum SlideStates {
-        FREE(0), BOTTOM(0), LOW(1115), MEDIUM(1300), PRESET(1.265), ADJUSTABLE(-5);
+        FREE(0), BOTTOM(0), LOW(1115), MEDIUM(1300), ADJUSTABLE(-5);
 
         public final double position;
 
@@ -55,7 +55,7 @@ public class SubsystemConstants {
     }
 
     public enum PixelHolderStates {
-        MIDDLE(0.7769), DOWN(0.73), UP(0.81);
+        MIDDLE(0.7769), DOWN(0.73), UP(0.84);
 
         public final double position;
 
