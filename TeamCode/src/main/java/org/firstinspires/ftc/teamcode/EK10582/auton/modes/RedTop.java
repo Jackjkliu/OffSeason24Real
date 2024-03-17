@@ -97,7 +97,9 @@ public class RedTop extends AutonBase {
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
         sleep(50);
 
+        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
         robot.update();
+
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
         telemetry.addData("currentY: ", robot.roadRunner.getPoseEstimate().getY());
         telemetry.update();

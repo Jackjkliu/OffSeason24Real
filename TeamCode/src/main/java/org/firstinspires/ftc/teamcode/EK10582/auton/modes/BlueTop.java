@@ -59,7 +59,7 @@ public class BlueTop extends AutonBase {
                 traj_pushPixel = robot.roadRunner.trajectorySequenceBuilder(startPos)
                         .lineToLinearHeading(new Pose2d(12,40, Math.toRadians(90)))
                         .lineToLinearHeading(new Pose2d(17,31, Math.toRadians(0)))
-                        .back(13)
+                        .back(12)
                         .forward(10)
                         .build();
                 traj_toBackboard = robot.roadRunner.trajectorySequenceBuilder(traj_pushPixel.end())
@@ -98,7 +98,10 @@ public class BlueTop extends AutonBase {
         robot.roadRunner.followTrajectorySequence(traj_toBackboard);
         sleep(50);
 
+        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
         robot.update();
+        sleep(500);
+
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
         sleep(1000);
 

@@ -23,10 +23,11 @@ public class highDump extends Action {
         }
         else if(timer.milliseconds() >= SubsystemConstants.timingsForHighDump[1]) {
             Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
-            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.HIGH;
+
         }
         else if(timer.milliseconds() >= SubsystemConstants.timingsForHighDump[0]) {
-            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.MIDDUMP;
+//            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.MIDDUMP;
+            Robot.getInstance().housing.dumperState = SubsystemConstants.DumperStates.HIGH;
         }
         else if (timer.milliseconds() >= 0) {
             Robot.getInstance().housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;

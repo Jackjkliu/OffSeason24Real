@@ -133,6 +133,7 @@ public class RedBottom extends AutonBase {
             return;
         }
 
+        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
         robot.update();
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
         telemetry.addData("currentY: ", robot.roadRunner.getPoseEstimate().getY());

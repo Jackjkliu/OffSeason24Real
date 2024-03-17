@@ -146,8 +146,13 @@ public class BlueBottom extends AutonBase {
             return;
         }
 
+        robot.housing.pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
         robot.update();
+        sleep(500);
+
         robot.roadRunner.setPoseEstimate(robot.aprilTags.relocalize());
+        telemetry.addData("currentY: ", robot.roadRunner.getPoseEstimate().getY());
+        telemetry.update();
         sleep(1000);
 
         robot.roadRunner.followTrajectorySequence(traj_placePixel);
