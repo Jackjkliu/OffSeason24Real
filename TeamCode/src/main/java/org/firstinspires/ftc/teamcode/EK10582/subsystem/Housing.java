@@ -6,12 +6,12 @@ public class Housing extends Subsystem {
 
 
     public SubsystemConstants.DumperStates dumperState = SubsystemConstants.DumperStates.PRESET;
-    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
+    public SubsystemConstants.PixelHolderStates pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
 
     @Override
     public void init(boolean auton) {
         dumperState = SubsystemConstants.DumperStates.PRESET;
-        pixelHolderState = SubsystemConstants.PixelHolderStates.DOWN;
+        pixelHolderState = SubsystemConstants.PixelHolderStates.UP;
     }
 
 

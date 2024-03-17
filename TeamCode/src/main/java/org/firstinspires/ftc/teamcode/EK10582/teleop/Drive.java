@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.Hanging.HangingSetup;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.Housing.highDump;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 
 @TeleOp(name="New Drive")
@@ -41,7 +42,8 @@ public class Drive extends EKLinear {
 
             //housing
             if (driverStation.raiseDumperOver()) {
-                robot.housing.dumperState = SubsystemConstants.DumperStates.HIGH;
+//                robot.housing.dumperState = SubsystemConstants.DumperStates.HIGH;
+                robot.addAction(new highDump());
             }
             else if (driverStation.lowerDumperUnder()) {
                 robot.housing.dumperState = SubsystemConstants.DumperStates.LOW;
