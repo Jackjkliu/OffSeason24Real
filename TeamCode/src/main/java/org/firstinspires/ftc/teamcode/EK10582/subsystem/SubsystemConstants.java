@@ -19,7 +19,13 @@ public class SubsystemConstants {
     public static double cH = -0.000062;
     public static double cC = 0.23;
 
-    //Intake
+    //Claw
+    //public static double openPosLeft =
+    //public static double closedPosLeft =
+    //public static double openPosRight =
+    //public static double closedPosRight =
+
+    // Intake
     public static double intakeIncrement = 0.0015;
     public static final double[] servoPos = {0.21, 0.7};
 
